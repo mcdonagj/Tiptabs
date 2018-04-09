@@ -12,7 +12,7 @@
 #   .py file within IDLE or by double-clicking on  #
 #   the program file. This opens a command prompt  #
 #   that shows the output of the program.          #
-#
+#                                                  #
 # - The original version of this program was built #
 #   using Python 2.7, which included various       #
 #   libraries, such as urllib2, that controlled    #
