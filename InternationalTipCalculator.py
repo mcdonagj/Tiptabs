@@ -33,6 +33,11 @@ class InternationalTipCalculator:
     # r = requests.get('http://data.fixer.io/api/convert')
     # print(r.text)
 
+    # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
+    # when the request for rate information fails.
+    # Library: smtplib
+    # https://www.tutorialspoint.com/python/python_sending_email.htm
+
     print("Here are the available currencies: ")
     currencies = (
         '1. USD - US Dollar', '2. EUR - Euro', '3. GBP - British Pound', '4. JPY - Japanese Yen',
