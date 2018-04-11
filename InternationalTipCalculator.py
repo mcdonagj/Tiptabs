@@ -1,4 +1,5 @@
 
+
 # Project Name: International Tip Calculator V5.0. #
 #                                                  #
 # Created By: Gary McDonald (mcdonagj)             #
@@ -73,7 +74,6 @@ class InternationalTipCalculator:
         mealTotal = float(input("\nPlease enter the total of your meal: "))
 
     # Show out the amount of the meal:
-
     print("The total of your meal is: " + str(mealTotal) + shortenedCurrencies[currentCurrency - 1] + ".")
 
     # Ask the user how much they would like to tip:
@@ -84,7 +84,6 @@ class InternationalTipCalculator:
     print("You would like to tip: " + str(tipPercentage) + "%.")
 
     # Calculate the amount of the tip:
-
     convertedTip = float(tipPercentage) / 100.00
 
     tipAmount = mealTotal * convertedTip
@@ -110,7 +109,6 @@ class InternationalTipCalculator:
 
             except ValueError:
                 print("Invalid Option, you needed to type 1, 2, 3, 4, or 5..")
-
                 validInput = False
 
             else:
@@ -184,3 +182,5 @@ class InternationalTipCalculator:
 
     else:
         print("Invalid choice. Please try again.")
+
+
