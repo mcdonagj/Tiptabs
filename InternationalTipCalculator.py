@@ -8,12 +8,12 @@
 #                                                  #
 # - Please use Python 3.6 to preserve the          #
 #   intended functionality of this program.        #
-
+#                                                  #
 # - This program can be run by either running the  #
 #   .py file within IDLE or by double-clicking on  #
 #   the program file. This opens a command prompt  #
 #   that shows the output of the program.          #
-                                                 
+#                                                  #
 # - The original version of this program was built #
 #   using Python 2.7, which included various       #
 #   libraries, such as urllib2, that controlled    #
@@ -22,7 +22,7 @@
 #   in the transition from Python 2.7 to           #
 #   Python 3.6. You can read more about these      #
 #   changes in the link provided below:            #
-                                                
+#                                                  #
 #   https://docs.python.org/2/library/urllib2.html #
 ####################################################
 
