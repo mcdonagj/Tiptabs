@@ -1,4 +1,4 @@
-#
+# #
 # Project Name: International Tip Calculator V5.0. #
 #                                                  #
 # Created By: Gary McDonald (mcdonagj)             #
@@ -24,7 +24,7 @@
 #   changes in the link provided below:            #
 #                                                  #
 #   https://docs.python.org/2/library/urllib2.html #
-#
+# #
 
 
 class InternationalTipCalculator:
