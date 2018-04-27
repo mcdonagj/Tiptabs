@@ -3,5 +3,7 @@ A Python program written to simplify currency conversions between established cu
 
 By using information from fixer.io, the program calculates a total for the user using the values taken from this database of information.
 
+This program will be utilizing several libraries, like Requests, in the final version.
+
 Version: V3.0.
 Last Update: April-27-2018.
