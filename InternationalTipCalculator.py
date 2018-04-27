@@ -1,4 +1,4 @@
-# # #
+# # # #
 # Project Name: International Tip Calculator V5.0. #
 #                                                  #
 # Created By: Gary McDonald (mcdonagj)             #
