@@ -24,7 +24,7 @@
 #   changes in the link provided below:            #
 #                                                  #
 #   https://docs.python.org/2/library/urllib2.html #
-# # # # # # # # # # #
+# # # # # # # # # # # #
 
 
 def my_rates(currentCurrencyB):
