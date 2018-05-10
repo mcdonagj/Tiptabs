@@ -1,8 +1,8 @@
-# # # # # # # # # # # #
+####################################################
 # Project Name: International Tip Calculator V5.0. #
 #                                                  #
 # Created By: Gary McDonald (mcdonagj)             #
-# Date: 04/08/2018.                                #
+# Date: 05/10/2018.                                #
 #                                                  #
 # Key Notes:                                       #
 #                                                  #
@@ -24,7 +24,35 @@
 #   changes in the link provided below:            #
 #                                                  #
 #   https://docs.python.org/2/library/urllib2.html #
-# # # # # # # # # # # #
+#                                                  #
+#  ** Required libraries:                          #
+#     - Requests: HTTP Python library. Used to     #
+#       retrieve currency conversion rates.        #
+####################################################
+
+import requests
+
+# request_rates() - Builds the current rates variable with current rate values.
+#                   Prints an error message to the terminal if the status code is not HTTP[200] (OK).
+def request_rates() -> bool:
+    current_rates = requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1')
+    ok_response = current_rates.status_code = 200
+    if ok_response:
+        print("Valid response from fixer.io.")
+    else:
+        print("ERROR code" + str(current_rates.status_code) + ": invalid response from fixer.io:")
+
+    return ok_response
+
+
+def get_rates(service_up: bool) -> str:
+
+    # Check to see if the service is available.
+    if not service_up:
+        print("ERROR: rate service 'fixer.io' is not available. Try again later.")
+        SystemExit()
+
+    return requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1').text
 
 
 def my_rates(currentCurrencyB):
@@ -75,13 +103,34 @@ def my_rates(currentCurrencyB):
     # print (data, rate)
 
 
+import smtplib
+from time import gmtime, strftime
+
 class InternationalTipCalculator:
 
     print("Welcome to the International Tip Calculator!\n")
 
-    # r = requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1')
-    # r = requests.get('http://data.fixer.io/api/convert')
-    # print(r.text)
+    exec_rates = request_rates()
+
+    # Used for testing email messaging.
+    # exec_rates = False
+    if not exec_rates:
+
+        from email.message import EmailMessage
+        send_msg = EmailMessage()
+        send_msg['Subject'] = '[ERROR] International Tip Calculator - ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
+
+        send_msg['To'] = 'mcdonagj@dukes.jmu.edu'
+        send_msg.preamble = "There was a problem with retrieving rates in the International Tip Calculator:" + "\n" + "\tDate: " + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + "\n"
+
+        with smtplib.SMTP('smtp.gmail.com') as s:
+            s.login('sendpyerr@gmail.com', 'pythonerr')
+            s.send_message(send_msg)
+            s.quit()
+
+        SystemExit()
+
+    rates = get_rates(exec_rates)
 
     # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
     # when the request for rate information fails.
