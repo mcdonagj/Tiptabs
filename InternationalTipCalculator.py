@@ -112,6 +112,10 @@ class InternationalTipCalculator:
 
     exec_rates = request_rates()
 
+    # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
+    # when the request for rate information fails.
+    # Library: smtplib
+    # https://www.tutorialspoint.com/python/python_sending_email.htm
     # Used for testing email messaging.
     print("Set exec_rates to false.")
     exec_rates = False
@@ -141,11 +145,6 @@ class InternationalTipCalculator:
         SystemExit()
 
     rates = get_rates(exec_rates)
-
-    # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
-    # when the request for rate information fails.
-    # Library: smtplib
-    # https://www.tutorialspoint.com/python/python_sending_email.htm
 
     print("Here are the available currencies: ")
     currencies = (
