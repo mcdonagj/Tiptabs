@@ -6,4 +6,4 @@ By using information from fixer.io, the program calculates a total for the user 
 This program will be utilizing several libraries, like Requests, in the final version.
 
 Version: V3.0.
-Last Update: May-10-2018.
+Last Update: May-11-2018.
