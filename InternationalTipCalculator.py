@@ -113,20 +113,30 @@ class InternationalTipCalculator:
     exec_rates = request_rates()
 
     # Used for testing email messaging.
-    # exec_rates = False
+    print("Set exec_rates to false.")
+    exec_rates = False
     if not exec_rates:
-
+        print("Enter error check.")
         from email.message import EmailMessage
+        print("Import email package.")
         send_msg = EmailMessage()
+        print("Create EmailMessage object.")
         send_msg['Subject'] = '[ERROR] International Tip Calculator - ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
-
         send_msg['To'] = 'mcdonagj@dukes.jmu.edu'
         send_msg.preamble = "There was a problem with retrieving rates in the International Tip Calculator:" + "\n" + "\tDate: " + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + "\n"
 
-        with smtplib.SMTP('smtp.gmail.com') as s:
-            s.login('sendpyerr@gmail.com', 'pythonerr')
-            s.send_message(send_msg)
-            s.quit()
+        print("Message built.")
+
+        gmail_user = 'sendpyerr@gmail.com'
+        gmail_pwd = 'pythonerr'
+        FROM = 'sendpyerr@gmail.com'
+        TO = 'mcdonagj@dukes.jmu.edu'
+
+        smtpserver = smtplib.SMTP("smtp.gmail.com", 587)
+        smtpserver.ehlo()
+        smtpserver.starttls()
+        smtpserver.ehlo()
+        smtpserver.login(gmail_user, gmail_pwd)
 
         SystemExit()
 
