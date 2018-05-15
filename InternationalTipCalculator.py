@@ -29,8 +29,14 @@
 #     - Requests: HTTP Python library. Used to     #
 #       retrieve currency conversion rates.        #
 ####################################################
+import sys
 
 import requests
+
+def main():
+    print("Hello")
+
+
 
 # request_rates() - Builds the current rates variable with current rate values.
 #                   Prints an error message to the terminal if the status code is not HTTP[200] (OK).
@@ -50,7 +56,7 @@ def get_rates(service_up: bool) -> str:
     # Check to see if the service is available.
     if not service_up:
         print("ERROR: rate service 'fixer.io' is not available. Try again later.")
-        SystemExit()
+        sys.exit()
 
     return requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1').text
 
@@ -108,6 +114,9 @@ from time import gmtime, strftime
 
 class InternationalTipCalculator:
 
+    def __init__(self):
+        print("Create an International Tip Calculator")
+
     print("Welcome to the International Tip Calculator!\n")
 
     exec_rates = request_rates()
@@ -117,8 +126,7 @@ class InternationalTipCalculator:
     # Library: smtplib
     # https://www.tutorialspoint.com/python/python_sending_email.htm
     # Used for testing email messaging.
-    print("Set exec_rates to false.")
-    exec_rates = False
+
     if not exec_rates:
         print("Enter error check.")
         from email.message import EmailMessage
@@ -142,7 +150,12 @@ class InternationalTipCalculator:
         smtpserver.ehlo()
         smtpserver.login(gmail_user, gmail_pwd)
 
-        SystemExit()
+        # Send an email to the desired location.
+        message_as_string = send_msg.preamble
+
+        smtpserver.sendmail(FROM, TO, send_msg.as_string())
+
+        sys.exit()
 
     rates = get_rates(exec_rates)
 
@@ -244,3 +257,5 @@ class InternationalTipCalculator:
         print("Invalid choice. Please try again.")
 
 
+if __name__ == '__name__':
+    main()
