@@ -1,11 +1,13 @@
 import sys
 
 from InternationalTipCalculator import InternationalTipCalculator
+from itc_gui import *
 
 
 def main():
 
     itc: InternationalTipCalculator = InternationalTipCalculator("EUR")
+    ui: itcGUI= itcGUI(itc)
 
     exec_rates = itc.request_rates()
 
