@@ -1,13 +1,10 @@
-import sys
-
-from InternationalTipCalculator import InternationalTipCalculator
+from InternationalTipCalculator import *
 from itc_gui import *
 
 
 def main():
 
     itc: InternationalTipCalculator = InternationalTipCalculator("EUR")
-    ui: itcGUI= itcGUI(itc)
 
     exec_rates = itc.request_rates()
 
@@ -23,6 +20,9 @@ def main():
 
     rates = itc.get_rates(exec_rates)
     print(rates)
+
+    #TODO: Implement a graphical user internface for the International Tip Calculator.
+    ui: itcGUI = itcGUI("International Tip Calculator")
 
 
 if __name__ == '__main__':
