@@ -17,7 +17,6 @@ def main():
     # Used for testing email messaging.
     exec_rates = dictionary_builder.request_rates()
 
-    exec_rates = False
     if not exec_rates:
         dictionary_builder.send_error_message()
         sys.exit()
