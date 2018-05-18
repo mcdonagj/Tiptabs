@@ -5,31 +5,35 @@ from UserInterface import *
 
 def main():
 
-    dictionary: DictionaryBuilder = DictionaryBuilder()
+    # Create a DictionaryBuilder object, which:
+    #   Creates a dictionary and stores key-value pairs of all available currencies and rates for a designated base.
+
+    dictionary_builder: DictionaryBuilder = DictionaryBuilder()
 
     # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
     # when the request for rate information fails.
     # Library: smtplib
     # https://www.tutorialspoint.com/python/python_sending_email.htm
     # Used for testing email messaging.
-    exec_rates = dictionary.request_rates()
+    exec_rates = dictionary_builder.request_rates()
 
+    exec_rates = False
     if not exec_rates:
-        dictionary.send_error_message()
+        dictionary_builder.send_error_message()
         sys.exit()
 
     # Populates the dictionary with available currencies.
-    rates = dictionary.get_rates(exec_rates)
+    rates = dictionary_builder.get_rates(exec_rates)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui: itcGUI = itcGUI("International Tip Calculator")
 
     # TODO: Integrate user input from GUI to allow for entry of a given rate.
-    itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary)
+    itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary_builder)
 
-    #print(len(dictionary.currencies))
+    print(len(dictionary_builder.currencies))
 
-    #print(dictionary.check_available_bases('ZWL'))
+    print(dictionary_builder.check_available_bases('ZWL'))
 
     #print(rates)
 
