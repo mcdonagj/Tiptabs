@@ -7,6 +7,11 @@ class InternationalTipCalculator:
     base = ""
 
     def __init__(self, desired_base: str, dict: DictionaryBuilder):
+        """
+        __init__(self, str, DictionaryBuilder): Constructor for creating an InternationalTipCalculator.
+        :param desired_base: Desired currency base.
+        :param dict: Constructed dictionary with available bases and rates for a given day.
+        """
 
         chk_base_size = len(desired_base) > 0
 
