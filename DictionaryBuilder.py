@@ -83,7 +83,7 @@ class DictionaryBuilder:
                     start_currencies = True
         return start_currencies
 
-    def check_available_bases(self, given_base: str) -> object:
+    def check_available_bases(self, given_base: str):
 
         return given_base in self.currencies
 
