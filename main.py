@@ -24,15 +24,15 @@ def main():
     # Populates the dictionary with available currencies.
     rates = dictionary_builder.get_rates(exec_rates)
 
-    # TODO: Implement a graphical user interface for the International Tip Calculator.
-    # ui: itcGUI = itcGUI("International Tip Calculator")
-
     # TODO: Integrate user input from GUI to allow for entry of a given rate.
     itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary_builder)
 
-    print(len(dictionary_builder.currencies))
+    # TODO: Implement a graphical user interface for the International Tip Calculator.
+    ui: UserInterface = UserInterface("International Tip Calculator", itc)
 
-    print(dictionary_builder.check_available_bases('ZWL'))
+    #print(len(dictionary_builder.currencies))
+
+    #print(dictionary_builder.check_available_bases('ZWL'))
 
     #print(rates)
 
