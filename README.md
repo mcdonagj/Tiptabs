@@ -10,7 +10,7 @@ Ideas for this project that I'm researching or implementing:
     1. A local graphical user interface utilizing Tkinter.
         a. [WIP] Created a UserInterface class to start this functionality.
 
-    2. A Flask web application hosted on a webserver within Amazon Web Services' Elastic Beanstalk.
+    2. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
 
 Version: V3.0.
-Last Update: May-21-2018.
+Last Update: May-22-2018.
