@@ -33,9 +33,9 @@ class DictionaryBuilder:
 
     def get_rates(self, service_up: bool) -> str:
         """
-
-        :param service_up:
-        :return:
+        get_rates(bool) - Retrieves and calls JSON organization subroutine for available rates.
+        :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
+        :return: JSON text of a given rates query.
         """
         # Check to see if the service is available.
         if not service_up:
