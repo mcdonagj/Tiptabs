@@ -9,7 +9,10 @@ class DictionaryBuilder:
     currencies = dict()
 
     def get_dictionary(self) -> object:
-
+        """
+        get_dictionary - Returns the currencies instance variable.
+        :return: Dictionary object containing all retrieved currencies.
+        """
         return self.currencies
 
     def request_rates(self) -> bool:
@@ -47,6 +50,10 @@ class DictionaryBuilder:
         return requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1').text
 
     def send_error_message(self):
+
+        # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
+        # when the request for rate information fails.
+        # Used for testing email messaging.
 
         from email.mime.multipart import MIMEMultipart
         message = MIMEMultipart()
