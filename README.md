@@ -11,6 +11,7 @@ Ideas for this project that I'm researching or implementing:
         a. [WIP] Created a UserInterface class to start this functionality.
 
     2. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
+        a. [WIP] Created a Flask web application within main.py.
 
 Version: V3.0.
-Last Update: May-22-2018.
+Last Update: May-23-2018.
