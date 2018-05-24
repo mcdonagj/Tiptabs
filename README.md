@@ -1,9 +1,9 @@
 # International-Tip-Calculator
-A Python program written to simplify currency conversions between established currencies. 
+A Python web application written to simplify currency conversions between established currencies.
 
-By using information from fixer.io, the program calculates a total for the user using the values taken from this database of information.
+By using information from fixer.io, the program calculates a total for the user\ using the values taken from this database of information.
 
-This program will be utilizing several libraries, like Requests, in the final version.
+This program will be utilizing several libraries, like Requests and Flask, in the final version.
 
 Ideas for this project that I'm researching or implementing:
 
@@ -12,6 +12,8 @@ Ideas for this project that I'm researching or implementing:
 
     2. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
         a. [WIP] Created a Flask web application within main.py.
+            - Created app.html and style.css for the web application's layout.
+            - [WIP] Research jQuery functions to assist with form information building.
 
-Version: V3.0.
-Last Update: May-23-2018.
+Version: V3.4.
+Last Update: May-24-2018.
