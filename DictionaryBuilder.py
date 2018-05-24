@@ -13,6 +13,7 @@ class DictionaryBuilder:
         get_dictionary - Returns the currencies instance variable.
         :return: Dictionary object containing all retrieved currencies.
         """
+
         return self.currencies
 
     def request_rates(self) -> bool:
@@ -37,6 +38,7 @@ class DictionaryBuilder:
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
         :return: JSON text of a given rates query.
         """
+
         # Check to see if the service is available.
         if not service_up:
             print("ERROR: rate service 'fixer.io' is not available. Try again later.")
@@ -50,7 +52,11 @@ class DictionaryBuilder:
         return requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1').text
 
     def send_error_message(self):
-
+        """
+        send_error_message - Helper function that assists with handling error messages within the ITC.
+        Creates an MIME message and sends it to a given email address. Execution of the ITC halts if
+        this state is encountered.
+        """
         # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
         # when the request for rate information fails.
         # Used for testing email messaging.
@@ -80,11 +86,16 @@ class DictionaryBuilder:
 
     # TODO: create a function that retrieves each currency and assigns them to a dictionary position.
     def split_json(self, requests_text: str) -> bool:
+        """
+        split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
+        :param requests_text: JSON text retrieved from Fixer.io.
+        :return: Boolean condition indicating the success of dividing this text.
+        """
         start_currencies = False
 
         for word in requests_text.split():
             if start_currencies:
-                result = self.add_currency(word)
+                self.add_currency(word)
             else:
                 if word.__contains__("rates"):
                     start_currencies = True
