@@ -1,11 +1,10 @@
 from InternationalTipCalculator import *
 from DictionaryBuilder import *
 from UserInterface import *
-from flask import Flask
+from flask import Flask, render_template, request
 
 
 def main():
-
     # Create a DictionaryBuilder object, which:
     #   Creates a dictionary and stores key-value pairs of all available currencies and rates for a designated base.
 
@@ -26,13 +25,21 @@ def main():
     itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary_builder)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
-    #ui: UserInterface = UserInterface("International Tip Calculator", itc)
+    # ui: UserInterface = UserInterface("International Tip Calculator", itc)
 
     app = Flask(__name__)
 
     @app.route('/')
     def home():
-        return "Welcome to the International Tip Calculator."
+        return render_template("app.html")
+
+    @app.route('/', methods=['POST'])
+    def post_home():
+        """def post_retrieve_input():
+            input = request.form['number']
+            return input
+        """
+        return ""
 
     @app.route('/fixer_status')
     def fixer_status():
@@ -44,14 +51,12 @@ def main():
 
     app.run(debug=True)
 
-    #print(len(dictionary_builder.currencies))
+    # print(len(dictionary_builder.currencies))
 
-    #print(dictionary_builder.check_available_bases('ZWL'))
+    # print(dictionary_builder.check_available_bases('ZWL'))
 
-    #print(rates)
+    # print(rates)
 
 
 if __name__ == '__main__':
     main()
-
-

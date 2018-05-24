@@ -32,7 +32,7 @@ class InternationalTipCalculator:
     def set_base(self, desired_base: str) -> bool:
         base = self.dictionary_builder.check_available_bases(desired_base)
 
-        #TODO: Check logic in this function.
+        # TODO: Check logic in this function.
         # Error checking for non-available bases is not working as intended.
         base_available = type(base) is object
 
