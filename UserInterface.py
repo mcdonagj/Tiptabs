@@ -2,7 +2,6 @@ import tkinter as tk
 
 
 class UserInterface:
-
     user_input = ""
     entry_field = None
     window = None
@@ -56,4 +55,3 @@ class UserInterface:
             result = True
 
         return result
-
