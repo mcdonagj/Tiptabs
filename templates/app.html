@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>International Tip Calculator</title>
+
+    <script type="text/javascript">
+
+        function populate_select_options() {
+            const currencies = ["USD", "EUR"];
+            var items = "";
+            $.each(currencies, function () {
+                items += "<option value='this.id'>" + this.Text + "</option>";
+            });
+            $("input_base").html(items);
+        }
+
+    </script>
+
+    <h1>Welcome to the International Tip Calculator.</h1>
+</head>
+
+<body>
+
+<form id="input" method="POST">
+
+    Base Currency:
+    <select title="Base Currency">
+        <script>
+            populate_select_options();
+        </script>
+    </select>
+
+    <br>
+
+    Bill Amount:
+    <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
+
+    Tip Percentage:
+    <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
+
+    Converted Currency:
+    <select title="Converted Currency">
+
+    </select><br>
+
+    <input type="submit" value="Submit"><br>
+
+</form>
+</body>
+
+</html>
