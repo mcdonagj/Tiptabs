@@ -51,3 +51,11 @@ class InternationalTipCalculator:
     def set_amount(self, desired_amount: float):
         self.amount = desired_amount
         print(self.amount)
+
+    def calculate_total(self, bill_amount: str, tip_percentage: str) -> float:
+
+        corrected_tip_percentage = float(tip_percentage) / 100
+        bill_amt = float(bill_amount)
+        tip_amount = (bill_amt * corrected_tip_percentage)
+
+        return bill_amt + tip_amount
