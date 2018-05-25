@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <title>International Tip Calculator</title>
 
@@ -9,23 +11,20 @@
 
         function populate_select_options() {
             const currencies = ["USD", "EUR"];
-            var items = "";
-            $.each(currencies, function () {
-                items += "<option value='this.id'>" + this.Text + "</option>";
-            });
-            $("input_base").html(items);
+            const items = "";
         }
 
     </script>
 
-    <h1>Welcome to the International Tip Calculator.</h1>
 </head>
 
 <body>
 
+<h1>Welcome to the International Tip Calculator.</h1>
+
 <form id="input" method="POST">
 
-    Base Currency:
+    &ensp;Base Currency:
     <select title="Base Currency">
         <script>
             populate_select_options();
@@ -34,18 +33,22 @@
 
     <br>
 
-    Bill Amount:
+    &ensp;Bill Amount:
     <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
 
-    Tip Percentage:
+    &ensp;Tip Percentage:
     <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
 
-    Converted Currency:
+    &ensp;Converted Currency:
     <select title="Converted Currency">
-
+        <script>
+            populate_select_options();
+        </script>
     </select><br>
 
-    <input type="submit" value="Submit"><br>
+    &ensp;<input type="submit" value="Submit">
+
+    <br>
 
 </form>
 </body>
