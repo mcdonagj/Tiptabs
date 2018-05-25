@@ -1,7 +1,7 @@
 # International-Tip-Calculator
 A Python web application written to simplify currency conversions between established currencies.
 
-By using information from fixer.io, the program calculates a total for the user\ using the values taken from this database of information.
+By using information from fixer.io, the program calculates a total for the user using the values taken from this database of information.
 
 This program will be utilizing several libraries, like Requests and Flask, in the final version.
 
@@ -16,4 +16,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Research jQuery functions to assist with form information building.
 
 Version: V3.4.
-Last Update: May-24-2018.
+Last Update: May-25-2018.
