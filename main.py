@@ -35,27 +35,19 @@ def main():
 
     @app.route('/', methods=['POST'])
     def post_home():
-        """def post_retrieve_input():
-            input = request.form['number']
-            return input
-        """
-        return ""
+        if request.method == 'POST':
+            result = request.form
+            total = itc.calculate_total(result['billamount'], result['tippercentage'])
+            return render_template("result.html", result=total)
 
     @app.route('/fixer_status')
     def fixer_status():
         result = "Fixer.io is not available."
         if exec_rates:
             result = "Fixer.io is available for use."
-
         return result
 
-    app.run(debug=True)
-
-    # print(len(dictionary_builder.currencies))
-
-    # print(dictionary_builder.check_available_bases('ZWL'))
-
-    # print(rates)
+    app.run()
 
 
 if __name__ == '__main__':
