@@ -16,4 +16,5 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Research jQuery functions to assist with form information building.
 
 Version: V3.4.
-Last Update: May-25-2018.
+
+Last Update: May-26-2018.
