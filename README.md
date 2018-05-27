@@ -14,7 +14,7 @@ Ideas for this project that I'm researching or implementing:
         a. [WIP] Created a Flask web application within main.py.
             - Created app.html and style.css for the web application's layout.
             - [WIP] Research jQuery functions to assist with form information building.
+            - [WIP] Generate better HTML and CSS for a refined web app interface.
 
 Version: V3.4.
-
-Last Update: May-26-2018.
+Last Update: May-27-2018.
