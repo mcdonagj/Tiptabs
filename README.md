@@ -5,6 +5,12 @@ By using information from fixer.io, the program calculates a total for the user 
 
 This program will be utilizing several libraries, like Requests and Flask, in the final version.
 
+To install these libraries, use the following commands:
+
+    1. Installing Requests: pip install requests
+
+    2. Installing Flask: pip install flask
+
 Ideas for this project that I'm researching or implementing:
 
     1. A local graphical user interface utilizing Tkinter.
