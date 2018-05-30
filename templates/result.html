@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>App Result</title>
 </head>
 <body>
-<p>
-    Your total amount was: {{ result }} <br>
-</p>
+        <div class="content">
+            <br>  
+            <p>&ensp;Your total amount was: {{ result }}</p>
+            <br>
+        </div>
 </body>
 </html>
