@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
@@ -20,37 +21,45 @@
 
 <body>
 
-<h1>Welcome to the International Tip Calculator.</h1>
+    <div class="topnav">
+        <a href="http://127.0.0.1:5000/">Home</a>
+        <a href="http://127.0.0.1:5000/fixer_status">Fixer.io Status</a>
+    </div>
+      
+    <div class="content">
+        <h2>International Tip Calculator</h2>
+        <form id="input" method="POST">
+            &ensp;Base Currency:
+            <select title="Base Currency">
+                <script>
+                    populate_select_options();
+                </script>
+            </select>            
+            <br>
+            
+            &ensp;Bill Amount:
+            <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
+            
+            &ensp;Tip Percentage:
+            <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
+            
+            &ensp;Converted Currency:
+            <select title="Converted Currency">
+                <script>
+                    populate_select_options();
+                </script>
+            </select>
+            <br>
+            
+            &ensp;<input type="submit" value="Submit">
+            
+        </form>
+    </div>
 
-<form id="input" method="POST">
-
-    &ensp;Base Currency:
-    <select title="Base Currency">
-        <script>
-            populate_select_options();
-        </script>
-    </select>
-
-    <br>
-
-    &ensp;Bill Amount:
-    <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
-
-    &ensp;Tip Percentage:
-    <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
-
-    &ensp;Converted Currency:
-    <select title="Converted Currency">
-        <script>
-            populate_select_options();
-        </script>
-    </select><br>
-
-    &ensp;<input type="submit" value="Submit">
-
-    <br>
-
-</form>
+    <div class="footer">
+        <p>Created using Flask & Requests.</p>
+    </div>
+      
 </body>
 
 </html>
