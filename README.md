@@ -11,6 +11,12 @@ To install these libraries, use the following commands:
 
     2. Installing Flask: pip install flask
 
+The basic CSS format is adapted from a template found below:
+
+    1. https://www.w3schools.com/css/tryit.asp?filename=trycss_template3
+
+Further adaptation of this template was done with information found through various outlets.
+
 Ideas for this project that I'm researching or implementing:
 
     1. A local graphical user interface utilizing Tkinter.
@@ -23,4 +29,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Generate better HTML and CSS for a refined web app interface.
 
 Version: V3.4.
-Last Update: May-29-2018.
+Last Update: May-30-2018.
