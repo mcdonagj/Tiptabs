@@ -13,6 +13,7 @@
                 height: 200px;
             }
     </style>
+
      <!---Devicons provided from: https://konpa.github.io/devicon-->
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     
@@ -22,10 +23,9 @@
 
     <script type="text/javascript">
 
-        function populate_select_options() {
-            const currencies = ["USD", "EUR"];
-            const items = "";
-        }
+        const currencies = ["USD", "EUR"];
+
+        // TODO: Create a function that populates the given select field with currency options.
 
     </script>
 
@@ -45,11 +45,10 @@
         <div id="rcorners">
             <p>To calculate a tip, complete the sections below:</p>
             <form method="POST">
+                
                 &ensp;a. Base Currency:
-                <select title="Base Currency">
-                    <script>
-                        populate_select_options();
-                    </script>
+                <select title="Base Currency" id='Base Currency'>
+                    
                 </select>            
                 <br>
             
@@ -61,9 +60,7 @@
             
                 &ensp;d. Converted Currency:
                 <select title="Converted Currency">
-                    <script>
-                        populate_select_options();
-                    </script>
+
                 </select>
                 <br><br>
             
