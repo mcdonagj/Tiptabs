@@ -4,6 +4,18 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
+    <style>
+            #rcorners {
+                border-radius: 5px;
+                border: 2px solid #73AD21;
+                padding: 0px;
+                width: 1000px;
+                height: 200px;
+            }
+    </style>
+     <!---Devicons provided from: https://konpa.github.io/devicon-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <title>International Tip Calculator</title>
@@ -24,40 +36,44 @@
     <div class="topnav">
         <a href="http://127.0.0.1:5000/">Home</a>
         <a href="http://127.0.0.1:5000/fixer_status">Fixer.io Status</a>
+        <a href="https://github.com/mcdonagj/International-Tip-Calculator">Fork on Github <i class="devicon-github-plain"></i></a>
     </div>
       
     <div class="content">
         <h2>International Tip Calculator</h2>
-        <form id="input" method="POST">
-            &ensp;Base Currency:
-            <select title="Base Currency">
-                <script>
-                    populate_select_options();
-                </script>
-            </select>            
-            <br>
+        <p>A web application that simplifies value conversions between established currencies.</p>
+        <div id="rcorners">
+            <p>To calculate a tip, complete the sections below:</p>
+            <form method="POST">
+                &ensp;a. Base Currency:
+                <select title="Base Currency">
+                    <script>
+                        populate_select_options();
+                    </script>
+                </select>            
+                <br>
             
-            &ensp;Bill Amount:
-            <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
+                &ensp;b. Bill Amount:
+                <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
             
-            &ensp;Tip Percentage:
-            <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
+                &ensp;c. Tip Percentage:
+                <input type="number" name="tippercentage" min="0" max="100" step="1" value="15"><br>
             
-            &ensp;Converted Currency:
-            <select title="Converted Currency">
-                <script>
-                    populate_select_options();
-                </script>
-            </select>
-            <br>
+                &ensp;d. Converted Currency:
+                <select title="Converted Currency">
+                    <script>
+                        populate_select_options();
+                    </script>
+                </select>
+                <br><br>
             
-            &ensp;<input type="submit" value="Submit">
-            
-        </form>
+                &ensp;<input type="submit" value="Calculate Tip">            
+            </form>
+        </div>
     </div>
 
     <div class="footer">
-        <p>Created using Flask & Requests.</p>
+        <p>&ensp;URL handling provided by: <a href="https://github.com/pallets/flask">Flask</a> & <a href="https://github.com/requests/requests">Requests</a>.</p>
     </div>
       
 </body>
