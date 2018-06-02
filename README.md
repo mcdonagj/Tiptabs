@@ -7,13 +7,13 @@ This program will be utilizing several libraries, like Requests and Flask, in th
 
 To install these libraries from the command line, use the following commands:
 
-    Note: Located in main.py, there is a function that automates the installation of dependencies. (install_dependencies(package, version))
+###### *Note: Located in main.py, there is a function that automates the installation of dependencies. (install_dependencies(package, version))
 
-    As of 6/1/2018, this function installs up-to-date versions of requests and flask via pip.
-    Manually installing these packages using the lines below will not hurt the execution of this program.
+As of 6/1/2018, this function installs up-to-date versions of requests and flask via pip.
+Manually installing these packages using the lines below will not hurt the execution of this program.
 
-        1. Installing Requests: pip install requests
-        2. Installing Flask: pip install flask
+    1. Installing Requests: pip install requests
+    2. Installing Flask: pip install flask
 
 The basic CSS format is adapted from a template found below:
 
@@ -33,4 +33,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Generate better HTML and CSS for a refined web app interface.
 
 Version: V3.4.
-Last Update: June-1-2018.
+Last Update: June-2-2018.
