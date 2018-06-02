@@ -55,7 +55,8 @@ def main():
         result = "Fixer.io is not available."
         if exec_rates:
             result = "Fixer.io is available for use."
-        return result
+        # return result
+        return render_template("fixer_status.html", result=result)
 
     app.run()
 
