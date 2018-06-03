@@ -22,7 +22,7 @@ def main():
 
     # Retrieve the rates for a given base currency.
     exec_rates = dictionary_builder.request_rates()
-
+    
     # If the retrieval of rates does not succeed, send an email with details of the event.
     if not exec_rates:
         dictionary_builder.send_error_message()
@@ -47,15 +47,17 @@ def main():
     def post_home():
         if request.method == 'POST':
             result = request.form
+            
             total = itc.calculate_total(result['billamount'], result['tippercentage'])
+            # conversion_type = result['convertedcurrency']
+            
             return render_template("result.html", result=total)
 
     @app.route('/fixer_status')
     def fixer_status():
         result = "Fixer.io is not available."
         if exec_rates:
-            result = "Fixer.io is available for use."
-        # return result
+            result = "Fixer.io is available for use."        
         return render_template("fixer_status.html", result=result)
 
     app.run()

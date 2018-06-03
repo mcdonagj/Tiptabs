@@ -8,6 +8,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+select {
+    width:200px;
+}
+
+input {
+    width:200px;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -27,7 +35,7 @@ body {
     color: black;
 }
 
-.content {
+.content {    
     background-color: #ddd;
     padding: 10px;
 }
@@ -35,4 +43,12 @@ body {
 .footer {
     background-color: #f1f1f1;
     padding: 10px;
+}
+
+.roundedcorners {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 600px;
+    height: 200px;
 }
