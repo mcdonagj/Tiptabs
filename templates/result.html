@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>App Result</title>
 </head>
 <body>
@@ -12,5 +13,11 @@
             <p>&ensp;Your total amount was: {{ result }}</p>
             <br>
         </div>
+
+        <div class="footer">
+                <a href="http://127.0.0.1:5000/">
+                    <i class="material-icons">arrow_back</i>
+                </a>    
+            </div>
 </body>
 </html>
