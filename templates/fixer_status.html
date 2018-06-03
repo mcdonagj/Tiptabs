@@ -4,13 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Material design icons used from: https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Fixer.io Status</title>
 </head>
 <body>
-        <div class="content">
-            <br>  
-            <p>&ensp;{{ result }}</p>
-            <br>
-        </div>
+
+    <div class="topnav"></div>
+
+    <div class="content">
+        <br>
+        <p>{{ result }}</p>
+        <p>You can view official details about the service <a href="https://status.fixer.io/775958873">here</a>.</p>
+        <br>
+    </div>
+
+    <div class="footer">
+        <a href="http://127.0.0.1:5000/"><i class="material-icons">arrow_back</i></a>    
+    </div>
+
 </body>
 </html>
