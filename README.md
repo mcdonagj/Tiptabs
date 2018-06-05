@@ -33,4 +33,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Generate better HTML and CSS for a refined web app interface.
 
 Version: V3.4.
-Last Update: June-3-2018.
+Last Update: June-4-2018.
