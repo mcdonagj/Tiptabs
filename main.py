@@ -1,12 +1,12 @@
 
-# Create a function that installs a package given a string describing the desired package and desired version of the package.
-def install_dependencies(package, version):
-    import subprocess
-    import sys
-    subprocess.call([sys.executable, '-m', 'pip', 'install', '{}=={}'.format(package, version)])
-
-install_dependencies('flask', '1.0.2')
-install_dependencies('requests', '2.18.4')
+# # Create a function that installs a package given a string describing the desired package and desired version of the package.
+# def install_dependencies(package, version):
+#     import subprocess
+#     import sys
+#     subprocess.call([sys.executable, '-m', 'pip', 'install', '{}=={}'.format(package, version)])
+#
+# install_dependencies('flask', '1.0.2')
+# install_dependencies('requests', '2.18.4')
 
 from requests import *
 from flask import Flask, render_template, request
