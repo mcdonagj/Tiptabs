@@ -31,6 +31,7 @@ Ideas for this project that I'm researching or implementing:
             - Created app.html and style.css for the web application's layout.
             - [WIP] Research jQuery functions to assist with form information building.
             - [WIP] Generate better HTML and CSS for a refined web app interface.
+            - [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
 Version: V3.4.
-Last Update: June-4-2018.
+Last Update: June-5-2018.
