@@ -102,7 +102,11 @@ class DictionaryBuilder:
         return start_currencies
 
     def check_available_bases(self, given_base: str):
-
+        """
+        check_available_bases(str) - Helper method that checks to see if a given base (key) is within the dictionary.
+        :param given_base:
+        :return: the given key if it is within the currencies dictionary.
+        """
         return given_base in self.currencies
 
     def check_available_currencies(self, given_currencies):
