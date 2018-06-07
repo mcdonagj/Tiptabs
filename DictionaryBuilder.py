@@ -110,6 +110,11 @@ class DictionaryBuilder:
         return given_base in self.currencies
 
     def check_available_currencies(self, given_currencies):
+        """
+        check_available_currencies(dict) - Helper method that compares the contents of two dictionaries.
+        :param given_currencies:
+        :return: False if the parameter is larger or smaller; True otherwise.
+        """
         valid_currency_set = False
         return valid_currency_set
 
