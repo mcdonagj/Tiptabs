@@ -119,6 +119,11 @@ class DictionaryBuilder:
         return valid_currency_set
 
     def add_currency(self, currency_to_add: str):
+        """
+        add_currency(str) - Helper function that adds a given currency to the currencies dictionary.
+        :param currency_to_add:
+        :return: Boolean condition indicating success or failure of addition of currency.
+        """
         revised_addition = currency_to_add.replace(",", "").replace("}", "")
 
         if len(revised_addition) > 0:
