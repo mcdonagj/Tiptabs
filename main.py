@@ -14,7 +14,13 @@ from InternationalTipCalculator import *
 from DictionaryBuilder import *
 from UserInterface import *
 
+
 def main():
+    """
+    main() - Main class for the International Tip Calculator. The Flask web application is created
+    in this file. Additionally, this file handles the creation of the dictionary of currencies.
+    :return:
+    """
     # Create a DictionaryBuilder object, which:
     #   Creates a dictionary and stores key-value pairs of all available currencies and rates for a designated base.
 
