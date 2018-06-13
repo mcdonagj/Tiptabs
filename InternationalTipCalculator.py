@@ -27,6 +27,10 @@ class InternationalTipCalculator:
                 self.base = 'EUR'
 
     def get_base(self):
+        """
+        get_base() - Helper function that returns the base currency instance variable.
+        :return: Base currency instance variable.
+        """
         return self.base
 
     def set_base(self, desired_base: str) -> bool:
