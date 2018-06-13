@@ -48,6 +48,11 @@ class InternationalTipCalculator:
         return base_available
 
     def set_custom_currencies(self, desired_currencies):
+        """
+        set_custom_currencies(Dict) - Setter function for setting a custom dictionary of currencies.
+        :param desired_currencies: Dictionary of currencies to set within the calculator.
+        :return: Boolean condition that indicates the success of setting the dictionary.
+        """
         custom_currencies_set = False
 
         return custom_currencies_set
