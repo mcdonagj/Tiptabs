@@ -34,6 +34,11 @@ class InternationalTipCalculator:
         return self.base
 
     def set_base(self, desired_base: str) -> bool:
+        """
+        set_base(str) - Setter function that sets the base instance variable to the desired parameter.
+        :param desired_base: Base to set within the calculator.
+        :return: Boolean condition that indicates the success of setting the desired base.
+        """
         base = self.dictionary_builder.check_available_bases(desired_base)
 
         # TODO: Check logic in this function.
