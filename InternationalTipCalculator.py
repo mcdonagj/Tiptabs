@@ -63,6 +63,10 @@ class InternationalTipCalculator:
         return custom_currencies_set
 
     def set_amount(self, desired_amount: float):
+        """
+        set_amount(float) - Setter function for setting a bill amount within the calculator.
+        :param desired_amount: Bill amount to be converted.
+        """
         self.amount = desired_amount
         print(self.amount)
 
