@@ -71,7 +71,12 @@ class InternationalTipCalculator:
         print(self.amount)
 
     def calculate_total(self, bill_amount: str, tip_percentage: str) -> float:
-
+        """
+        calculate_total(str, str) - Function that calculates the total for a given bill amount and tip percentage.
+        :param bill_amount: Desired bill amount.
+        :param tip_percentage: Desired tip amount. (Later converted to a decimal value)
+        :return: Total sum of the bill.
+        """
         corrected_tip_percentage = float(tip_percentage) / 100
         bill_amt = float(bill_amount)
         tip_amount = (bill_amt * corrected_tip_percentage)
