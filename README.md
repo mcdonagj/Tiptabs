@@ -34,4 +34,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
 Version: V3.4.
-Last Update: June-5-2018.
+Last Update: June-16-2018.
