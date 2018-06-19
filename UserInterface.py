@@ -36,7 +36,10 @@ class UserInterface:
         self.window.mainloop()
 
     def retrieve_input(self):
-
+        """
+        retrieve_input() - Helper function for retrieving input from the fields within the UI.
+        :return: Boolean indicating valid input placed into the calculator.
+        """
         input_text = str(self.entry_field.get())
         valid_input = self.check_input(input_text)
 
