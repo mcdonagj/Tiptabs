@@ -49,7 +49,11 @@ class UserInterface:
         return valid_input
 
     def check_input(self, desired_input_text: str) -> bool:
-
+        """
+        check_input(str) - Helper function for verifying input given in the Tkinter GUI.
+        :param desired_input_text: String containing input from all fields in the GUI input fields.
+        :return: Boolean condition indicated whether valid input was given.
+        """
         result = False
 
         check_str_len = len(desired_input_text.strip()) > 0
