@@ -33,5 +33,8 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Generate better HTML and CSS for a refined web app interface.
             - [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
+    3. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
+            - [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
+
 Version: V3.4.
-Last Update: June-16-2018.
+Last Update: June-20-2018.
