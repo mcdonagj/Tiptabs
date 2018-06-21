@@ -8,7 +8,11 @@ class UserInterface:
     calculator = None
 
     def __init__(self, title, calculator):
-
+        """
+        __init__() - Constructor for the ITC User Interface.
+        :param title: Title of the UI window.
+        :param calculator: International Tip Calculator object.K
+        """
         self.calculator = calculator
 
         # Declare the frame of the UI
