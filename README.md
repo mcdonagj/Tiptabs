@@ -37,4 +37,4 @@ Ideas for this project that I'm researching or implementing:
             - [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
 Version: V3.4.
-Last Update: June-21-2018.
+Last Update: June-20-2018.
