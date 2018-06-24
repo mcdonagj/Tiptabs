@@ -13,9 +13,8 @@ class InternationalTipCalculator:
         :param desired_dictionary: Constructed dictionary with available bases and rates for a given day.
         """
 
-        chk_base_size = len(desired_base) > 0
-
         self.dictionary_builder = desired_dictionary
+        chk_base_size = len(desired_base) >= 0
 
         if not chk_base_size:
             self.base = 'EUR'
@@ -60,6 +59,8 @@ class InternationalTipCalculator:
         """
         custom_currencies_set = False
 
+        #TODO: Create subroutine that checks all currencies within the dictionary for invalid entries.
+
         return custom_currencies_set
 
     def set_amount(self, desired_amount: float):
@@ -70,9 +71,10 @@ class InternationalTipCalculator:
         self.amount = desired_amount
         print(self.amount)
 
-    def calculate_total(self, bill_amount: str, tip_percentage: str) -> float:
+    def calculate_total(self, bill_amount: str, tip_percentage: str, converted_currency: str) -> str:
         """
         calculate_total(str, str) - Function that calculates the total for a given bill amount and tip percentage.
+        :param converted_currency: Desired currency base chosen on the ITC page.
         :param bill_amount: Desired bill amount.
         :param tip_percentage: Desired tip amount. (Later converted to a decimal value)
         :return: Total sum of the bill.
@@ -81,4 +83,9 @@ class InternationalTipCalculator:
         bill_amt = float(bill_amount)
         tip_amount = (bill_amt * corrected_tip_percentage)
 
-        return bill_amt + tip_amount
+        # TODO: Multiply the currency conversion rate to generate the correct converted amount.
+        convert_currency_rate = self.dictionary_builder.currencies.get(converted_currency, 1)
+
+        final_amount = (bill_amt + tip_amount) * convert_currency_rate
+
+        return "Your total amount was: {!s} {!s}.".format(final_amount, converted_currency)
