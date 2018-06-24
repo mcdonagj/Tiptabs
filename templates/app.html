@@ -8,13 +8,9 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 
     <title>International Tip Calculator</title>
-
-    <script type="text/javascript">
-        const currencies = ["USD", "EUR"];
-        // TODO: Create a function that populates the given select field with currency options.
-    </script>
 
 </head>
 
@@ -36,22 +32,24 @@
                     <br><br>
                     
                     a. Base Currency:
-                    <select title="Base Currency" id='Base Currency'>
-                        <option name='basecurrency' value="EUR">EUR - Euro</option>
-                    </select>            
+                    <select title="Base Currency" id='Base Currency' name="base_currency">
+                        <option name='Euro' value="EUR">EUR - Euro</option>
+                    </select>
+
                     <br>
                     
                     b. Bill Amount:
-                    <input type="number" name="billamount" min="0" step="0.01" value="0"><br>
+                    <input type="number" name="bill_amount" min="0" step="0.01" value="0"><br>
                     
                     c. Tip Percentage:
-                    <input type="number" name="tippercentage" min="0" max="100" step="1" value="15">
+                    <input type="number" name="tip_percentage" min="0" max="100" step="1" value="15">
                     (%)
                     <br>
 
                     d. Converted Currency:
-                    <select title="Converted Currency">
-                        <option value="EUR">EUR - Euro</option>                    
+
+                    <select type="text" class="form-control" name="converted_currency" id="Converted Currency">
+                         <option ng-repeat="rate in rates" value="{{rate}}">{{rate}}</option>
                     </select>
                     <br>
                     <br>
