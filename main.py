@@ -37,7 +37,6 @@ def main():
     # Populate the dictionary with available currencies.
     rates = dictionary_builder.get_rates(exec_rates)
 
-    # TODO: Integrate user input from GUI to allow for entry of a given rate.
     itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary_builder)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
@@ -45,18 +44,19 @@ def main():
 
     app = Flask(__name__)
 
+    rates = dictionary_builder.currencies.keys()
+
     @app.route('/')
     def home():
-        return render_template("app.html")
+        return render_template("app.html", rates=rates)
 
     @app.route('/', methods=['POST'])
     def post_home():
         if request.method == 'POST':
             result = request.form
             
-            total = itc.calculate_total(result['billamount'], result['tippercentage'])
-            # conversion_type = result['convertedcurrency']
-            
+            total = itc.calculate_total(result['bill_amount'], result['tip_percentage'], result['converted_currency'])
+
             return render_template("result.html", result=total)
 
     @app.route('/fixer_status')
