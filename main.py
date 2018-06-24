@@ -7,9 +7,9 @@
 #
 # install_dependencies('flask', '1.0.2')
 # install_dependencies('requests', '2.18.4')
-
+from flask.json import jsonify
 from requests import *
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, json
 from InternationalTipCalculator import *
 from DictionaryBuilder import *
 from UserInterface import *
@@ -44,7 +44,7 @@ def main():
 
     app = Flask(__name__)
 
-    rates = dictionary_builder.currencies.keys()
+    rates = dictionary_builder.currencies
 
     @app.route('/')
     def home():
