@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+
+<html ng-app="itc_app" lang="en">
+<div ng-controller='itc_controller'>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
-     <!---Devicons provided from: https://konpa.github.io/devicon-->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 
     <title>International Tip Calculator</title>
 
+    <script>var app = angular.module('itc_app', []);</script>
 </head>
 
     <body>
@@ -20,27 +22,28 @@
             <a href="http://127.0.0.1:5000/fixer_status"><i class="fas fa-wrench"></i>  Fixer.io Status</a>
             <a href="https://github.com/mcdonagj/International-Tip-Calculator"><i class="fab fa-github"></i>  Fork on Github</a>
         </div>
-        
+
         <div class="content">
-            
+
                 <h2>International Tip Calculator</h2>
                 <p>A web application that simplifies value conversions between established currencies.</p>
                 <div class="roundedcorners">
                 <form method="POST">
-                
+
                     To calculate a tip, complete the sections below:
                     <br><br>
-                    
+
                     a. Base Currency:
-                    <select title="Base Currency" id='Base Currency' name="base_currency">
+
+                    <select class="form-control" name="base_currency" id="Base Currency">
                         <option name='Euro' value="EUR">EUR - Euro</option>
                     </select>
 
                     <br>
-                    
+
                     b. Bill Amount:
                     <input type="number" name="bill_amount" min="0" step="0.01" value="0"><br>
-                    
+
                     c. Tip Percentage:
                     <input type="number" name="tip_percentage" min="0" max="100" step="1" value="15">
                     (%)
@@ -48,21 +51,24 @@
 
                     d. Converted Currency:
 
-                    <select type="text" class="form-control" name="converted_currency" id="Converted Currency">
-                         <option ng-repeat="rate in rates" value="{{rate}}">{{rate}}</option>
+                    <!--{{rates}}-->
+
+                    <select class="form-control" name="converted_currency" id="Converted Currency">
+                         <option ng-repeat="rate in rates" value="{{rate}}">{{ rates }}</option>
                     </select>
+
                     <br>
                     <br>
-                    
-                    <input type="submit" value="Calculate Tip">            
+
+                    <input type="submit" value="Calculate Tip">
                 </form>
-            </div>        
+            </div>
         </div>
 
         <div class="footer">
             <p>URL handling provided by: <a href="https://github.com/pallets/flask">Flask</a> & <a href="https://github.com/requests/requests">Requests</a>.</p>
         </div>
-        
-    </body>
 
+    </body>
+</div>
 </html>
