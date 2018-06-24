@@ -39,5 +39,5 @@ Ideas for this project that I'm researching or implementing:
     4. Use a Dockerfile to install dependencies required for execution, rather than relying on a function.
             - [WIP] Design of a Dockerfile is currently in progress; Ubuntu 14.04 Trusty will be OS environment.
 
-Version: V3.4.
-Last Update: June-21-2018.
+Version: V3.5.
+Last Update: June-22-2018.
