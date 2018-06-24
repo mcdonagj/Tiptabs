@@ -36,5 +36,8 @@ Ideas for this project that I'm researching or implementing:
     3. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
             - [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
+    4. Use a Dockerfile to install dependencies required for execution, rather than relying on a function.
+            - [WIP] Design of a Dockerfile is currently in progress; Ubuntu 14.04 Trusty will be OS environment.
+
 Version: V3.4.
 Last Update: June-21-2018.
