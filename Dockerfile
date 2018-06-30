@@ -12,20 +12,13 @@ RUN virtualenv venv
 
 # Activate virtualenv.
 WORKDIR env/bin
-RUN ls 
 
 # Retrieve project from repo.
-# RUN git clone https://github.com/mcdonagj/International-Tip-Calculator.git
-RUN mkdir ITC
-WORKDIR ITC
-COPY International-Tip-Calculator International-Tip-Calculator
+RUN git clone https://github.com/mcdonagj/International-Tip-Calculator.git
 WORKDIR International-Tip-Calculator
 
 # Install requirements.
-#COPY requirements.txt requirements.txt
-#RUN pip install --no-cache-dir -r requirements.txt
-
-RUN pip3 install flask && pip3 install requests
+RUN pip3 install -r requirements.txt
 
 # Expose port for Flask.
 EXPOSE 5000
