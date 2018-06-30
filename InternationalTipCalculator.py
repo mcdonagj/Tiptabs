@@ -6,7 +6,7 @@ class InternationalTipCalculator:
     dictionary_builder = None
     amount = 0
 
-    def __init__(self, desired_base: str, desired_dictionary: DictionaryBuilder):
+    def __init__(self, desired_base, desired_dictionary):
         """
         __init__(self, str, DictionaryBuilder): Constructor for creating an InternationalTipCalculator.
         :param desired_base: Desired currency base.
@@ -32,7 +32,7 @@ class InternationalTipCalculator:
         """
         return self.base
 
-    def set_base(self, desired_base: str) -> bool:
+    def set_base(self, desired_base):
         """
         set_base(str) - Setter function that sets the base instance variable to the desired parameter.
         :param desired_base: Base to set within the calculator.

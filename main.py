@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 # # Create a function that installs a package given a string describing the desired package and desired version of the package.
 # def install_dependencies(package, version):
@@ -24,7 +25,7 @@ def main():
     # Create a DictionaryBuilder object, which:
     #   Creates a dictionary and stores key-value pairs of all available currencies and rates for a designated base.
 
-    dictionary_builder: DictionaryBuilder = DictionaryBuilder()
+    dictionary_builder = DictionaryBuilder()
 
     # Retrieve the rates for a given base currency.
     exec_rates = dictionary_builder.request_rates()
@@ -37,7 +38,7 @@ def main():
     # Populate the dictionary with available currencies.
     rates = dictionary_builder.get_rates(exec_rates)
 
-    itc: InternationalTipCalculator = InternationalTipCalculator("EUR", dictionary_builder)
+    itc = InternationalTipCalculator("EUR", dictionary_builder)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui: UserInterface = UserInterface("International Tip Calculator", itc)
