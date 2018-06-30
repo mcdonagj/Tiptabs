@@ -5,13 +5,13 @@ FROM ubuntu:14.04
 # Install python, pip, and virtualenv.
 RUN \
   apt-get update && apt-get upgrade -y && \
-  apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk curl
+  apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
 
 # Create virtualenv.
-#RUN virtualenv venv
+RUN virtualenv venv
 
 # Activate virtualenv.
-#WORKDIR env/bin
+WORKDIR env/bin
 
 # Retrieve project from repo.
 RUN git clone https://github.com/mcdonagj/International-Tip-Calculator.git
@@ -25,3 +25,4 @@ EXPOSE 5000
 
 # Run main.py.
 CMD ["python3", "main.py"]
+
