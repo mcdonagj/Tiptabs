@@ -8,7 +8,7 @@ import requests
 class DictionaryBuilder:
     currencies = dict()
 
-    def get_dictionary(self) -> object:
+    def get_dictionary(self):
         """
         get_dictionary - Returns the currencies instance variable.
         :return: Dictionary object containing all retrieved currencies.
@@ -16,7 +16,7 @@ class DictionaryBuilder:
 
         return self.currencies
 
-    def request_rates(self) -> bool:
+    def request_rates(self):
         """
         request_rates - Builds the current rates variable with current rate values.
                         Prints an error message to the terminal if the status code is not HTTP[200] (OK).
@@ -32,7 +32,7 @@ class DictionaryBuilder:
 
         return ok_response
 
-    def get_rates(self, service_up: bool) -> str:
+    def get_rates(self, service_up):
         """
         get_rates(bool) - Retrieves and calls JSON organization subroutine for available rates.
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
@@ -85,7 +85,7 @@ class DictionaryBuilder:
         smtpserver.sendmail(message['From'], message['To'], message_body)
 
     # TODO: create a function that retrieves each currency and assigns them to a dictionary position.
-    def split_json(self, requests_text: str) -> bool:
+    def split_json(self, requests_text):
         """
         split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
         :param requests_text: JSON text retrieved from Fixer.io.
@@ -101,7 +101,7 @@ class DictionaryBuilder:
                     start_currencies = True
         return start_currencies
 
-    def check_available_bases(self, given_base: str):
+    def check_available_bases(self, given_base):
         """
         check_available_bases(str) - Helper method that checks to see if a given base (key) is within the dictionary.
         :param given_base:
@@ -118,7 +118,7 @@ class DictionaryBuilder:
         valid_currency_set = False
         return valid_currency_set
 
-    def add_currency(self, currency_to_add: str):
+    def add_currency(self, currency_to_add):
         """
         add_currency(str) - Helper function that adds a given currency to the currencies dictionary.
         :param currency_to_add:
