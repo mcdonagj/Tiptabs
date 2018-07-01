@@ -45,7 +45,7 @@ def main():
 
     app = Flask(__name__)
 
-    rates = dictionary_builder.currencies
+    rates = list(dictionary_builder.currencies.keys())
 
     @app.route('/')
     def home():
