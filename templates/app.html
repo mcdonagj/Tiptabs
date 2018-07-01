@@ -1,9 +1,6 @@
 
 <!DOCTYPE html>
-
-
-<html ng-app="itc_app" lang="en">
-<div ng-controller='itc_controller'>
+<html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
@@ -13,22 +10,23 @@
 
     <title>International Tip Calculator</title>
 
-    <script>var app = angular.module('itc_app', []);</script>
 </head>
 
-    <body>
+    <body ng-app="test">
         <div class="topnav">
             <a href="http://127.0.0.1:5000/"><i class="fas fa-home fa-fw"></i>  Home</a>
             <a href="http://127.0.0.1:5000/fixer_status"><i class="fas fa-wrench"></i>  Fixer.io Status</a>
             <a href="https://github.com/mcdonagj/International-Tip-Calculator"><i class="fab fa-github"></i>  Fork on Github</a>
         </div>
 
+
         <div class="content">
 
-                <h2>International Tip Calculator</h2>
+                <h3>International Tip Calculator</h3>
                 <p>A web application that simplifies value conversions between established currencies.</p>
+            <div ng-controller="testCtrl">
                 <div class="roundedcorners">
-                <form method="POST">
+                <form method="POST" ng-submit="submit()">
 
                     To calculate a tip, complete the sections below:
                     <br><br>
@@ -36,7 +34,7 @@
                     a. Base Currency:
 
                     <select class="form-control" name="base_currency" id="Base Currency">
-                        <option name='Euro' value="EUR">EUR - Euro</option>
+                        <option name='Euro' value="EUR">EUR</option>
                     </select>
 
                     <br>
@@ -51,17 +49,19 @@
 
                     d. Converted Currency:
 
-                    <!--{{rates}}-->
+                        <script>
+                            var app = angular.module("test", []);
+                            app.controller("testCtrl", function($scope) {
+                                $scope.list= JSON.parse('{{rates | tojson}}');
+                            })
+                        </script>
 
-                    <select class="form-control" name="converted_currency" id="Converted Currency">
-                         <option ng-repeat="rate in rates" value="{{rate}}">{{ rates }}</option>
-                    </select>
+                        <select ng-model="value" ng-options="value for value in list"></select>
+                        <br>
 
-                    <br>
-                    <br>
-
-                    <input type="submit" value="Calculate Tip">
+                    <input type="submit" value="Calculate tip" />
                 </form>
+                    </div>
             </div>
         </div>
 
@@ -70,5 +70,6 @@
         </div>
 
     </body>
-</div>
+
+
 </html>
