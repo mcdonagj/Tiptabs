@@ -50,8 +50,12 @@ Ideas for this project that I'm researching or implementing:
 3. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
+4. Replace storage of currencies as (key,value) pairs in a dictionary to entries in a MongoDB Docker container.
+    * [WIP] Use Flask-PyMongo to integrate this feature into the ITC.
+    ###### *Note: The information required to use the AngularJS frontend requires a JSON object to populate `ng-options`.
+
 
 After installation, simply visit `localhost:5000` in your web-browser and the application appears!
 
 Version: V3.6.
-Last Update: June-29-2018.
+Last Update: July-1-2018.
