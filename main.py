@@ -55,8 +55,8 @@ def main():
     def post_home():
         if request.method == 'POST':
             result = request.form
-            
-            total = itc.calculate_total(result['bill_amount'], result['tip_percentage'], result['converted_currency'])
+
+            total = itc.calculate_total(str(result['bill_amount']), str(result['tip_percentage']), str(result['converted_currency']))
 
             return render_template("result.html", result=total)
 
