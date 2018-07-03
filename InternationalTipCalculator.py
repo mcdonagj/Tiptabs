@@ -86,6 +86,9 @@ class InternationalTipCalculator:
         # TODO: Multiply the currency conversion rate to generate the correct converted amount.
         convert_currency_rate = self.dictionary_builder.currencies.get(converted_currency, 1)
 
-        final_amount = (bill_amt + tip_amount) * convert_currency_rate
+        fixed_converted_currency = converted_currency.replace('string:', '')
+        convert_currency_rate = self.dictionary_builder.currencies.get(fixed_converted_currency, 1)
 
-        return "Your total amount was: {!s} {!s}.".format(final_amount, converted_currency)
+        final_amount = (bill_amt + tip_amount) * float(convert_currency_rate)
+
+        return "Your total amount was: {!s} {!s}.".format(final_amount, fixed_converted_currency)
