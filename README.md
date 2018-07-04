@@ -27,14 +27,17 @@ To install these dependencies from the command line, complete either of the foll
     As of 6/1/2018, ` install_dependencies ` installs up-to-date versions of requests and flask via pip.
 
 3. Installation via command line interface (CLI).
-    Manually installing these packages using the lines below will not hurt the execution of this program.
+    Manually installing these packages using the commands below will not alter the execution of this repository.
     ```sh
-    pip install requests
-    pip install flask
+    pip(3) install requests
+    pip(3) install flask
     ```
 The basic CSS format is adapted from a template found below:
     a. https://www.w3schools.com/css/tryit.asp?filename=trycss_template3
 Further adaptation of this template was done with information found through various outlets.
+
+As of 7/3/2018 (V3.7), AngularJS is used to generate forms with various currency information in `app.html`.
+This functionality does not require the installation of AngularJS, as it is reference via the `<head>` of `app.html`.
 
 Ideas for this project that I'm researching or implementing:
 1. A local graphical user interface utilizing Tkinter.
@@ -42,9 +45,8 @@ Ideas for this project that I'm researching or implementing:
 
 2. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
-        * Created app.html and style.css for the web application's layout.
-        * [WIP] Research jQuery functions to assist with form information building.
-        * [WIP] Generate better HTML and CSS for a refined web app interface.
+        * [DONE] Created app.html and style.css for the web application's layout.
+        * [DONE] Use AngularJS to control form creation and population.
         * [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
 3. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
@@ -57,5 +59,5 @@ Ideas for this project that I'm researching or implementing:
 
 After installation, simply visit `localhost:5000` in your web-browser and the application appears!
 
-Version: V3.6.
-Last Update: July-1-2018.
+Version: V3.7.
+Last Update: July-4-2018.
