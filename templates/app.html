@@ -3,74 +3,81 @@
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-<title>International Tip Calculator</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <title>International Tip Calculator</title>
 </head>
 
 <body ng-app="itc_app">
 <div class="topnav">
-<a href="http://127.0.0.1:5000/"><i class="fas fa-home fa-fw"></i>  Home</a>
-<a href="http://127.0.0.1:5000/fixer_status"><i class="fas fa-wrench"></i>  Fixer.io Status</a>
-<a href="https://github.com/mcdonagj/International-Tip-Calculator"><i class="fab fa-github"></i>  Fork on Github</a>
+    <a href="http://127.0.0.1:5000/"><i class="fas fa-home fa-fw"></i>  Home</a>
+    <a href="http://127.0.0.1:5000/fixer_status"><i class="fas fa-wrench"></i>  Fixer.io Status</a>
+    <a href="https://github.com/mcdonagj/International-Tip-Calculator"><i class="fab fa-github"></i>  Fork on Github</a>
 </div>
 
 <div class="content">
-<h3>International Tip Calculator</h3>
-<p>A web application that simplifies value conversions between established currencies.</p>
+    <h3>International Tip Calculator</h3>
+    <p>A web application that simplifies value conversions between established currencies.</p>
 
-<script>
-var app = angular.module("itc_app", []);
+    <script>
+        var app = angular.module("itc_app", []);
 
-app.controller("app_controller", function($scope, $http) {
-$scope.response = {};
-$scope.sendResponse = function() {
-$http.post('/', $scope.response, {'Content-Type': 'application/x-www-form-urlencoded'})
-};
-$scope.available_rates= JSON.parse('{{rates | tojson}}');
-})
-</script>
+        app.controller("app_controller", function($scope, $http) {
+            $scope.response = {};
+            $scope.sendResponse = function() {
+                $http.post('/', $scope.response, {'Content-Type': 'application/x-www-form-urlencoded'})
+            };
+            $scope.available_rates= JSON.parse('{{rates | tojson}}');
+        })
+    </script>
 
-<div class="container" ng-controller="app_controller">
-<label>Complete the form below:</label>
-<div class="roundedcorners">
+    <div class="container" ng-controller="app_controller">
+        <label>Complete the form below:</label>
+        <div class="roundedcorners">
+            <form ng-submit="sendResponse()" action="/" method="POST">
 
-<form ng-submit="sendResponse()" action="/" method="POST">
+                <div class="row">
+                    <div class="column">
+                        <label for="baseCurrency">Base Currency:</label><br>
+                        <label for="billAmount">Bill Amount:</label><br>
+                        <label for="tipPercentage">Tip Percentage:</label><br>
+                        <label for="convertedCurrency">Converted Currency:</label>
+                    </div>
 
-<div class="form-group">
-<label for="baseCurrency">Base Currency:</label>
-<!-- <select class="form-control" id="Base Currency" ng-model="base_currency" ng-options="base_currency for base_currency in available_rates"></select> -->
-<select class="form-control" name="Base Currency" ng-model="response.base_currency">
-<option value="EUR">EUR</option>
-</select>
+                    <div class="column">
+                        <div class="form-group">
+                            <!-- <select class="form-control" id="Base Currency" ng-model="base_currency" ng-options="base_currency for base_currency in available_rates"></select> -->
+                            <select class="form-control" name="Base Currency" id="baseCurrency" ng-model="response.base_currency">
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" name="bill_amount" id="billAmount" class="form-control" ng-model="response.bill_amount" min="0" step="0.01" value="0" placeholder="Enter a Bill Amount.." required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" name="tip_percentage" id="tipPercentage" class="form-control" ng-model="response.tip_percentage" min="0" max="100" step="1" value="15" placeholder="Enter a Tip Amount.." required>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="converted_currency" id="convertedCurrency" ng-init="response.converted_currency = converted_currency[1]"ng-model="response.converted_currency" ng-options="converted_currency for converted_currency in available_rates" placeholder="Select your Conversion Currency.." required></select>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row" style="text-align:center;">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-<div class="form-group">
-<label for="billAmount">Bill Amount:</label>
-<input type="number" name="bill_amount" class="form-control" ng-model="response.bill_amount" min="0" step="0.01" value="0" placeholder="Enter a Bill Amount.." required>
-</div>
-
-<div class="form-group">
-<label for="tipPercentage">Tip Percentage:</label>
-<input type="number" name="tip_percentage" class="form-control" ng-model="response.tip_percentage" min="0" max="100" step="1" value="15" placeholder="Enter a Tip Amount.." required>
-</div>
-
-<div class="form-group">
-<label for="convertedCurrency">Converted Currency:</label>
-<select class="form-control" name="converted_currency" ng-init="response.converted_currency = converted_currency[1]"ng-model="response.converted_currency" ng-options="converted_currency for converted_currency in available_rates" placeholder="Select your Conversion Currency.." required></select>
-</div>
-
-<button type="submit" class="btn btn-default">Submit</button>
-
-</form>
-</div>
-</div>
-
-<div class="footer">
-<p>URL handling provided by: <a href="https://github.com/pallets/flask">Flask</a> & <a href="https://github.com/requests/requests">Requests</a>.</p>
-</div>
-
 </body>
+<div class="footer">
+    <p>URL handling provided by: <a href="https://github.com/pallets/flask">Flask</a> & <a href="https://github.com/requests/requests">Requests</a>.</p>
+</div>
 </html>
