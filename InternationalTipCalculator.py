@@ -59,7 +59,7 @@ class InternationalTipCalculator:
         """
         custom_currencies_set = False
 
-        #TODO: Create subroutine that checks all currencies within the dictionary for invalid entries.
+        # TODO: Create subroutine that checks all currencies within the dictionary for invalid entries.
 
         return custom_currencies_set
 

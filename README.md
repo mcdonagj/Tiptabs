@@ -1,6 +1,10 @@
 ### International-Tip-Calculator
 A Python web application written to simplify currency conversions between established currencies.
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
+When rates are available from fixer.io, currency rates are retrieved and stored into a `DictionaryBuilder` object,
+which consists of a dictionary and functions for modifying and validating this information.
+
+When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status.
 
 The ITC utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
@@ -57,7 +61,7 @@ Ideas for this project that I'm researching or implementing:
     ###### *Note: The information required to use the AngularJS frontend requires a JSON object to populate `ng-options`.
 
 
-After installation, simply visit `localhost:5000` in your web-browser and the application appears!
+After installation, simply visit `127.0.0.1:5000` in your web-browser and the application appears!
 
 Version: V3.7.
-Last Update: July-4-2018.
+Last Update: July-5-2018.
