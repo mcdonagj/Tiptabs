@@ -51,6 +51,8 @@ def main():
     def home():
         return render_template("app.html", rates=rates)
 
+    # TODO: Add a route for inputting a list of currencies to be added/updated via form input / read from a file.
+
     @app.route('/', methods=['POST'])
     def post_home():
         if request.method == 'POST':
