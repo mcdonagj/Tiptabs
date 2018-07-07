@@ -47,21 +47,27 @@ Ideas for this project that I'm researching or implementing:
 1. A local graphical user interface utilizing Tkinter.
     * [WIP] Created a UserInterface class to start this functionality.
 
-2. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
+2. Add form input option for adding/updating a list of currencies to the ITC.
+    * [WIP] Implement this functionality in ITC.
+    * [WIP] Create a toggleable pane for this functionality on the app.html page.
+
+3. Create unittests for various functions in the ITC and supporting classes.
+    * [WIP] Create tests that cover all possible cases for class functions.
+
+4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
         * [DONE] Created app.html and style.css for the web application's layout.
         * [DONE] Use AngularJS to control form creation and population.
         * [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
-3. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
+5. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
-4. Replace storage of currencies as (key,value) pairs in a dictionary to entries in a MongoDB Docker container.
+6. Replace storage of currencies as (key,value) pairs in a dictionary to entries in a MongoDB Docker container.
     * [WIP] Use Flask-PyMongo to integrate this feature into the ITC.
     ###### *Note: The information required to use the AngularJS frontend requires a JSON object to populate `ng-options`.
-
 
 After installation, simply visit `127.0.0.1:5000` in your web-browser and the application appears!
 
 Version: V3.7.
-Last Update: July-5-2018.
+Last Update: July-7-2018.
