@@ -84,7 +84,6 @@ class DictionaryBuilder:
 
         smtpserver.sendmail(message['From'], message['To'], message_body)
 
-    # TODO: create a function that retrieves each currency and assigns them to a dictionary position.
     def split_json(self, requests_text):
         """
         split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
@@ -111,12 +110,64 @@ class DictionaryBuilder:
 
     def check_available_currencies(self, given_currencies):
         """
-        check_available_currencies(dict) - Helper method that compares the contents of two dictionaries.
-        :param given_currencies:
-        :return: False if the parameter is larger or smaller; True otherwise.
+        add_additional_currencies(dict) - Helper method that adds additional values to the currency dictionary.
+        :param given_currencies: dictionary of currencies to be added to the calculator.
+        :return: List containing success of operation and corresponding response string.
         """
-        valid_currency_set = False
-        return valid_currency_set
+        func_name = "check_available_currencies(self, dict)"
+        dictionary = self.get_dictionary()
+        check_type = type(given_currencies) is dict
+        if not check_type:
+            inc_type_resp = "ERROR: Invalid parameter type {!s} provided to func {!s}:".format(str(type(given_currencies)), str(func_name))
+            return [False, inc_type_resp]
+
+        check_length = len(given_currencies) == 0
+        if check_length:
+            # Provided dictionary is empty; return True.
+            return [True, "SUCCESS: Provided list of currencies is empty; Nothing to add."]
+
+        # Store the keys of all available currencies. (Names)
+        my_keys = dictionary.keys()
+        # Store the keys of all provided currencies.
+        provided_keys = given_currencies.keys()
+
+        # Check all keys of provided keys.
+        for key in provided_keys:
+            # TODO: Check this functionality with unit tests.
+            valid_key = self.check_valid_currency_key(key)
+            if not valid_key:
+                inc_key_resp = "This key value is invalid {!s}".format(str(key))
+                return [False, inc_key_resp]
+
+        # Check all values of provided keys.
+        for key in provided_keys:
+            # TODO: Check this functionality with unit tests.
+            valid_value = self.check_valid_currency_value(given_currencies.get(key))
+            if not valid_value:
+                inc_val_resp = "This entry is invalid: {!s} {!s}".format(str(key), str(given_currencies.get(key)))
+                return [False, inc_val_resp]
+
+        val_added = 0
+        val_updated = 0
+        for key in my_keys:
+            # Check to see if a key is within the dictionary already.
+            if key in provided_keys:
+                # Store the value of the current key from the provided dictionary.
+                key_value = given_currencies.get(key)
+                # Store the value of the current key from the global dictionary.
+                dict_value = dictionary.get(key)
+                # If the value is not equal to the dictionary value, update the key's value.
+                if key_value != dict_value:
+                    dictionary[key] = key_value
+                    val_updated += 1
+            else:
+                # If the key is not already in the dictionary, add it.
+                dictionary[key] = provided_keys.get(key)
+                val_added += 1
+
+        revise_resp = "SUCCESS: {!s} key-value pairs added and {!s} values updated.".format(str(val_added), str(val_updated))
+
+        return [True, revise_resp]
 
     def add_currency(self, currency_to_add):
         """
@@ -143,3 +194,20 @@ class DictionaryBuilder:
             revised_addition = "ERROR"
 
         return revised_addition
+
+    def check_valid_currency_value(self, given_currency_key_value):
+
+        import re
+        valid_currency_pattern = re.compile('(^\d?(\.?\d*)$)', re.IGNORECASE)
+        valid_currency_value = valid_currency_pattern.match(given_currency_key_value)
+
+        if valid_currency_value is None:
+            return False
+        else:
+            return True
+
+    def check_valid_currency_key(self, given_currency_key):
+
+        # Must provide a value appropriate ISO-4217 standards.
+        # TODO: Create a function that checks appropriate currency keys.
+        return True
