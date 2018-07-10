@@ -16,8 +16,16 @@ class testDictionaryBuilder(unittest.TestCase):
         self.assertEqual(request_rates_result, True)
 
     def testGetRates(self):
-        # TODO: Create tests for GetRates.
-        return True
+
+        # Assume that the service is up.
+        serv_up = self.db.get_rates(True)
+        self.assertEqual(True, serv_up[0])
+        self.assertEqual(True, len(serv_up[1]) > 0)
+
+        # Assume that the service is down.
+        serv_down = self.db.get_rates(False)
+        self.assertEqual(False, serv_down[0])
+        self.assertEqual("ERROR: rate service 'fixer.io' is not available. Try again later.", serv_down[1])
 
     def testSendErrorMessage(self):
         # TODO: Create tests for SendErrorMessage.
