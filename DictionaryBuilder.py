@@ -28,7 +28,7 @@ class DictionaryBuilder:
         ok_response = current_rates.status_code == 200
 
         if not ok_response:
-            print("ERROR code" + str(current_rates.status_code) + ": invalid response from fixer.io:")
+            print("ERROR: RESP " + str(current_rates.status_code) + ": invalid response from fixer.io:")
 
         return ok_response
 
@@ -39,17 +39,21 @@ class DictionaryBuilder:
         :return: JSON text of a given rates query.
         """
 
+        # TODO: Check the relationship between retrieving rates and splitting JSON.
+
         # Check to see if the service is available.
         if not service_up:
-            print("ERROR: rate service 'fixer.io' is not available. Try again later.")
-            sys.exit()
+            service_error_resp = "ERROR: rate service 'fixer.io' is not available. Try again later."
+            return [False, service_error_resp]
 
         requests_text = requests.get(
             "http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1").text
 
-        self.split_json(requests_text)
+        fixed_json_resp = self.split_json(requests_text)
 
-        return requests.get('http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1').text
+        ret_rates_resp = [True, requests_text]
+
+        return ret_rates_resp
 
     def send_error_message(self):
         """
