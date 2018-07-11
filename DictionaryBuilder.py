@@ -51,7 +51,10 @@ class DictionaryBuilder:
 
         fixed_json_resp = self.split_json(requests_text)
 
-        ret_rates_resp = [True, requests_text]
+        if not fixed_json_resp[0]:
+            ret_rates_resp = fixed_json_resp
+        else:
+            ret_rates_resp = [True, requests_text]
 
         return ret_rates_resp
 
@@ -98,7 +101,10 @@ class DictionaryBuilder:
 
         for word in requests_text.split():
             if start_currencies:
-                self.add_currency(word)
+                add_curr_resp = self.add_currency(word)
+                if not add_curr_resp[0]:
+                    return add_curr_resp
+
             else:
                 if word.__contains__("rates"):
                     start_currencies = True
@@ -181,21 +187,20 @@ class DictionaryBuilder:
         """
         revised_addition = currency_to_add.replace(",", "").replace("}", "")
 
-        if len(revised_addition) > 0:
+        # TODO: Create a regex to pull items from a given addition.
+        valid_curr_length = (len(revised_addition) > 0)
+        if valid_curr_length:
             key_pairs = revised_addition.split(":")
-            # print("-- Currency Addition:\n")
 
-            # NOTE: Quotations removed from key values.
             key = key_pairs[0].replace('"', "")
-            # print("  Key: " + key + "\n")
-
             value = key_pairs[1]
-            # print("  Value: " + value + "\n")
 
             self.currencies[key] = value
 
+            revised_addition = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
         else:
-            revised_addition = "ERROR"
+            invalid_curr_resp = "ERROR: Currency addition is empty."
+            revised_addition = [False, invalid_curr_resp]
 
         return revised_addition
 
