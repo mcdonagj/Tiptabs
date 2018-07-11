@@ -51,8 +51,12 @@ Ideas for this project that I'm researching or implementing:
     * [WIP] Implement this functionality in ITC.
     * [WIP] Create a toggleable pane for this functionality on the app.html page.
 
-3. Create unittests for various functions in the ITC and supporting classes.
-    * [WIP] Create tests that cover all possible cases for class functions.
+3. Create tests for various functions in the ITC and supporting classes.
+    * [WIP] Use pytest to cover all possible cases for class functions.
+    * [WIP] pytest source: https://docs.pytest.org/en/latest/
+    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the
+    success of a given operation and an error message for the given condition that occured. In the future of the
+    ITC, this message will be posted as a message on the Angular frontend.
 
 4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
