@@ -8,12 +8,12 @@
 #
 # install_dependencies('flask', '1.0.2')
 # install_dependencies('requests', '2.18.4')
-from flask.json import jsonify
 from requests import *
 from flask import Flask, render_template, request, json
 from InternationalTipCalculator import *
 from DictionaryBuilder import *
 from UserInterface import *
+import sys
 
 
 def main():
@@ -41,11 +41,12 @@ def main():
     itc = InternationalTipCalculator("EUR", dictionary_builder)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
-    # ui: UserInterface = UserInterface("International Tip Calculator", itc)
+    # ui = UserInterface("International Tip Calculator", itc)
 
     app = Flask(__name__)
 
     rates = list(dictionary_builder.currencies.keys())
+    rates.sort()
 
     @app.route('/')
     def home():
@@ -61,7 +62,7 @@ def main():
             total = itc.calculate_total(str(result['bill_amount']), str(result['tip_percentage']),
                                         str(result['converted_currency']))
 
-            return render_template("result.html", result=total)
+            return render_template("result.html", resp=total[0], result=total[1])
 
     @app.route('/fixer_status')
     def fixer_status():
