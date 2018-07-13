@@ -1,5 +1,4 @@
 import smtplib
-import sys
 from time import strftime, gmtime
 
 import requests
@@ -90,6 +89,11 @@ class DictionaryBuilder:
         smtpserver.login(gmail_user, gmail_pwd)
 
         smtpserver.sendmail(message['From'], message['To'], message_body)
+
+        snd_msg_resp = "SUCCESS: Message successfully sent to {!s}.".format(message['To'])
+
+        return [True, snd_msg_resp]
+
 
     def split_json(self, requests_text):
         """
