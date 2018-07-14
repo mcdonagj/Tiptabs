@@ -48,7 +48,7 @@ def main():
     rates = list(dictionary_builder.currencies.keys())
     rates.sort()
 
-    @app.route('/')
+    @app.route('/', methods=['GET'])
     def home():
         return render_template("app.html", rates=rates)
 
@@ -57,19 +57,32 @@ def main():
     @app.route('/', methods=['POST'])
     def post_home():
         if request.method == 'POST':
-            result = request.form
 
-            total = itc.calculate_total(str(result['bill_amount']), str(result['tip_percentage']),
-                                        str(result['converted_currency']))
+            post_form_resp = [False, "ERROR: Request form was invalid/empty."]
 
-            return render_template("result.html", resp=total[0], result=total[1])
+            if request.form:
 
-    @app.route('/fixer_status')
+                total_bill_amount = str(request.form['bill_amount'])
+                total_tip_percentage = str(request.form['tip_percentage'])
+                total_desr_currency = str(request.form['converted_currency'])
+
+                total = itc.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
+
+                post_form_resp = total
+
+            return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
+
+    @app.route('/fixer_status', methods=['GET'])
     def fixer_status():
-        result = "Fixer.io is not available."
-        if exec_rates:
-            result = "Fixer.io is available for use."
-        return render_template("fixer_status.html", result=result)
+
+        fxr_resp = [False, "Fixer.io is not available."]
+        if request.method == 'GET':
+            if exec_rates:
+                fxr_resp = [exec_rates, "Fixer.io is available for use."]
+
+        return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
+
+
 
     app.run(host='0.0.0.0', port=5000)
 
