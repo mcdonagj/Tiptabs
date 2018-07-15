@@ -9,10 +9,10 @@
 # install_dependencies('flask', '1.0.2')
 # install_dependencies('requests', '2.18.4')
 from requests import *
-from flask import Flask, render_template, request, json
+from flask import Flask, render_template, request
 from InternationalTipCalculator import *
 from DictionaryBuilder import *
-from UserInterface import *
+# from UserInterface import *
 import sys
 
 
@@ -31,22 +31,22 @@ def main():
     exec_rates = dictionary_builder.request_rates()
 
     # If the retrieval of rates does not succeed, send an email with details of the event.
-    if not exec_rates:
+    if not exec_rates[0]:
         dictionary_builder.send_error_message()
         sys.exit()
 
     # Populate the dictionary with available currencies.
-    rates = dictionary_builder.get_rates(exec_rates)
+    populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
-    itc = InternationalTipCalculator("EUR", dictionary_builder)
+    if populate_dictionary_result[0]:
+        itc = InternationalTipCalculator("EUR", dictionary_builder)
+        rates = list(dictionary_builder.currencies.keys())
+        rates.sort()
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
 
     app = Flask(__name__)
-
-    rates = list(dictionary_builder.currencies.keys())
-    rates.sort()
 
     @app.route('/', methods=['GET'])
     def home():
@@ -81,7 +81,6 @@ def main():
                 fxr_resp = [exec_rates, "Fixer.io is available for use."]
 
         return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
-
 
 
     app.run(host='0.0.0.0', port=5000)

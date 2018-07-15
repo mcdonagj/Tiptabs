@@ -15,23 +15,31 @@ class DictionaryBuilder:
 
         return self.currencies
 
-    def request_rates(self):
+    @staticmethod
+    def request_rates():
         """
         request_rates - Builds the current rates variable with current rate values.
                         Prints an error message to the terminal if the status code is not HTTP[200] (OK).
         :return: Boolean value if the rates can be retrieved from the given service.
         """
 
-        current_rates = requests.get(
-            'http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1')
-        ok_response = current_rates.status_code == 200
+        url = 'http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1'
+
+        rates_request = requests.get(url)
+
+        # TODO: Parse response JSON in a more refined way.
+
+        # rates_request.json()
+
+        ok_response = rates_request.status_code == 200
 
         if not ok_response:
-            print("ERROR: RESP " + str(current_rates.status_code) + ": invalid response from fixer.io:")
+            invalid_resp_code = "ERROR:  RESP " + str(rates_request.status_code) + ": invalid response from fixer.io:"
+            return [ok_response, invalid_resp_code]
 
-        return ok_response
+        return [ok_response, rates_request.text]
 
-    def get_rates(self, service_up):
+    def get_rates(self, service_up, resp_text):
         """
         get_rates(bool) - Retrieves and calls JSON organization subroutine for available rates.
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
@@ -45,8 +53,7 @@ class DictionaryBuilder:
             service_error_resp = "ERROR: rate service 'fixer.io' is not available. Try again later."
             return [False, service_error_resp]
 
-        requests_text = requests.get(
-            "http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1").text
+        requests_text = resp_text
 
         fixed_json_resp = self.split_json(requests_text)
 
@@ -57,7 +64,8 @@ class DictionaryBuilder:
 
         return ret_rates_resp
 
-    def send_error_message(self):
+    @staticmethod
+    def send_error_message():
         """
         send_error_message - Helper function that assists with handling error messages within the ITC.
         Creates an MIME message and sends it to a given email address. Execution of the ITC halts if
@@ -94,7 +102,6 @@ class DictionaryBuilder:
 
         return [True, snd_msg_resp]
 
-
     def split_json(self, requests_text):
         """
         split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
@@ -112,7 +119,9 @@ class DictionaryBuilder:
             else:
                 if word.__contains__("rates"):
                     start_currencies = True
-        return start_currencies
+
+        split_json_resp = [start_currencies, "SUCCESS: JSON successfully split."]
+        return split_json_resp
 
     def check_available_bases(self, given_base):
         """
