@@ -8,7 +8,7 @@ When rates are not available, the application sends an email notification to `mc
 
 The ITC utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
-To install these dependencies from the command line, complete either of the following steps:
+To install these dependencies from the command line, complete any of the following steps:
 1. Installation via Dockerfile.
     As of 6/28/2018 (V3.6), a Dockerfile is included that assembles an Ubuntu 14.04 Docker image with all required dependencies.
     To create this image, verify that you have the Docker daemon installed and running.
@@ -69,7 +69,10 @@ Ideas for this project that I'm researching or implementing:
     * [WIP] Use Flask-PyMongo to integrate this feature into the ITC.
     ###### *Note: The information required to use the AngularJS frontend requires a JSON object to populate `ng-options`.
 
+7. Use Poetry as an additional option for installing dependencies for the ITC.
+    * [WIP] Source: https://pypi.org/project/poetry/
+
 After installation, simply visit `127.0.0.1:5000` in your web-browser and the application appears!
 
 Version: V3.7.
-Last Update: July-7-2018.
+Last Update: July-17-2018.
