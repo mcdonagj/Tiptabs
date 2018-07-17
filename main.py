@@ -38,10 +38,10 @@ def main():
     # Populate the dictionary with available currencies.
     populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
-    if populate_dictionary_result[0]:
-        itc = InternationalTipCalculator("EUR", dictionary_builder)
-        rates = list(dictionary_builder.currencies.keys())
-        rates.sort()
+    # if populate_dictionary_result[0]:
+    itc = InternationalTipCalculator("EUR", dictionary_builder)
+    rates = list(dictionary_builder.currencies.keys())
+    rates.sort()
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
