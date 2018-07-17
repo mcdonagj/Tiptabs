@@ -43,7 +43,8 @@ class DictionaryBuilder:
         """
         get_rates(bool) - Retrieves and calls JSON organization subroutine for available rates.
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
-        :return: JSON text of a given rates query.
+        :param resp_text: Text returned from a given query to the rates service.
+        :return: List containing success of operation and JSON text of a given rates query.
         """
 
         # TODO: Check the relationship between retrieving rates and splitting JSON.
@@ -106,7 +107,7 @@ class DictionaryBuilder:
         """
         split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
         :param requests_text: JSON text retrieved from Fixer.io.
-        :return: Boolean condition indicating the success of dividing this text.
+        :return: List containing success of operation and corresponding response string.
         """
         start_currencies = False
 
@@ -133,7 +134,8 @@ class DictionaryBuilder:
 
     def check_available_currencies(self, given_currencies):
         """
-        add_additional_currencies(dict) - Helper method that adds additional values to the currency dictionary.
+        check_available_currencies(dict) - Helper method that checks and adds additional values to the
+        currency dictionary from a given dictionary.
         :param given_currencies: dictionary of currencies to be added to the calculator.
         :return: List containing success of operation and corresponding response string.
         """
