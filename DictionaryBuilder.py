@@ -23,7 +23,7 @@ class DictionaryBuilder:
         :return: Boolean value if the rates can be retrieved from the given service.
         """
 
-        url = 'http://data.fixer.io/api/latest?access_key=a6cf5db13abce0db6576c936b74eeef3&format=1'
+        url = 'http://data.fixer.io/api/latest?access_key=3f604e437d5c5029d1cf7fa38acdcde9&format=1'
 
         rates_request = requests.get(url)
 
