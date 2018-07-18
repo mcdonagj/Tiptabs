@@ -111,12 +111,11 @@ class DictionaryBuilder:
         """
         start_currencies = False
 
+        # TODO: Refactor this method to be more resilient to errors.
+
         for word in requests_text.split():
             if start_currencies:
-                add_curr_resp = self.add_currency(word)
-                if not add_curr_resp[0]:
-                    return add_curr_resp
-
+                self.add_currency(word)
             else:
                 if word.__contains__("rates"):
                     start_currencies = True
