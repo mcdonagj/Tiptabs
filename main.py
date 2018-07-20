@@ -56,18 +56,45 @@ def main():
 
     @app.route('/', methods=['POST'])
     def post_home():
+
+        # Accept only POST requests.
         if request.method == 'POST':
 
+            # Create a default response list.
             post_form_resp = [False, "ERROR: Request form was invalid/empty."]
 
+            # Retrieve the form information from a given request response.
             if request.form:
 
+                # Store the base currency.
+                total_base_currency = str(request.form['base_currency'])
+
+                # Determine if the chosen base is available from the API service.
+                check_avail_base = dictionary_builder.check_available_bases(total_base_currency)
+
+                if not check_avail_base:
+                    # Create a response string for an unavailable base.
+                    base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(total_base_currency)
+
+                    # Create a response list to return.
+                    post_form_resp = [False, base_not_avail_resp]
+
+                    # Return the response to display on app.html
+                    # return post_form_resp
+
+                # Store the bill amount.
                 total_bill_amount = str(request.form['bill_amount'])
+
+                # Store the tip percentage.
                 total_tip_percentage = str(request.form['tip_percentage'])
+
+                # Store the conversion currency.
                 total_desr_currency = str(request.form['converted_currency'])
 
+                # Calculate the given total with the provided form information.
                 total = itc.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
 
+                # Store the total response list into the post response list.
                 post_form_resp = total
 
             return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
@@ -76,11 +103,16 @@ def main():
     def fixer_status():
 
         fxr_resp = [False, "Fixer.io is not available."]
+
         if request.method == 'GET':
             if exec_rates:
                 fxr_resp = [exec_rates, "Fixer.io is available for use."]
 
         return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
+
+    @app.errorhandler(404)
+    def no_page_found(e):
+        return render_template('error_404.html')
 
 
     app.run(host='0.0.0.0', port=5000)

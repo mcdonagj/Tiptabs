@@ -39,7 +39,7 @@
 
                     <div class="column">
                         <div class="form-group">
-                             <select class="form-control" name="Base Currency" ng-init="base_currency = available_rates[46]" id="baseCurrency" ng-model="base_currency" ng-options="base_currency for base_currency in available_rates" ng-disabled="disabled"></select>
+                             <select class="form-control" name="base_currency" ng-init="response.base_currency = available_rates[46]" id="baseCurrency" ng-model="response.base_currency" ng-options="base_currency for base_currency in available_rates" ng-disabled="disabled"></select>
                         </div>
 
                         <div class="form-group">
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <select class="form-control" ng-init="response.converted_currency = available_rates[149]" name="converted_currency" id="convertedCurrency" ng-init="response.converted_currency = converted_currency[1]"ng-model="response.converted_currency" ng-options="converted_currency for converted_currency in available_rates" placeholder="Select your Conversion Currency.." required></select>
+                            <select class="form-control" ng-init="response.converted_currency = available_rates[149]" name="converted_currency" id="convertedCurrency" ng-init="response.converted_currency = converted_currency[1]" ng-model="response.converted_currency" ng-options="converted_currency for converted_currency in available_rates" placeholder="Select your Conversion Currency.." required></select>
                         </div>
 
                     </div>
