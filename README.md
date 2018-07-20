@@ -65,14 +65,19 @@ Ideas for this project that I'm researching or implementing:
 5. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
-6. Replace storage of currencies as (key,value) pairs in a dictionary to entries in a MongoDB Docker container.
+6. Create a user database using a MongoDB Docker container.
     * [WIP] Use Flask-PyMongo to integrate this feature into the ITC.
-    ###### *Note: The information required to use the AngularJS frontend requires a JSON object to populate `ng-options`.
+    * [WIP] Be able to click on an object (button) on app.html to store a saved currency conversion.
+    * [WIP] Have a database that store a past query (history).
+    * [WIP] Display the history on app.html as a selectable region. Selecting the previous query populates the app.html fields.
 
 7. Use Poetry as an additional option for installing dependencies for the ITC.
     * [WIP] Source: https://pypi.org/project/poetry/
 
-After installation, simply visit `127.0.0.1:5000` in your web-browser and the application appears!
+8. Extend the functionality of the Dockerfile to create a MongoDB alongside the app container.
+    * [WIP] Create a docker-compose.yml file to create multiple containers.
+
+After installation, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
 Version: V3.7.
 Last Update: July-17-2018.
