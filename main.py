@@ -49,7 +49,7 @@ def main():
     app = Flask(__name__)
 
     @app.route('/', methods=['GET'])
-    def home():
+    def get_home():
         return render_template("app.html", rates=rates)
 
     # TODO: Add a route for inputting a list of currencies to be added/updated via form input / read from a file.
@@ -100,7 +100,7 @@ def main():
             return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
 
     @app.route('/fixer_status', methods=['GET'])
-    def fixer_status():
+    def get_fixer_status():
 
         fxr_resp = [False, "Fixer.io is not available."]
 
@@ -109,6 +109,10 @@ def main():
                 fxr_resp = [exec_rates, "Fixer.io is available for use."]
 
         return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
+
+    @app.route('/feedback', methods=['GET', 'POST'])
+    def send_feedback():
+        return render_template("feedback.html")
 
     @app.errorhandler(404)
     def no_page_found(e):
