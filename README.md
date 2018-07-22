@@ -54,7 +54,7 @@ Ideas for this project that I'm researching or implementing:
 3. Create tests for various functions in the ITC and supporting classes.
     * [WIP] Use pytest to cover all possible cases for class functions.
     * [WIP] pytest source: https://docs.pytest.org/en/latest/
-    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. In the future of the ITC, this message will be posted as a message on the Angular frontend.
+    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. In the future of the ITC, this message will be posted as a message on the AngularJS frontend.
 
 4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
