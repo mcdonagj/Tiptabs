@@ -1,11 +1,15 @@
 
 # Install OS environment.
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Install python, pip, and virtualenv.
 RUN \
   apt-get update && apt-get upgrade -y && \
   apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
+
+RUN apt-get update -y && apt-get install nodejs -y && apt-get install npm -y
+
+RUN npm i angular-material
 
 # Create virtualenv.
 RUN virtualenv venv
