@@ -63,6 +63,16 @@
 <md-content class="md-padding">
 <h1 class="md-display-2">Input Option: Card Selection</h1>
 <p>This page will contain a form with multiple cards for selecting conversions from one currency to another.</p>
+
+<md-slider-container flex="50">
+<span>Tip Amount</span>
+<md-slider ng-model="tip.value" min="0" max="25" aria-label="tip" id="tip-slider" class="md-accent">
+</md-slider>
+<md-input-container>
+<input type="number" ng-model="tip.value" aria-label="tip" aria-controls="tip-slider">
+</md-input-container>
+</md-slider-container>
+
 </md-content>
 </md-tab>
 
