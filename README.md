@@ -1,4 +1,4 @@
-### International-Tip-Calculator
+## International-Tip-Calculator
 A Python web application written to simplify currency conversions between established currencies.
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
 When rates are available from fixer.io, currency rates are retrieved and stored into a `DictionaryBuilder` object,
@@ -10,7 +10,7 @@ The ITC utilizes various libraries and microframeworks, like Requests and Flask,
 
 To install these dependencies from the command line, complete any of the following steps:
 1. Installation via Dockerfile.
-    As of 6/28/2018 (V3.6), a Dockerfile is included that assembles an Ubuntu 14.04 Docker image with all required dependencies.
+    As of 6/28/2018 (V3.6), a Dockerfile is included that assembles an Ubuntu 16.04 Docker image with all required dependencies.
     To create this image, verify that you have the Docker daemon installed and running.
 
     While in the directory containing the Dockerfile:
@@ -77,7 +77,11 @@ Ideas for this project that I'm researching or implementing:
 8. Extend the functionality of the Dockerfile to create a MongoDB alongside the app container.
     * [WIP] Create a docker-compose.yml file to create multiple containers.
 
+9. Integrate Slack support to the ITC.
+    * [WIP] Be able to send requests to the ITC and have converted values sent back as a message to the user.
+    * [WIP] Webhooks Source: https://api.slack.com/incoming-webhooks
+
 After installation, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
 Version: V3.7.
-Last Update: July-17-2018.
+Last Update: July-26-2018.
