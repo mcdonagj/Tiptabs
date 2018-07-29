@@ -9,9 +9,9 @@ class UserInterface:
 
     def __init__(self, title, calculator):
         """
-        __init__() - Constructor for the ITC User Interface.
+        __init__() - Constructor for the Tiptabs User Interface.
         :param title: Title of the UI window.
-        :param calculator: International Tip Calculator object.K
+        :param calculator: Tiptabs object.
         """
         self.calculator = calculator
 
@@ -22,7 +22,7 @@ class UserInterface:
         self.window.title(title)
 
         # Create a label for the UI application name.
-        lbl_name = tk.Label(text="International Tip Calculator, V3.0")
+        lbl_name = tk.Label(text="Tiptabs, V3.7")
         lbl_name.grid(column=0, row=0)
 
         # Create a entry field for inputting the bill amount.

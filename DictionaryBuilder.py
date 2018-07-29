@@ -68,8 +68,8 @@ class DictionaryBuilder:
     @staticmethod
     def send_error_message():
         """
-        send_error_message - Helper function that assists with handling error messages within the ITC.
-        Creates an MIME message and sends it to a given email address. Execution of the ITC halts if
+        send_error_message - Helper function that assists with handling error messages within Tiptabs.
+        Creates an MIME message and sends it to a given email address. Execution of Tiptabs halts if
         this state is encountered.
         """
         # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
@@ -81,9 +81,9 @@ class DictionaryBuilder:
 
         message['From'] = 'sendpyerr@gmail.com'
         message['To'] = 'mcdonagj@dukes.jmu.edu'
-        message['Subject'] = '[ERROR] International Tip Calculator - ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        message['Subject'] = '[ERROR] Tiptabs - ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-        message_text = "There was a problem with retrieving rates in the International Tip Calculator:\n\tDate: {0}\n".format(
+        message_text = "There was a problem with retrieving rates in Tiptabs:\n\tDate: {0}\n".format(
             strftime(
                 "%Y-%m-%d %H:%M:%S", gmtime()))
 

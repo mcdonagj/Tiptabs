@@ -10,7 +10,7 @@
 # install_dependencies('requests', '2.18.4')
 from requests import *
 from flask import Flask, render_template, request
-from InternationalTipCalculator import *
+from Tiptabs import *
 from DictionaryBuilder import *
 # from UserInterface import *
 import sys
@@ -39,7 +39,7 @@ def main():
     populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
     # if populate_dictionary_result[0]:
-    itc = InternationalTipCalculator("EUR", dictionary_builder)
+    itc = Tiptabs("EUR", dictionary_builder)
     rates = list(dictionary_builder.currencies.keys())
     rates.sort()
 
