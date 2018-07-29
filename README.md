@@ -6,7 +6,7 @@ which consists of a dictionary and functions for modifying and validating this i
 
 When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status.
 
-The ITC utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
+Tiptabs utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
 To install these dependencies from the command line, complete any of the following steps:
 1. Installation via Dockerfile.
@@ -47,14 +47,14 @@ Ideas for this project that I'm researching or implementing:
 1. A local graphical user interface utilizing Tkinter.
     * [WIP] Created a UserInterface class to start this functionality.
 
-2. Add form input option for adding/updating a list of currencies to the ITC.
-    * [WIP] Implement this functionality in ITC.
+2. Add form input option for adding/updating a list of currencies to Tiptabs.
+    * [WIP] Implement this functionality in Tiptabs.
     * [WIP] Create a toggleable pane for this functionality on the app.html page.
 
-3. Create tests for various functions in the ITC and supporting classes.
+3. Create tests for various functions in the Tiptabs and supporting classes.
     * [WIP] Use pytest to cover all possible cases for class functions.
     * [WIP] pytest source: https://docs.pytest.org/en/latest/
-    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. In the future of the ITC, this message will be posted as a message on the AngularJS frontend.
+    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. In the future of Tiptabs, this message will be posted as a message on the AngularJS frontend.
 
 4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
@@ -66,7 +66,7 @@ Ideas for this project that I'm researching or implementing:
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
 6. Create a user database using a MongoDB Docker container.
-    * [WIP] Use Flask-PyMongo to integrate this feature into the ITC.
+    * [WIP] Use Flask-PyMongo to integrate this feature into Tiptabs.
     * [WIP] Be able to click on an object (button) on app.html to store a saved currency conversion.
     * [WIP] Have a database that store a past query (history).
     * [WIP] Display the history on app.html as a selectable region. Selecting the previous query populates the app.html fields.
@@ -77,8 +77,8 @@ Ideas for this project that I'm researching or implementing:
 8. Extend the functionality of the Dockerfile to create a MongoDB alongside the app container.
     * [WIP] Create a docker-compose.yml file to create multiple containers.
 
-9. Integrate Slack support to the ITC.
-    * [WIP] Be able to send requests to the ITC and have converted values sent back as a message to the user.
+9. Integrate Slack support to Tiptabs.
+    * [WIP] Be able to send requests to Tiptabs and have converted values sent back as a message to the user.
     * [WIP] Webhooks Source: https://api.slack.com/incoming-webhooks
 
 After installation, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
