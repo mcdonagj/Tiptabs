@@ -18,8 +18,8 @@ RUN virtualenv venv
 WORKDIR env/bin
 
 # Retrieve project from repo.
-RUN git clone https://github.com/mcdonagj/International-Tip-Calculator.git
-WORKDIR International-Tip-Calculator
+RUN git clone https://github.com/mcdonagj/Tiptabs.git
+WORKDIR Tiptabs
 
 # Install requirements.
 RUN pip3 install -r requirements.txt
