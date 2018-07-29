@@ -1,4 +1,4 @@
-## International-Tip-Calculator
+## Tiptabs
 A Python web application written to simplify currency conversions between established currencies.
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
 When rates are available from fixer.io, currency rates are retrieved and stored into a `DictionaryBuilder` object,
@@ -62,7 +62,7 @@ Ideas for this project that I'm researching or implementing:
         * [DONE] Use AngularJS to control form creation and population.
         * [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
 
-5. Use Swagger, an API / API framework, to create an API for interacting with the International Tip Calculator.
+5. Use Swagger, an API / API framework, to create an API for interacting with Tiptabs.
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
 
 6. Create a user database using a MongoDB Docker container.
@@ -71,7 +71,7 @@ Ideas for this project that I'm researching or implementing:
     * [WIP] Have a database that store a past query (history).
     * [WIP] Display the history on app.html as a selectable region. Selecting the previous query populates the app.html fields.
 
-7. Use Poetry as an additional option for installing dependencies for the ITC.
+7. Use Poetry as an additional option for installing dependencies for Tiptabs.
     * [WIP] Source: https://pypi.org/project/poetry/
 
 8. Extend the functionality of the Dockerfile to create a MongoDB alongside the app container.
