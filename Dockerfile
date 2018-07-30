@@ -27,6 +27,9 @@ RUN pip3 install -r requirements.txt
 # Expose port for Flask.
 EXPOSE 5000
 
+# Expose port for MySQL Server.
+EXPOSE 3006
+
 # Run main.py.
 CMD ["python3", "main.py"]
 
