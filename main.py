@@ -11,6 +11,7 @@
 from requests import *
 from flask import Flask, render_template, request
 from Tiptabs import *
+from TiptabsDB import *
 from DictionaryBuilder import *
 # from UserInterface import *
 import sys
@@ -42,6 +43,9 @@ def main():
     itc = Tiptabs("EUR", dictionary_builder)
     rates = list(dictionary_builder.currencies.keys())
     rates.sort()
+
+    # Initialize the MySQL database.
+    db = TiptabsDB()
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
