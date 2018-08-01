@@ -47,6 +47,8 @@ def main():
     # Initialize the MySQL database.
     db = TiptabsDB()
 
+    db.add_entry("A")
+
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
 

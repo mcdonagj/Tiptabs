@@ -5,17 +5,20 @@ class TiptabsDB:
 
     def __init__(self):
 
-        TiptabsDB = mysql.connector.connect(
+        self.TiptabsDBConnector = mysql.connector.connect(
           host="localhost",
           user="root",
           passwd="root"
         )
 
-        tiptabs_db_cursor = TiptabsDB.cursor()
-        tiptabs_db_cursor.execute("DROP DATABASE tiptabs_db;")
-        tiptabs_db_cursor.execute("CREATE DATABASE tiptabs_db;")
+        self.TiptabsDBConnector.cursor().execute("DROP DATABASE tiptabs_db;")
+        self.TiptabsDBConnector.cursor().execute("CREATE DATABASE tiptabs_db;")
+        self.TiptabsDBConnector.cursor().execute("USE tiptabs_db;")
+        self.TiptabsDBConnector.cursor().execute("CREATE TABLE users (username VARCHAR(20), password VARCHAR(20), favorite_conversions VARCHAR(35));")
 
     def add_entry(self, entry):
+        self.TiptabsDBConnector.cursor().execute("INSERT INTO users (username, password, favorite_conversions) " +
+                                       "VALUES ('garym', 'gary', 'EURtoUSD')")
         add_entry_result = [True, "Item was added successfully to the Database."]
         return add_entry_result
 
