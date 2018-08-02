@@ -18,7 +18,7 @@ class TiptabsDB:
 
     def add_entry(self, entry):
         self.TiptabsDBConnector.cursor().execute("INSERT INTO users (username, password, favorite_conversions) " +
-                                       "VALUES ('garym', 'gary', 'EURtoUSD')")
+                                       "VALUES ('garym', 'gary', 'EURtoUSD');")
         add_entry_result = [True, "Item was added successfully to the Database."]
         return add_entry_result
 
@@ -30,3 +30,8 @@ class TiptabsDB:
         item_collection = "Item placeholder."
         retrieve_entry_result = [True, item_collection]
         return retrieve_entry_result
+
+    def get_all_users(self):
+        users = self.TiptabsDBConnector.cursor().execute("SELECT username FROM users;")
+        all_users_result = [True, users]
+        return all_users_result

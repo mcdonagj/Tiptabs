@@ -48,6 +48,7 @@ def main():
     db = TiptabsDB()
 
     db.add_entry("A")
+    db.get_all_users()
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
