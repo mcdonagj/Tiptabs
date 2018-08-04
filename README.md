@@ -1,6 +1,7 @@
 ## Tiptabs
-A Python web application written to simplify currency conversions between established currencies.
+A Python web application written to simplify conversions between established currencies.
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
+
 When rates are available from fixer.io, currency rates are retrieved and stored into a `DictionaryBuilder` object,
 which consists of a dictionary and functions for modifying and validating this information.
 
@@ -33,8 +34,9 @@ To install these dependencies from the command line, complete any of the followi
 3. Installation via command line interface (CLI).
     Manually installing these packages using the commands below will not alter the execution of this repository.
     ```sh
-    pip(3) install requests
-    pip(3) install flask
+    pip install requests
+    pip install flask
+    pip install MySQL-connector-python
     ```
 The basic CSS format is adapted from a template found below:
     a. https://www.w3schools.com/css/tryit.asp?filename=trycss_template3
@@ -83,5 +85,5 @@ Ideas for this project that I'm researching or implementing:
 
 After installation, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
-Version: V3.7.
-Last Update: July-26-2018.
+Version: V3.8.
+Last Update: August-3-2018.

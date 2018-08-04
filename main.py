@@ -47,8 +47,11 @@ def main():
     # Initialize the MySQL database.
     db = TiptabsDB()
 
-    db.add_entry("A")
-    db.get_all_users()
+    db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
+    db.add_entry(db_entry)
+
+    # TODO: Define a route for all users tab.
+    db_users = db.get_all_users()
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", itc)
@@ -124,7 +127,6 @@ def main():
     @app.errorhandler(404)
     def no_page_found(e):
         return render_template('error_404.html')
-
 
     app.run(host='0.0.0.0', port=5000)
 
