@@ -11,10 +11,14 @@ class TiptabsDB:
           passwd="root"
         )
 
-        self.TiptabsDBConnector.cursor().execute("DROP DATABASE IF EXISTS tiptabs_db;")
-        self.TiptabsDBConnector.cursor().execute("CREATE DATABASE IF NOT EXISTS tiptabs_db;")
-        self.TiptabsDBConnector.cursor().execute("USE tiptabs_db;")
-        self.TiptabsDBConnector.cursor().execute("CREATE TABLE users (username VARCHAR(20), password VARCHAR(20), favorite_conversions VARCHAR(35));")
+        self.db_cursor = self.TiptabsDBConnector.cursor()
+
+        commands = ["DROP DATABASE IF EXISTS tiptabs_db;", "CREATE DATABASE IF NOT EXISTS tiptabs_db;",
+                    "USE tiptabs_db;",
+                    "CREATE TABLE users (username VARCHAR(20), password VARCHAR(20), favorite_conversions VARCHAR(35));"]
+
+        for command in commands:
+            self.db_cursor.execute(command)
 
     def check_inputs(self, entry):
         valid_input = True
@@ -43,9 +47,10 @@ class TiptabsDB:
             return valid_entry_checks
 
         sql_insert = "INSERT INTO {!s} VALUES ('{!s}', '{!s}', '{!s}');".format(entry[0], entry[1], entry[2], entry[3])
-        self.TiptabsDBConnector.cursor().execute(sql_insert)
+        self.db_cursor.execute(sql_insert)
         self.TiptabsDBConnector.commit()
         add_entry_result = [True, "Item was added successfully to the Database."]
+
         return add_entry_result
 
     def remove_entry(self, entry):
@@ -58,7 +63,14 @@ class TiptabsDB:
         return retrieve_entry_result
 
     def get_all_users(self):
-        users = self.TiptabsDBConnector.cursor().execute("SELECT username FROM users;")
+
+        query = "SELECT username FROM users;"
+        self.db_cursor.execute(query)
+        for username in self.db_cursor:
+            print("Current User: " + str(username))
+
+        users = username
         all_users_result = [True, users]
+
         return all_users_result
 

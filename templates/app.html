@@ -82,23 +82,19 @@
 </md-input-container>
 </md-slider-container>
 
-    <!--<md-button type="submit" class="md-raised md-primary">Submit</md-button>-->
-        <md-button class="md-primary md-raised" ng-click="showConfirm($event)">
-      Submit
-    </md-button>
-
+<md-button class="md-primary md-raised" ng-click="showConfirm($event)">
+Submit
+</md-button>
 
 </md-content>
 </md-tab>
 
-
-
-    <md-tab label="Tiptabs Stats">
+<md-tab label="Tiptabs Stats">
 <md-content class="md-padding">
 <h1 class="md-display-2">Statistics about Tiptabs</h1>
 <p>This page will contain stats about the Tiptabs application.</p>
-    <br>
-    <p>For example, common users (tracked by login-count) and their favorite conversions.</p>
+<br>
+<p>For example, common users (tracked by login-count) and their favorite conversions.</p>
 
 <md-slider-container flex="50">
 <span>Username</span>
@@ -110,12 +106,6 @@
 
 </md-content>
 </md-tab>
-
-
-
-
-
-
 </md-tabs>
 </md-content>
 </div>
@@ -141,21 +131,21 @@ app.controller("app_controller", function($scope, $http, $mdDialog) {
 $scope.response = {};
 $scope.status = '  ';
 $scope.showConfirm = function(ev) {
-    var confirm = $mdDialog.confirm()
-          .title('Calculate a Tip Amount?')
-          .textContent('You\'ve chosen to convert {{BASE_AMOUNT}} in {{BASE_CURRENCY}} to {{CONVERTED_CURRENCY}}.' +
-              '\n{{TIP_PERCENTAGE}} of {{BASE_CURRENCY}} will be added to your total in {{CONVERTED_CURRENCY}}.')
-          .targetEvent(ev)
-          .ok('Calculate Tip')
-          .cancel('Cancel');
+var confirm = $mdDialog.confirm()
+.title('Calculate a Tip Amount?')
+.textContent('You\'ve chosen to convert {{BASE_AMOUNT}} in {{BASE_CURRENCY}} to {{CONVERTED_CURRENCY}}.' +
+'\n{{TIP_PERCENTAGE}} of {{BASE_CURRENCY}} will be added to your total in {{CONVERTED_CURRENCY}}.')
+.targetEvent(ev)
+.ok('Calculate Tip')
+.cancel('Cancel');
 
-    $mdDialog.show(confirm).then(function() {
-        document.getElementById("Input-Form").submit();
-      $scope.status = 'Your converted total is..';
-    }, function() {
-      $scope.status = 'Decided to cancel.';
-    });
-  };
+$mdDialog.show(confirm).then(function() {
+document.getElementById("Input-Form").submit();
+$scope.status = 'Your converted total is..';
+}, function() {
+$scope.status = 'Decided to cancel.';
+});
+};
 $scope.sendResponse = function() {
 $http.post('/', $scope.response, {'Content-Type': 'application/x-www-form-urlencoded'})
 };
