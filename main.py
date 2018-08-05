@@ -46,16 +46,16 @@ def main():
     rates.sort()
 
     # Initialize the MySQL database.
-    db = TiptabsDB()
+    #db = TiptabsDB()
 
-    db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
-    db.add_entry(db_entry)
+    #db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
+    #db.add_entry(db_entry)
 
     # TODO: Define a route for all users tab.
-    db_users = db.get_all_users()
+    #db_users = db.get_all_users()
 
     # TODO: Define a route for retrieving all favorites (Ordered list of favorites using dropdown).
-    db_favorites = db.retrieve_user_favorites(db_entry)
+    #db_favorites = db.retrieve_user_favorites(db_entry)
 
     # TODO: Implement a graphical user interface for the International Tip Calculator.
     # ui = UserInterface("International Tip Calculator", tiptabs_core)
