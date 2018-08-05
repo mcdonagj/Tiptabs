@@ -5,7 +5,9 @@ import requests
 
 
 class DictionaryBuilder:
-    currencies = dict()
+
+    def __init__(self):
+        self.currencies = dict()
 
     def get_dictionary(self):
         """
@@ -159,6 +161,7 @@ class DictionaryBuilder:
         for key in provided_keys:
             # TODO: Check this functionality with unit tests.
             valid_key = self.check_valid_currency_key(key)
+            print(valid_key)
             if not valid_key:
                 inc_key_resp = "This key value is invalid {!s}".format(str(key))
                 return [False, inc_key_resp]
@@ -167,6 +170,7 @@ class DictionaryBuilder:
         for key in provided_keys:
             # TODO: Check this functionality with unit tests.
             valid_value = self.check_valid_currency_value(given_currencies.get(key))
+            print("Valid Value:" + valid_value + str(given_currencies.get(key)))
             if not valid_value:
                 inc_val_resp = "This entry is invalid: {!s} {!s}".format(str(key), str(given_currencies.get(key)))
                 return [False, inc_val_resp]

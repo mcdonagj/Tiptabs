@@ -8,6 +8,7 @@
 #
 # install_dependencies('flask', '1.0.2')
 # install_dependencies('requests', '2.18.4')
+# install_dependencies('MySQL-connector-python', '8.0.12')
 from requests import *
 from flask import Flask, render_template, request
 from Tiptabs import *
@@ -40,7 +41,7 @@ def main():
     populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
     # if populate_dictionary_result[0]:
-    itc = Tiptabs("EUR", dictionary_builder)
+    tiptabs_core = Tiptabs("EUR", dictionary_builder)
     rates = list(dictionary_builder.currencies.keys())
     rates.sort()
 
@@ -53,8 +54,11 @@ def main():
     # TODO: Define a route for all users tab.
     db_users = db.get_all_users()
 
+    # TODO: Define a route for retrieving all favorites (Ordered list of favorites using dropdown).
+    db_favorites = db.retrieve_user_favorites(db_entry)
+
     # TODO: Implement a graphical user interface for the International Tip Calculator.
-    # ui = UserInterface("International Tip Calculator", itc)
+    # ui = UserInterface("International Tip Calculator", tiptabs_core)
 
     app = Flask(__name__)
 
@@ -102,7 +106,7 @@ def main():
                 total_desr_currency = str(request.form['converted_currency'])
 
                 # Calculate the given total with the provided form information.
-                total = itc.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
+                total = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
 
                 # Store the total response list into the post response list.
                 post_form_resp = total

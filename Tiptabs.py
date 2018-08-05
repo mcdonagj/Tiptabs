@@ -1,7 +1,4 @@
 class Tiptabs:
-    base = ""
-    dictionary_builder = None
-    amount = 0
 
     def __init__(self, desired_base, desired_dictionary):
         """
