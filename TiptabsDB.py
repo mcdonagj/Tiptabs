@@ -62,16 +62,26 @@ class TiptabsDB:
 
         return add_entry_result
 
-
     def get_usercount(self):
-        self._get_cursor().execute("SELECT COUNT(username) FROM users;")
+        query = "SELECT COUNT(username) FROM users;"
+        self._get_cursor().execute(query)
         usercount = self._get_cursor().fetchall()
         return [True, usercount]
 
     def remove_user(self, username):
-        #self._get_cursor().execute("DELETE FROM users where username='garym'")
+        # TODO: Add a check for the provided username before removing.
+        entry = "DELETE FROM users WHERE username='{!s}';".format(str(username))
+        self._get_cursor().execute(entry)
         remove_entry_result = [True, "Item was removed successfully from the Database."]
         return remove_entry_result
+
+
+    def add_favorite_to_user(self, favorite_conversion):
+
+        if len(favorite_conversion) <= 0:
+            return [False, "Invalid conversion entered."]
+
+        return [True, "Add Favorite placeholder."]
 
     def retrieve_user_favorites(self, entry):
 
