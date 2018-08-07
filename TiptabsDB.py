@@ -62,7 +62,14 @@ class TiptabsDB:
 
         return add_entry_result
 
-    def remove_entry(self, entry):
+
+    def get_usercount(self):
+        self._get_cursor().execute("SELECT COUNT(username) FROM users;")
+        usercount = self._get_cursor().fetchall()
+        return [True, usercount]
+
+    def remove_user(self, username):
+        #self._get_cursor().execute("DELETE FROM users where username='garym'")
         remove_entry_result = [True, "Item was removed successfully from the Database."]
         return remove_entry_result
 
