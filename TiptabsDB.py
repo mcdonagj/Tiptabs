@@ -75,7 +75,6 @@ class TiptabsDB:
         remove_entry_result = [True, "Item was removed successfully from the Database."]
         return remove_entry_result
 
-
     def add_favorite_to_user(self, favorite_conversion):
 
         if len(favorite_conversion) <= 0:
