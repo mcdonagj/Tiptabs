@@ -7,6 +7,8 @@ from Tiptabs import *
 class testTiptabs(unittest.TestCase):
 
     app_dict = DictionaryBuilder()
+    res = app_dict.request_rates()
+    populate_dictionary_result = app_dict.get_rates(res[0], res[1])
     app = Tiptabs("EUR", app_dict)
 
     # TODO: Test class constructor with empty string, null values, etc
@@ -15,3 +17,13 @@ class testTiptabs(unittest.TestCase):
         expected = "EUR"
         result = self.app.get_base()
         return self.assertEqual(expected, result)
+
+    def test_set_base_valid_base(self):
+        expected = "USD"
+        result = self.app.set_base("USD")
+        return self.assertEqual(expected, self.app.get_base())
+
+    def test_set_base_invalid_base(self):
+        expected = "EUR"
+        result = self.app.set_base("asdfasdf")
+        return self.assertEqual(expected, self.app.get_base())

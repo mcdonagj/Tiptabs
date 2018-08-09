@@ -32,18 +32,18 @@ class Tiptabs:
         :param desired_base: Base to set within the calculator.
         :return: Boolean condition that indicates the success of setting the desired base.
         """
-        base = self.dictionary_builder.check_available_bases(desired_base)
+        available_base = self.dictionary_builder.check_available_bases(desired_base)
 
         # TODO: Check logic in this function.
         # Error checking for non-available bases is not working as intended.
-        base_available = type(base) is object
 
-        if base_available:
+        if available_base:
             self.base = desired_base
         else:
             self.base = "EUR"
+            available_base = "EUR"
 
-        return base_available
+        return available_base
 
     def set_custom_currencies(self, desired_currencies):
         """
