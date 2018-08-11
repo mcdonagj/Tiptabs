@@ -33,3 +33,9 @@ class testTiptabs(unittest.TestCase):
         self.app.set_amount(10.00)
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
+
+    def test_calculate_total(self):
+        expected = [True, "Your total amount was: 13.707 USD."]
+        result = self.app.calculate_total(10, 20, 'USD')
+        return self.assertEqual(expected, result)
+
