@@ -19,6 +19,8 @@ class Tiptabs:
             else:
                 self.base = 'EUR'
 
+        self.amount = 0.00
+
     def get_base(self):
         """
         get_base() - Helper function that returns the base currency instance variable.
@@ -41,9 +43,8 @@ class Tiptabs:
             self.base = desired_base
         else:
             self.base = "EUR"
-            available_base = "EUR"
 
-        return available_base
+        return self.base
 
     def set_custom_currencies(self, desired_currencies):
         """
@@ -59,10 +60,22 @@ class Tiptabs:
 
     def set_amount(self, desired_amount):
         """
-        set_amount(float) - Setter function for setting a bill amount within the calculator.
+        set_amount(float) - Setter function for setting a bill amount within Tiptabs.
         :param desired_amount: Bill amount to be converted.
         """
-        self.amount = desired_amount
+
+        if desired_amount > 0.00:
+            self.amount = desired_amount
+        else:
+            self.amount = 0.00
+
+
+    def get_amount(self):
+        """
+        get_amount() - Getter function for retrieving the current bill amount within Tiptabs.
+        :return: Float instance variable for the current amount.
+        """
+        return self.amount
 
     def calculate_total(self, bill_amount, tip_percentage, converted_currency):
         """
@@ -72,7 +85,7 @@ class Tiptabs:
         :param tip_percentage: Desired tip amount. (Later converted to a decimal value)
         :return: Total sum of the bill.
         """
-        corrected_tip_percentage = float(tip_percentage) / 100
+        corrected_tip_percentage = float(tip_percentage) / 100.00
         bill_amt = float(bill_amount)
         tip_amount = (bill_amt * corrected_tip_percentage)
 

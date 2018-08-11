@@ -74,9 +74,6 @@ class DictionaryBuilder:
         Creates an MIME message and sends it to a given email address. Execution of Tiptabs halts if
         this state is encountered.
         """
-        # TODO: Implement functionality that sends an email notification to mcdonagj@dukes.jmu.edu
-        # when the request for rate information fails.
-        # Used for testing email messaging.
 
         from email.mime.multipart import MIMEMultipart
         message = MIMEMultipart()

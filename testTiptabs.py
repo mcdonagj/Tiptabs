@@ -27,3 +27,9 @@ class testTiptabs(unittest.TestCase):
         expected = "EUR"
         result = self.app.set_base("asdfasdf")
         return self.assertEqual(expected, self.app.get_base())
+
+    def test_set_amount(self):
+        expected = 10.00
+        self.app.set_amount(10.00)
+        result = self.app.get_amount()
+        return self.assertEqual(expected, result)
