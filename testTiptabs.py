@@ -19,14 +19,14 @@ class testTiptabs(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def test_set_base_valid_base(self):
-        expected = "USD"
+        expected = True
         result = self.app.set_base("USD")
-        return self.assertEqual(expected, self.app.get_base())
+        return self.assertEqual(expected, result[0])
 
     def test_set_base_invalid_base(self):
-        expected = "EUR"
+        expected = False
         result = self.app.set_base("asdfasdf")
-        return self.assertEqual(expected, self.app.get_base())
+        return self.assertEqual(expected, result[0])
 
     def test_set_amount(self):
         expected = 10.00
@@ -35,7 +35,7 @@ class testTiptabs(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def test_calculate_total(self):
-        expected = [True, "Your total amount was: 13.707 USD."]
+        expected = [True, "Your total amount was: 13.6539 USD."]
         result = self.app.calculate_total(10, 20, 'USD')
         return self.assertEqual(expected, result)
 

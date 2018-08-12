@@ -39,12 +39,17 @@ class Tiptabs:
         # TODO: Check logic in this function.
         # Error checking for non-available bases is not working as intended.
 
+        set_base_res = [False, "Desired base of {!s} is not available.\n Default base of EUR assigned.".format(str(desired_base))]
+
         if available_base:
+            current_base = str(self.get_base())
+            base_changed_resp = "Currency base of {!s} has been changed to {!s}.".format(current_base, str(desired_base))
+            set_base_res = [True, base_changed_resp]
             self.base = desired_base
         else:
             self.base = "EUR"
 
-        return self.base
+        return set_base_res
 
     def set_custom_currencies(self, desired_currencies):
         """
@@ -69,7 +74,6 @@ class Tiptabs:
         else:
             self.amount = 0.00
 
-
     def get_amount(self):
         """
         get_amount() - Getter function for retrieving the current bill amount within Tiptabs.
@@ -89,7 +93,7 @@ class Tiptabs:
         bill_amt = float(bill_amount)
         tip_amount = (bill_amt * corrected_tip_percentage)
 
-        fixed_converted_currency = converted_currency.replace('string:', '')
+        fixed_converted_currency = str(converted_currency).replace('string:', '')
         convert_currency_rate = self.dictionary_builder.currencies.get(fixed_converted_currency, 1)
 
         final_amount = (bill_amt + tip_amount) * float(convert_currency_rate)
