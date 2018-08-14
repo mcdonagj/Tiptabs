@@ -32,4 +32,3 @@ EXPOSE 3006
 
 # Run main.py.
 CMD ["python3", "main.py"]
-

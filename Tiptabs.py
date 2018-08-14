@@ -1,3 +1,5 @@
+from DictionaryBuilder import *
+
 class Tiptabs:
 
     def __init__(self, desired_base, desired_dictionary):
@@ -94,6 +96,15 @@ class Tiptabs:
         tip_amount = (bill_amt * corrected_tip_percentage)
 
         fixed_converted_currency = str(converted_currency).replace('string:', '')
+
+        valid_input_currency = self.dictionary_builder.check_available_bases(fixed_converted_currency)
+
+        # TODO: Test this invalid input functionality in testTiptabs.py.
+        
+        if not valid_input_currency:
+            invalid_input_resp = "Your desired currency base of {!s} is not available in the calculator.".format(str(fixed_converted_currency))
+            return [False, invalid_input_resp]
+
         convert_currency_rate = self.dictionary_builder.currencies.get(fixed_converted_currency, 1)
 
         final_amount = (bill_amt + tip_amount) * float(convert_currency_rate)
