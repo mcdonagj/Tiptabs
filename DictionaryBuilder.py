@@ -225,13 +225,23 @@ class DictionaryBuilder:
         valid_currency_pattern = re.compile('(^\d?(\.?\d*)$)', re.IGNORECASE)
         valid_currency_value = valid_currency_pattern.match(given_currency_key_value)
 
+        funct_name = "check_valid_currency_value()"
+        valid_currency_value_resp = "Provided currency value: '{!s}' is valid.".format(str(given_currency_key_value))
+
         if valid_currency_value is None:
-            return False
-        else:
-            return True
+            none_currency_value_resp = "None values are not permitted as input into fnct: {!s}.".format(funct_name)
+            return [False, none_currency_value_resp]
+
+        return [True, valid_currency_value_resp]
 
     def check_valid_currency_key(self, given_currency_key):
 
-        # Must provide a value appropriate ISO-4217 standards.
-        # TODO: Create a function that checks appropriate currency keys.
-        return True
+        if given_currency_key is None:
+            return [False, "None values are not permitted as input."]
+
+        if len(str(given_currency_key).strip) == 0:
+            return [False, "Empty keys are not permitted as input."]
+
+        valid_currency_key_resp = "Provided key: '{!s}' is valid.".format(str(given_currency_key))
+
+        return [True, valid_currency_key_resp]
