@@ -14,7 +14,6 @@ class DictionaryBuilder:
         get_dictionary - Returns the currencies instance variable.
         :return: Dictionary object containing all retrieved currencies.
         """
-
         return self.currencies
 
     @staticmethod
@@ -128,7 +127,7 @@ class DictionaryBuilder:
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
-        return given_base in self.currencies
+        return self.format_base(str(given_base)) in self.currencies.keys()
 
     def check_available_currencies(self, given_currencies):
         """
@@ -242,6 +241,11 @@ class DictionaryBuilder:
         if len(str(given_currency_key).strip) == 0:
             return [False, "Empty keys are not permitted as input."]
 
+        #TODO: Add check for string against ISO codes.
+
         valid_currency_key_resp = "Provided key: '{!s}' is valid.".format(str(given_currency_key))
 
         return [True, valid_currency_key_resp]
+
+    def format_base(self, provided_string):
+        return str(provided_string).strip().upper()
