@@ -23,6 +23,11 @@ class testDictionaryBuilder(unittest.TestCase):
     def testGetRates(self):
         return True
 
+    def testGetRates_false_param(self):
+        expected = [False, "ERROR: rate service 'fixer.io' is not available. Try again later."]
+        result = self.app_dict.get_rates(False, "Testing getRates() with a false flag.")
+        return self.assertEqual(expected, result)
+
     def testSendErrorMessage(self):
         # TODO: Create tests for SendErrorMessage.
         return True
