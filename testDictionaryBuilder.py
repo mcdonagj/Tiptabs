@@ -82,6 +82,16 @@ class testDictionaryBuilder(unittest.TestCase):
         # TODO: Create tests for CheckValidCurrencyKey.
         return True
 
+    def testFormatBase_lowercase(self):
+        expected = "USD"
+        result = self.app_dict.format_base("usd")
+        return self.assertEqual(expected, result)
+
+    def testFormatBase_spaces(self):
+        expected = "EUR"
+        result = self.app_dict.format_base("   EUR    ")
+        return self.assertEqual(expected, result)
+
 
 if __name__ == '__main__':
     unittest.main()
