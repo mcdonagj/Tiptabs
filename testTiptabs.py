@@ -1,8 +1,6 @@
 import unittest
-
 from DictionaryBuilder import *
 from Tiptabs import *
-
 
 class testTiptabs(unittest.TestCase):
 
@@ -34,8 +32,10 @@ class testTiptabs(unittest.TestCase):
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
 
-    def test_calculate_total(self):
-        expected = [True, "Your total amount was: 13.6539 USD."]
-        result = self.app.calculate_total(10, 20, 'USD')
+    def test_calculate_total_test_same_base(self):
+        expected = [True, "Your total amount was: 12.0 EUR."]
+        result = self.app.calculate_total(10.00, 20.00, "EUR")
         return self.assertEqual(expected, result)
 
+if __name__ == '__main__':
+    unittest.main()
