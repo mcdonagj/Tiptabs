@@ -1,114 +1,120 @@
-
 <html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 
-<title>Tiptabs - V3.7</title>
+    <title>Tiptabs - V3.7</title>
 </head>
+
 <body ng-app="tiptabs_app">
-<div ng-controller="app_controller" ng-cloak>
+    <div ng-controller="app_controller" ng-cloak>
 
-<md-content>
-<md-tabs md-dynamic-height md-border-bottom>
-<md-tab label="Single Conversion">
-<md-content class="md-padding">
-<h1 class="md-display-2">Input Option: Form</h1>
-<form name="Input-Form" ng-submit="sendResponse()" action="/" method="POST">
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Single Conversion">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Input Option: Form</h1>
+                        <form name="Input-Form" ng-submit="sendResponse()" action="/" method="POST">
 
-<div layout="row" layout-align="start" flex="">
+                            <div layout="row" layout-align="start" flex="">
 
-<md-input-container flex="50">
-<label>Base Currency</label>
-<select ng-model="response.base_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="base_currency for base_currency in available_rates"></select>
-<md-select name="base_currency" ng-model="response.base_currency" class="input-sm form-control">
-<md-option ng-bind="base_currency" ng-value="base_currency" ng-repeat="base_currency in available_rates"></md-option>
-</md-select>
+                                <md-input-container flex="50">
+                                    <label>Base Currency</label>
+                                    <select ng-model="response.base_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="base_currency for base_currency in available_rates"></select>
+                                    <md-select name="base_currency" ng-model="response.base_currency" class="input-sm form-control">
+                                        <md-option ng-bind="base_currency" ng-value="base_currency" ng-repeat="base_currency in available_rates"></md-option>
+                                    </md-select>
 
-</md-input-container>
+                                </md-input-container>
 
-<md-input-container flex="50">
-<label>Converted Currency</label>
-<select ng-model="response.converted_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="converted_currency for converted_currency in available_rates"></select>
-<md-select name="converted_currency" ng-model="response.converted_currency" class="input-sm form-control">
-<md-option ng-bind="converted_currency" ng-value="converted_currency" ng-repeat="converted_currency in available_rates"></md-option>
+                                <md-input-container flex="50">
+                                    <label>Converted Currency</label>
+                                    <select ng-model="response.converted_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="converted_currency for converted_currency in available_rates"></select>
+                                    <md-select name="converted_currency" ng-model="response.converted_currency" class="input-sm form-control">
+                                        <md-option ng-bind="converted_currency" ng-value="converted_currency" ng-repeat="converted_currency in available_rates"></md-option>
 
-<div class="errors" ng-messages="Input-Form.convertedCurrency.$error">
-<div ng-message="required">Selection Required</div>
-</div>
-</md-select>
-</md-input-container>
-</div>
+                                        <div class="errors" ng-messages="Input-Form.convertedCurrency.$error">
+                                            <div ng-message="required">Selection Required</div>
+                                        </div>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
 
-<div layout="row" layout-align="start" flex="">
+                            <div layout="row" layout-align="start" flex="">
 
-<md-input-container flex="50">
-<label>Bill Amount</label>
-<input name="bill_amount" type="number" ng-model="response.bill_amount" min="0" step="0.01" value="0" placeholder="Enter a Bill Amount.." required>
-</md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Bill Amount</label>
+                                    <input name="bill_amount" type="number" ng-model="response.bill_amount" min="0" step="0.01" value="0" placeholder="Enter a Bill Amount.."
+                                        required>
+                                </md-input-container>
 
-<md-input-container flex="50">
-<label>Tip Percentage</label>
-<input name="tip_percentage" type="number" ng-model="response.tip_percentage" min="0" max="100" step="1" value="15" placeholder="Enter a Tip Amount.." required>
-</md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Tip Percentage</label>
+                                    <input name="tip_percentage" type="number" ng-model="response.tip_percentage" min="0" max="100" step="1" value="15" placeholder="Enter a Tip Amount.."
+                                        required>
+                                </md-input-container>
 
-</div>
+                            </div>
 
-<md-button type="submit" class="md-raised md-primary" style="vertical-align:middle"><span>Submit</span></md-button>
-</form>
-</md-content>
-</md-tab>
+                            <md-button type="submit" class="md-raised md-primary" style="vertical-align:middle">
+                                <span>Submit</span>
+                            </md-button>
+                        </form>
+                    </md-content>
+                </md-tab>
 
-<md-tab label="Multiple Conversions">
-<md-content class="md-padding">
-<h1 class="md-display-2">Input Option: Card Selection</h1>
-<p>This page will contain a form with multiple cards for selecting conversions from one currency to another.</p>
+                <md-tab label="Multiple Conversions">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Input Option: Card Selection</h1>
+                        <p>This page will contain a form with multiple cards for selecting conversions from one currency to
+                            another.</p>
 
-<md-slider-container flex="50">
-<span>Tip Amount</span>
-<md-slider ng-model="tip.value" min="0" max="25" aria-label="tip" id="tip-slider" class="md-accent">
-</md-slider>
-<md-input-container>
-<input type="number" ng-model="tip.value" aria-label="tip" aria-controls="tip-slider">
-</md-input-container>
-</md-slider-container>
+                        <md-slider-container flex="50">
+                            <span>Tip Amount</span>
+                            <md-slider ng-model="tip.value" min="0" max="25" aria-label="tip" id="tip-slider" class="md-accent">
+                            </md-slider>
+                            <md-input-container>
+                                <input type="number" ng-model="tip.value" aria-label="tip" aria-controls="tip-slider">
+                            </md-input-container>
+                        </md-slider-container>
 
-<md-slider-container flex="50">
-<span>Bill Amount</span>
-<md-slider ng-model="bill.amount" min="0" max="250" aria-label="bill" id="bill-slider" class="md-accent">
-</md-slider>
-<md-input-container flex="50">
-<input type="number" ng-model="bill.amount" aria-label="bill" aria-controls="bill-slider">
-</md-input-container>
-</md-slider-container>
+                        <md-slider-container flex="50">
+                            <span>Bill Amount</span>
+                            <md-slider ng-model="bill.amount" min="0" max="250" aria-label="bill" id="bill-slider" class="md-accent">
+                            </md-slider>
+                            <md-input-container flex="50">
+                                <input type="number" ng-model="bill.amount" aria-label="bill" aria-controls="bill-slider">
+                            </md-input-container>
+                        </md-slider-container>
 
-<md-button class="md-primary md-raised" ng-click="showConfirm($event)">
-Submit
-</md-button>
+                        <md-button class="md-primary md-raised" ng-click="showConfirm($event)">
+                            Submit
+                        </md-button>
 
-</md-content>
-</md-tab>
+                    </md-content>
+                </md-tab>
 
-<md-tab label="Tiptabs Stats">
-<md-content class="md-padding">
-<h1 class="md-display-2">Statistics about Tiptabs</h1>
-<p>This page will contain stats about the Tiptabs application.</p>
-<br>
-<p>For example, common users (tracked by login-count) and their favorite conversions.</p>
+                <md-tab label="Tiptabs Stats">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Statistics about Tiptabs</h1>
+                        <p>This page will contain stats about the Tiptabs application.</p>
+                        <br>
+                        <p>For example, common users (tracked by login-count) and their favorite conversions.</p>
 
-<md-slider-container flex="50">
-<span>Username</span>
-</md-slider-container>
+                        <md-slider-container flex="50">
+                            <span>Username</span>
+                        </md-slider-container>
 
-<md-slider-container flex="50">
-<span>Favorite Conversions</span>
-</md-slider-container>
+                        <md-slider-container flex="50">
+                            <span>Favorite Conversions</span>
+                        </md-slider-container>
 
-</md-content>
-</md-tab>
-</md-tabs>
-</md-content>
-</div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
@@ -120,38 +126,39 @@ Submit
 
 <script type="text/javascript">
 
-var app = angular.module('tiptabs_app', ['ngMaterial', 'ngMessages']);
+    var app = angular.module('tiptabs_app', ['ngMaterial', 'ngMessages']);
 
-app.config(['$interpolateProvider', function($interpolateProvider) {
-$interpolateProvider.startSymbol('{[');
-$interpolateProvider.endSymbol(']}');
-}]);
+    app.config(['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[');
+        $interpolateProvider.endSymbol(']}');
+    }]);
 
-app.controller("app_controller", function($scope, $http, $mdDialog) {
-$scope.response = {};
-$scope.status = '  ';
-$scope.showConfirm = function(ev) {
-var confirm = $mdDialog.confirm()
-.title('Calculate a Tip Amount?')
-.textContent('You\'ve chosen to convert {{BASE_AMOUNT}} in {{BASE_CURRENCY}} to {{CONVERTED_CURRENCY}}.' +
-'\n{{TIP_PERCENTAGE}} of {{BASE_CURRENCY}} will be added to your total in {{CONVERTED_CURRENCY}}.')
-.targetEvent(ev)
-.ok('Calculate Tip')
-.cancel('Cancel');
+    app.controller("app_controller", function ($scope, $http, $mdDialog) {
+        $scope.response = {};
+        $scope.status = '  ';
+        $scope.showConfirm = function (ev) {
+            var confirm = $mdDialog.confirm()
+                .title('Calculate a Tip Amount?')
+                .textContent('You\'ve chosen to convert {{BASE_AMOUNT}} in {{BASE_CURRENCY}} to {{CONVERTED_CURRENCY}}.' +
+                    '\n{{TIP_PERCENTAGE}} of {{BASE_CURRENCY}} will be added to your total in {{CONVERTED_CURRENCY}}.')
+                .targetEvent(ev)
+                .ok('Calculate Tip')
+                .cancel('Cancel');
 
-$mdDialog.show(confirm).then(function() {
-document.getElementById("Input-Form").submit();
-$scope.status = 'Your converted total is..';
-}, function() {
-$scope.status = 'Decided to cancel.';
-});
-};
-$scope.sendResponse = function() {
-$http.post('/', $scope.response, {'Content-Type': 'application/x-www-form-urlencoded'})
-};
-$scope.available_rates= JSON.parse('{{rates | tojson}}');
-})
+            $mdDialog.show(confirm).then(function () {
+                document.getElementById("Input-Form").submit();
+                $scope.status = 'Your converted total is..';
+            }, function () {
+                $scope.status = 'Decided to cancel.';
+            });
+        };
+        $scope.sendResponse = function () {
+            $http.post('/', $scope.response, { 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+        $scope.available_rates = JSON.parse('{{rates | tojson}}');
+    })
 </script>
 
 </body>
+
 </html>

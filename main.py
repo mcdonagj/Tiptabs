@@ -38,7 +38,8 @@ def main():
         sys.exit()
 
     # Populate the dictionary with available currencies.
-    populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
+    populate_dictionary_result = dictionary_builder.get_rates(
+        exec_rates[0], exec_rates[1])
 
     # if populate_dictionary_result[0]:
     tiptabs_core = Tiptabs("EUR", dictionary_builder)
@@ -49,7 +50,7 @@ def main():
     #db = TiptabsDB()
 
     #db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
-    #db.add_entry(db_entry)
+    # db.add_entry(db_entry)
 
     # TODO: Define a route for all users tab.
     #db_users = db.get_all_users()
@@ -84,11 +85,13 @@ def main():
                 total_base_currency = str(request.form['base_currency'])
 
                 # Determine if the chosen base is available from the API service.
-                check_avail_base = dictionary_builder.check_available_bases(total_base_currency)
+                check_avail_base = dictionary_builder.check_available_bases(
+                    total_base_currency)
 
                 if not check_avail_base:
                     # Create a response string for an unavailable base.
-                    base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(total_base_currency)
+                    base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(
+                        total_base_currency)
 
                     # Create a response list to return.
                     post_form_resp = [False, base_not_avail_resp]
@@ -106,7 +109,8 @@ def main():
                 total_desr_currency = str(request.form['converted_currency'])
 
                 # Calculate the given total with the provided form information.
-                total = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
+                total = tiptabs_core.calculate_total(
+                    total_bill_amount, total_tip_percentage, total_desr_currency)
 
                 # Store the total response list into the post response list.
                 post_form_resp = total

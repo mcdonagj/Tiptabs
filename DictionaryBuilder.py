@@ -199,15 +199,18 @@ class DictionaryBuilder:
         :param currency_to_add:
         :return: Boolean condition indicating success or failure of addition of currency.
         """
-        revised_addition = currency_to_add.replace(",", "").replace("}", "")
+        revised_addition = currency_to_add
+
+        if "," or "}" or '"' in revised_addition:
+            revised_addition = currency_to_add.replace(",", "").replace("}", "").replace('"', "").strip()
 
         # TODO: Create a regex to pull items from a given addition.
         valid_curr_length = (len(revised_addition) > 0)
         if valid_curr_length:
             key_pairs = revised_addition.split(":")
 
-            key = key_pairs[0].replace('"', "")
-            value = key_pairs[1]
+            key = self.format_base(str(key_pairs[0]))
+            value = self.format_currency(str(key_pairs[1]))
 
             self.currencies[key] = value
 
@@ -249,3 +252,6 @@ class DictionaryBuilder:
 
     def format_base(self, provided_string):
         return str(provided_string).strip().upper()
+
+    def format_currency(self, provided_currency):
+        return round(float(provided_currency), 6)

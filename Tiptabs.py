@@ -13,13 +13,13 @@ class Tiptabs:
         chk_base_size = len(desired_base) >= 0
 
         if not chk_base_size:
-            self.base = 'EUR'
+            self.base = "EUR"
         else:
             base_available = desired_dictionary.check_available_bases(desired_base)
             if base_available:
                 self.base = desired_base
             else:
-                self.base = 'EUR'
+                self.base = "EUR"
 
         self.amount = 0.00
 
@@ -71,10 +71,10 @@ class Tiptabs:
         :param desired_amount: Bill amount to be converted.
         """
 
-        if desired_amount > 0.00:
+        if desired_amount > 0.000000:
             self.amount = desired_amount
         else:
-            self.amount = 0.00
+            self.amount = 0.000000
 
     def get_amount(self):
         """
