@@ -92,6 +92,21 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_base("   EUR    ")
         return self.assertEqual(expected, result)
 
+    def testFormatCurrency_string(self):
+        expected = 1.0
+        result = self.app_dict.format_currency('1.0')
+        return self.assertEqual(expected, result)
+
+    def testFormatCurrency_negative(self):
+        expected = 2.0012
+        result = self.app_dict.format_currency(2.0012)
+        return self.assertEqual(expected, result)
+
+    def testFormatCurrency_nonnumeric(self):
+        expected = False
+        result = self.app_dict.format_currency('asdf')
+        return self.assertEqual(expected, result)
+
 
 if __name__ == '__main__':
     unittest.main()

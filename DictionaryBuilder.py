@@ -254,4 +254,7 @@ class DictionaryBuilder:
         return str(provided_string).strip().upper()
 
     def format_currency(self, provided_currency):
+        if str(provided_currency).isalpha():
+            return False
+
         return round(float(provided_currency), 6)
