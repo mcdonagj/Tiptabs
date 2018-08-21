@@ -127,7 +127,7 @@ class DictionaryBuilder:
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
-        return self.format_base(str(given_base)) in self.currencies.keys()
+        return self.format_base(str(given_base))[1] in self.currencies.keys()
 
     def check_available_currencies(self, given_currencies):
         """
@@ -212,7 +212,8 @@ class DictionaryBuilder:
             key = self.format_base(str(key_pairs[0]))
             value = self.format_currency(str(key_pairs[1]))
 
-            self.currencies[key] = value
+            if key[0] and value[0]:
+                self.currencies[key[1]] = value[1]
 
             revised_addition = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
         else:
@@ -251,10 +252,16 @@ class DictionaryBuilder:
         return [True, valid_currency_key_resp]
 
     def format_base(self, provided_string):
-        return str(provided_string).strip().upper()
+        
+        if isinstance(provided_string, int) or isinstance(provided_string, float) or str(provided_string).isnumeric():
+            format_base_resp = "ERROR: Invalid base value! '{!s}' cannot contain numeric characters.".format(str(provided_string))
+            return [False, format_base_resp]
+
+        return [True, str(provided_string).strip().upper()]
 
     def format_currency(self, provided_currency):
         if str(provided_currency).isalpha():
-            return False
+            format_currency_resp = "ERROR: Invalid currency value! '{!s}' cannot contain alphanumeric characters.".format(str(provided_currency))
+            return [False, format_currency_resp]
 
-        return round(float(provided_currency), 6)
+        return [True, round(float(provided_currency), 6)]
