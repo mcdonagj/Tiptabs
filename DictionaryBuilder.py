@@ -197,7 +197,7 @@ class DictionaryBuilder:
         """
         add_currency(str) - Helper function that adds a given currency to the currencies dictionary.
         :param currency_to_add:
-        :return: Boolean condition indicating success or failure of addition of currency.
+        :return: List containing a Boolean condition indicating success or failure of addition of currency.
         """
         revised_addition = currency_to_add
 
@@ -223,26 +223,40 @@ class DictionaryBuilder:
         return revised_addition
 
     def check_valid_currency_value(self, given_currency_key_value):
-
+        """
+        check_valid_currency_value(str) - Helper function that validates a provided currency key value using a regular expression.
+        :param given_currency_key_value: Desired key value to be checked.
+        :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
+        """
         import re
         valid_currency_pattern = re.compile('(^\d?(\.?\d*)$)', re.IGNORECASE)
-        valid_currency_value = valid_currency_pattern.match(given_currency_key_value)
 
         funct_name = "check_valid_currency_value()"
-        valid_currency_value_resp = "Provided currency value: '{!s}' is valid.".format(str(given_currency_key_value))
 
-        if valid_currency_value is None:
-            none_currency_value_resp = "None values are not permitted as input into fnct: {!s}.".format(funct_name)
-            return [False, none_currency_value_resp]
+        if given_currency_key_value is None:
+            none_currency_input_resp = "ERROR: None values are not permitted as input into function: {!s}.".format(funct_name)
+            return [False, none_currency_input_resp]
+
+        if len(str(given_currency_key_value).strip()) == 0:
+            return [False, "ERROR: Empty strings are not permitted as input."]
+
+        valid_currency_value = valid_currency_pattern.match(str(given_currency_key_value))
+        
+        valid_currency_value_resp = "Provided currency value: '{!s}' is valid.".format(str(given_currency_key_value))
 
         return [True, valid_currency_value_resp]
 
     def check_valid_currency_key(self, given_currency_key):
+        """
+        check_valid_currency_key(str) - Helper function that validates a provided currency key against a predetermined list of ISO codes.
+        :param given_currency_key_value: Desired key to be checked.
+        :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
+        """
 
         if given_currency_key is None:
             return [False, "None values are not permitted as input."]
 
-        if len(str(given_currency_key).strip) == 0:
+        if len(str(given_currency_key).strip()) == 0:
             return [False, "Empty keys are not permitted as input."]
 
         #TODO: Add check for string against ISO codes.
@@ -251,15 +265,36 @@ class DictionaryBuilder:
 
         return [True, valid_currency_key_resp]
 
-    def format_base(self, provided_string):
+    def format_base(self, provided_base):
+        """
+        format_base(str) - Helper function that formats a provided base to a predefined standard for bases. (Simplifies expected output.)
+        :param provided_base: Desired base to be formatted.
+        :return: List containing a Boolean condition indicating success of base formatting and a detailed response.
+        """
         
-        if isinstance(provided_string, int) or isinstance(provided_string, float) or str(provided_string).isnumeric():
-            format_base_resp = "ERROR: Invalid base value! '{!s}' cannot contain numeric characters.".format(str(provided_string))
+        valid_base_resp = self.check_valid_currency_key(provided_base)
+
+        if not valid_base_resp[0]:
+            return valid_base_resp
+        
+        if isinstance(provided_base, int) or isinstance(provided_base, float) or str(provided_base).isnumeric():
+            format_base_resp = "ERROR: Invalid base value! '{!s}' cannot contain numeric characters.".format(str(provided_base))
             return [False, format_base_resp]
 
-        return [True, str(provided_string).strip().upper()]
+        return [True, str(provided_base).strip().upper()]
 
     def format_currency(self, provided_currency):
+        """
+        format_currency(str) - Helper function that formats a provided currency to a predefined standard for currencies. (Simplifies expected output.)
+        :param provided_currency: Desired currency to be formatted.
+        :return: List containing a Boolean condition indicating success of currency formatting and a detailed response.
+        """
+
+        valid_currency_resp = self.check_valid_currency_value(provided_currency)
+
+        if not valid_currency_resp[0]:
+            return valid_currency_resp
+
         if str(provided_currency).isalpha():
             format_currency_resp = "ERROR: Invalid currency value! '{!s}' cannot contain alphanumeric characters.".format(str(provided_currency))
             return [False, format_currency_resp]

@@ -101,7 +101,7 @@ class testDictionaryBuilder(unittest.TestCase):
     def testFormatBase_decimal(self):
         expected = False
         result = self.app_dict.format_base(1.002)
-        return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2)and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
+        return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
     def testFormatCurrency_string(self):
         expected = [True, 1.0]
@@ -112,6 +112,16 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [True, 2.0012]
         result = self.app_dict.format_currency(2.0012)
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
+
+    def testFormatCurrency_None(self):
+        expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
+        result = self.app_dict.format_currency(None)
+        return self.assertEqual(expected, result)
+
+    def testFormatCurrency_Empty(self):
+        expected = [False, "ERROR: Empty strings are not permitted as input."]
+        result = self.app_dict.format_currency("")
+        return self.assertEqual(expected, result)
 
     def testFormatCurrency_nonnumeric(self):
         expected = False
