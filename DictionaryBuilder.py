@@ -200,6 +200,10 @@ class DictionaryBuilder:
         :return: List containing a Boolean condition indicating success or failure of addition of currency.
         """
         revised_addition = currency_to_add
+        invalid_curr_resp = [False, "ERROR: Currency addition is empty."]
+
+        if revised_addition is None:
+            return invalid_curr_resp
 
         if "," or "}" or '"' in revised_addition:
             revised_addition = currency_to_add.replace(",", "").replace("}", "").replace('"', "").strip()
@@ -217,8 +221,7 @@ class DictionaryBuilder:
 
             revised_addition = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
         else:
-            invalid_curr_resp = "ERROR: Currency addition is empty."
-            revised_addition = [False, invalid_curr_resp]
+            revised_addition = invalid_curr_resp
 
         return revised_addition
 

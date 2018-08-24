@@ -71,9 +71,17 @@ class testDictionaryBuilder(unittest.TestCase):
         # TODO: Create tests for CheckAvailableCurrencies.
         return True
 
-    def testAddCurrency(self):
-        # TODO: Create tests for AddCurrency.
-        return True
+    def testAddCurrency_desired_format(self):    
+        initial_size = len(self.app_dict.get_dictionary())
+        expected = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
+        result = self.app_dict.add_currency("MMM:2.001")
+        result_size = len(self.app_dict.get_dictionary())
+        return self.assertEqual(expected, result) and self.assertTrue(result_size > initial_size)
+
+    def testAddCurrency_None(self):
+        expected = [False, "ERROR: Currency addition is empty."]
+        result = self.app_dict.add_currency(None)
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyValue(self):
         # TODO: Create tests for CheckValidCurrencyValue.
@@ -108,6 +116,11 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_base(1.002)
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
+    def testFormatCurrency_None(self):
+        expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
+        result = self.app_dict.format_currency(None)
+        return self.assertEqual(expected, result)
+
     def testFormatCurrency_string(self):
         expected = [True, 1.0]
         result = self.app_dict.format_currency('1.0')
@@ -117,11 +130,6 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [True, 2.0012]
         result = self.app_dict.format_currency(2.0012)
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
-
-    def testFormatCurrency_None(self):
-        expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
-        result = self.app_dict.format_currency(None)
-        return self.assertEqual(expected, result)
 
     def testFormatCurrency_Empty(self):
         expected = [False, "ERROR: Empty strings are not permitted as input."]
