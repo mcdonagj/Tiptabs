@@ -127,7 +127,9 @@ class DictionaryBuilder:
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
-        return self.format_base(str(given_base))[1] in self.currencies.keys()
+        res = self.format_base(str(given_base))
+        print(str(res))
+        return res[1] in self.currencies.keys()
 
     def check_available_currencies(self, given_currencies):
         """
@@ -209,17 +211,38 @@ class DictionaryBuilder:
             revised_addition = currency_to_add.replace(",", "").replace("}", "").replace('"', "").strip()
 
         # TODO: Create a regex to pull items from a given addition.
-        valid_curr_length = (len(revised_addition) > 0)
+        valid_curr_length = (len(revised_addition) > 0) and (":" in str(revised_addition))
         if valid_curr_length:
-            key_pairs = revised_addition.split(":")
 
+            key_pairs = revised_addition.split(":")            
+
+            if not key_pairs[0] or not key_pairs[1]:
+                return invalid_curr_resp
+
+            revised_base = str(key_pairs[0]).strip()
+            revised_value = str(key_pairs[1]).strip()
+
+            # Check base to be only alphanumeric characters.
+            if not revised_base.isalpha():
+                base_non_alpha = "ERROR: Provided string '{!s}' is invalid for a base. Must be an alphanumeric string.".format(str(key_pairs[0]))
+                return [False, base_non_alpha]
+
+            # Check currency to be only numeric characters.
+            if not "." in str(revised_value):
+                value_non_numeric = "ERROR: Provided value '{!s}' is invalid. Must be a numeric value.".format((str(key_pairs[1])))
+                return [False, value_non_numeric]
+            
+            # Format key to be desired base format.
             key = self.format_base(str(key_pairs[0]))
+
+            # Format currency to be desired key format.
             value = self.format_currency(str(key_pairs[1]))
 
             if key[0] and value[0]:
                 self.currencies[key[1]] = value[1]
 
             revised_addition = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
+           
         else:
             revised_addition = invalid_curr_resp
 

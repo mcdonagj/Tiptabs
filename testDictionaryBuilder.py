@@ -67,6 +67,18 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_available_bases(base)
         return self.assertEqual(expected, result)
 
+    def testCheckAvailableBases_Float(self):
+        base = 3.1415
+        expected = False
+        result = self.app_dict.check_available_bases(base)
+        return self.assertEqual(expected, result)
+
+    def testCheckAvailableBases_Integer(self):
+        base = 3
+        expected = False
+        result = self.app_dict.check_available_bases(base)
+        return self.assertEqual(expected, result)
+
     def testCheckAvailableCurrencies(self):
         # TODO: Create tests for CheckAvailableCurrencies.
         return True
@@ -78,9 +90,24 @@ class testDictionaryBuilder(unittest.TestCase):
         result_size = len(self.app_dict.get_dictionary())
         return self.assertEqual(expected, result) and self.assertTrue(result_size > initial_size)
 
+    def testAddCurrency_invalid_format(self):
+        expected = [False, "ERROR: Currency addition is empty."]
+        result = self.app_dict.add_currency("asdf")
+        return self.assertEqual(expected, result)
+
+    def testAddCurrency_invalid_format_with_colon(self):
+        expected = [False, "ERROR: Provided value 'df' is invalid. Must be a numeric value."]
+        result = self.app_dict.add_currency("as:df")
+        return self.assertEqual(expected, result)
+
     def testAddCurrency_None(self):
         expected = [False, "ERROR: Currency addition is empty."]
         result = self.app_dict.add_currency(None)
+        return self.assertEqual(expected, result)
+
+    def testAddCurrency_Empty_String(self):
+        expected = [False, "ERROR: Currency addition is empty."]
+        result = self.app_dict.add_currency("")
         return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyValue(self):
