@@ -123,6 +123,11 @@ class testDictionaryBuilder(unittest.TestCase):
         # TODO: Create tests for CheckValidCurrencyKey.
         return True
 
+    def testCheckValidCurrencyKey_None(self):
+        expected = [False, "None values are not permitted as input."]
+        result = self.app_dict.check_valid_currency_key(None)
+        return self.assertTrue(expected, result)
+
     def testFormatBase_None(self):
         expected = [False, "None values are not permitted as input."]
         result = self.app_dict.format_base(None)
