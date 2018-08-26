@@ -127,9 +127,8 @@ class DictionaryBuilder:
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
-        res = self.format_base(str(given_base))
-        print(str(res))
-        return res[1] in self.currencies.keys()
+        formatted_base = self.format_base(str(given_base))        
+        return formatted_base[1] in self.currencies.keys()
 
     def check_available_currencies(self, given_currencies):
         """
