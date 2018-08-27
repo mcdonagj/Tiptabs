@@ -117,7 +117,12 @@ class testDictionaryBuilder(unittest.TestCase):
     def testCheckValidCurrencyValue_None(self):
         expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
         result = self.app_dict.check_valid_currency_value(None)
-        return self.assertTrue(expected, result)
+        return self.assertEqual(expected, result)
+
+    def testCheckValidCurrencyValue_EmptyString(self):
+        expected = [False, 'ERROR: Empty strings are not permitted as input.']
+        result = self.app_dict.check_valid_currency_value("")
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyKey(self):
         # TODO: Create tests for CheckValidCurrencyKey.
@@ -127,6 +132,11 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [False, "None values are not permitted as input."]
         result = self.app_dict.check_valid_currency_key(None)
         return self.assertTrue(expected, result)
+
+    def testCheckValidCurrencyKey_EmptyString(self):
+        expected = [False, 'Empty keys are not permitted as input.']
+        result = self.app_dict.check_valid_currency_key("")
+        return self.assertEqual(expected, result)
 
     def testFormatBase_None(self):
         expected = [False, "None values are not permitted as input."]
