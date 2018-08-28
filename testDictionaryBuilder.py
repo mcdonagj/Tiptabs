@@ -143,12 +143,17 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_base(None)
         return self.assertEqual(expected, result) and self.assertFalse(result[0]) and self.assertTrue(len(result[1]) > 0)
 
-    def testFormatBase_lowercase(self):
+    def testFormatBase_EmptyString(self):
+        expected = [False, "Empty keys are not permitted as input."]
+        result = self.app_dict.format_base("")
+        return self.assertTrue(isinstance(result, list)) and self.assertEqual(expected, result) and self.assertFalse(result[0]) and self.assertTrue(len(result[1]) > 0)
+
+    def testFormatBase_Lowercase(self):
         expected = "USD"
         result = self.app_dict.format_base("usd")
         return self.assertTrue(result[0]) and self.assertEqual(expected, result[1])
 
-    def testFormatBase_spaces(self):
+    def testFormatBase_Spaces(self):
         expected = "EUR"
         result = self.app_dict.format_base("   EUR    ")
         return self.assertTrue(result[0]) and self.assertEqual(expected, result[1])
@@ -168,17 +173,17 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_currency(None)
         return self.assertEqual(expected, result)
 
-    def testFormatCurrency_string(self):
+    def testFormatCurrency_FloatAsString(self):
         expected = [True, 1.0]
         result = self.app_dict.format_currency('1.0')
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
 
-    def testFormatCurrency_negative(self):
+    def testFormatCurrency_Negative(self):
         expected = [True, 2.0012]
         result = self.app_dict.format_currency(2.0012)
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
 
-    def testFormatCurrency_Empty(self):
+    def testFormatCurrency_EmptyString(self):
         expected = [False, "ERROR: Empty strings are not permitted as input."]
         result = self.app_dict.format_currency("")
         return self.assertEqual(expected, result)
