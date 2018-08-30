@@ -130,13 +130,14 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyKey(self):
-        # TODO: Create tests for CheckValidCurrencyKey.
-        return True
+        expected = [True, "Provided key: '1.003' is valid."]
+        result = self.app_dict.check_valid_currency_key("1.003")     
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyKey_None(self):
         expected = [False, "None values are not permitted as input."]
         result = self.app_dict.check_valid_currency_key(None)
-        return self.assertTrue(expected, result)
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyKey_EmptyString(self):
         expected = [False, 'Empty keys are not permitted as input.']
@@ -198,6 +199,10 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_currency('asdf')
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
+    def testFormatCurrency_specialCharacters(self):
+        # TODO: Create a test against special character input.
+        # i.e: ! @ # $ % ^ & * ( )
+        return True
 
 if __name__ == '__main__':
     unittest.main()
