@@ -100,6 +100,11 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.add_currency("as:df")
         return self.assertEqual(expected, result)
 
+    def testAddCurrency_invalid_format_with_colon_ending(self):
+        expected = [False, 'ERROR: Currency addition is empty.']
+        result = self.app_dict.add_currency("as:")
+        return self.assertEqual(expected, result)
+
     def testAddCurrency_None(self):
         expected = [False, "ERROR: Currency addition is empty."]
         result = self.app_dict.add_currency(None)
