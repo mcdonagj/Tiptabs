@@ -117,7 +117,9 @@ class testDictionaryBuilder(unittest.TestCase):
 
     def testCheckValidCurrencyValue(self):
         # TODO: Create tests for CheckValidCurrencyValue.
-        return True
+        expected = [True, "Provided currency value: '10.221' is valid."]
+        result = self.app_dict.check_valid_currency_value('10.221')
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyValue_None(self):
         expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]

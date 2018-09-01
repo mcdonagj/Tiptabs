@@ -85,6 +85,7 @@ Ideas for this project that I'm researching or implementing:
     
 10. Use FontAwesome currency icons within AngularJS input/output fields.
     * [WIP] FA icon Source: https://www.w3schools.com/icons/fontawesome_icons_currency.asp
+    * [WIP] XE's icon collection for currencies: https://www.xe.com/symbols.php
 
 After installation, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
