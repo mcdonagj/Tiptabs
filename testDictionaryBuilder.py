@@ -13,7 +13,7 @@ class testDictionaryBuilder(unittest.TestCase):
     def testGetDictionary(self):
         dict_type = type({})
         get_dictionary_type = type(self.app_dict.get_dictionary())
-        self.assertEqual(get_dictionary_type, dict_type)
+        return self.assertEqual(get_dictionary_type, dict_type)
 
     def testRequestRates_Result(self):
         test_request_rates_resp = self.app_dict.request_rates()
@@ -115,8 +115,7 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.add_currency("")
         return self.assertEqual(expected, result)
 
-    def testCheckValidCurrencyValue(self):
-        # TODO: Create tests for CheckValidCurrencyValue.
+    def testCheckValidCurrencyValue(self):        
         expected = [True, "Provided currency value: '10.221' is valid."]
         result = self.app_dict.check_valid_currency_value('10.221')
         return self.assertEqual(expected, result)
@@ -133,8 +132,13 @@ class testDictionaryBuilder(unittest.TestCase):
 
     def testCheckValidCurrencyKey(self):
         expected = [True, "Provided key: '1.003' is valid."]
-        result = self.app_dict.check_valid_currency_key("1.003")     
+        result = self.app_dict.check_valid_currency_key(1.003)     
         return self.assertEqual(expected, result)
+
+    def testCheckValidCurrencyKey_DecimalString(self):
+        expected = [True, "Provided key: '8.21' is valid."]
+        result = self.app_dict.check_valid_currency_key('8.21')     
+        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) > 0)
 
     def testCheckValidCurrencyKey_None(self):
         expected = [False, "None values are not permitted as input."]
@@ -145,6 +149,11 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [False, 'Empty keys are not permitted as input.']
         result = self.app_dict.check_valid_currency_key("")
         return self.assertEqual(expected, result)
+
+    def testFormatBase(self):
+        expected = [True, 'JPY']
+        result = self.app_dict.format_base("JPY")
+        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) == 3)
 
     def testFormatBase_None(self):
         expected = [False, "None values are not permitted as input."]
@@ -176,19 +185,24 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_base(1.002)
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
-    def testFormatCurrency_None(self):
-        expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
-        result = self.app_dict.format_currency(None)
-        return self.assertEqual(expected, result)
+    def testFormatCurrency(self):
+        expected = [True, 6.2125]
+        result = self.app_dict.format_currency(6.2125)
+        return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
 
     def testFormatCurrency_FloatAsString(self):
         expected = [True, 1.0]
         result = self.app_dict.format_currency('1.0')
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
+    
+    def testFormatCurrency_None(self):
+        expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
+        result = self.app_dict.format_currency(None)
+        return self.assertEqual(expected, result)
 
     def testFormatCurrency_Negative(self):
-        expected = [True, 2.0012]
-        result = self.app_dict.format_currency(2.0012)
+        expected = [True, -2.0012]
+        result = self.app_dict.format_currency(-2.0012)
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
 
     def testFormatCurrency_EmptyString(self):
