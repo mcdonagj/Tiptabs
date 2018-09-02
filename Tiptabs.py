@@ -91,6 +91,16 @@ class Tiptabs:
         :param tip_percentage: Desired tip amount. (Later converted to a decimal value)
         :return: Total sum of the bill.
         """
+
+        if not tip_percentage:
+            return [False, "ERROR: NoneTypes are not accepted for tip percentages."]
+
+        if not bill_amount:
+            return [False, "ERROR: NoneTypes are not accepted for bill amounts."]
+
+        if not converted_currency:
+            return [False, "ERROR: NoneTypes are not accepted for currency bases."]
+
         corrected_tip_percentage = float(tip_percentage) / 100.00
         bill_amt = float(bill_amount)
         tip_amount = (bill_amt * corrected_tip_percentage)

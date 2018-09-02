@@ -33,8 +33,18 @@ class testTiptabs(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def test_calculate_total_test_same_base(self):
-        expected = [True, "Your total amount was: 12.0 EUR."]
-        result = self.app.calculate_total(10.00, 20.00, "EUR")
+        expected = [True, "Your total amount was: 2963.4438779999996 JPY."]
+        result = self.app.calculate_total(20.00, 15.00, "JPY")
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_None_BillAmount(self):
+        expected = [False, 'ERROR: NoneTypes are not accepted for bill amounts.']
+        result = self.app.calculate_total(None, 15.00, "EUR")
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_None_TipPercentage(self):
+        expected = [False, 'ERROR: NoneTypes are not accepted for tip percentages.']
+        result = self.app.calculate_total(20.00, None, "EUR")
         return self.assertEqual(expected, result)
 
 if __name__ == '__main__':
