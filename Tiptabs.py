@@ -71,8 +71,8 @@ class Tiptabs:
         :param desired_amount: Bill amount to be converted.
         """
 
-        if desired_amount and desired_amount > 0.000000:
-            self.amount = desired_amount
+        if desired_amount and float(desired_amount) > 0.000000:
+            self.amount = float(desired_amount)
         else:
             self.amount = 0.000000
 
