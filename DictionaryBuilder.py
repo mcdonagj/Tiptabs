@@ -59,12 +59,8 @@ class DictionaryBuilder:
 
         fixed_json_resp = self.split_json(requests_text)
 
-        if not fixed_json_resp[0]:
-            ret_rates_resp = fixed_json_resp
-        else:
-            ret_rates_resp = [True, requests_text]
-
-        return ret_rates_resp
+        return fixed_json_resp if not fixed_json_resp[0] else [True, requests_text]
+        
 
     @staticmethod
     def send_error_message():
@@ -151,6 +147,7 @@ class DictionaryBuilder:
 
         # Store the keys of all available currencies. (Names)
         my_keys = dictionary.keys()
+
         # Store the keys of all provided currencies.
         provided_keys = given_currencies.keys()
 
@@ -158,7 +155,7 @@ class DictionaryBuilder:
         for key in provided_keys:
             # TODO: Check this functionality with unit tests.
             valid_key = self.check_valid_currency_key(key)
-            print(valid_key)
+            
             if not valid_key:
                 inc_key_resp = "This key value is invalid {!s}".format(str(key))
                 return [False, inc_key_resp]
@@ -166,9 +163,8 @@ class DictionaryBuilder:
         # Check all values of provided keys.
         for key in provided_keys:
             # TODO: Check this functionality with unit tests.
-            valid_value = self.check_valid_currency_value(given_currencies.get(key))
-            print("Valid Value:" + valid_value + str(given_currencies.get(key)))
-            if not valid_value:
+            valid_value = self.check_valid_currency_value(given_currencies.get(key))            
+            if not valid_value[0]:
                 inc_val_resp = "This entry is invalid: {!s} {!s}".format(str(key), str(given_currencies.get(key)))
                 return [False, inc_val_resp]
 
@@ -177,6 +173,7 @@ class DictionaryBuilder:
         for key in my_keys:
             # Check to see if a key is within the dictionary already.
             if key in provided_keys:
+                print("This is my key: " + key)
                 # Store the value of the current key from the provided dictionary.
                 key_value = given_currencies.get(key)
                 # Store the value of the current key from the global dictionary.
@@ -187,7 +184,7 @@ class DictionaryBuilder:
                     val_updated += 1
             else:
                 # If the key is not already in the dictionary, add it.
-                dictionary[key] = provided_keys.get(key)
+                dictionary[key] = given_currencies.get(key)
                 val_added += 1
 
         revise_resp = "SUCCESS: {!s} key-value pairs added and {!s} values updated.".format(str(val_added), str(val_updated))
@@ -254,7 +251,7 @@ class DictionaryBuilder:
         :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
         """
         import re
-        valid_currency_pattern = re.compile('(^\d?(\.?\d*)$)', re.IGNORECASE)
+        valid_currency_pattern = re.compile('(^\d*(\.\d+)?$)', re.IGNORECASE)
 
         funct_name = "check_valid_currency_value()"
 
@@ -266,6 +263,10 @@ class DictionaryBuilder:
             return [False, "ERROR: Empty strings are not permitted as input."]
 
         valid_currency_value = valid_currency_pattern.match(str(given_currency_key_value))
+
+        if valid_currency_value is None:
+            failed_value_regex = "Invalid input: '{!s}' is not permitted as a currency value.".format(str(given_currency_key_value))
+            return [False, failed_value_regex]
         
         valid_currency_value_resp = "Provided currency value: '{!s}' is valid.".format(str(given_currency_key_value))
 
@@ -285,6 +286,15 @@ class DictionaryBuilder:
             return [False, "Empty keys are not permitted as input."]
 
         #TODO: Add check for string against ISO codes.
+
+        import re
+        valid_key_pattern = re.compile('([A-Z]{3})?$', re.IGNORECASE)
+
+        valid_key_input = valid_key_pattern.match(str(given_currency_key))        
+
+        if valid_key_input is None:
+            invalid_key_input = "Invalid input: '{!s}' is not permitted as a base key.".format(str(given_currency_key))
+            return [False, invalid_key_input]
 
         valid_currency_key_resp = "Provided key: '{!s}' is valid.".format(str(given_currency_key))
 

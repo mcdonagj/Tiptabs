@@ -15,11 +15,13 @@ class testDictionaryBuilder(unittest.TestCase):
         get_dictionary_type = type(self.app_dict.get_dictionary())
         return self.assertEqual(get_dictionary_type, dict_type)
 
+
     def testRequestRates_Result(self):
         test_request_rates_resp = self.app_dict.request_rates()
         expected = True
         result = (test_request_rates_resp[0] and len(str(test_request_rates_resp[1])) > 0)
         return self.assertEqual(expected, result)
+
         
     def testGetRates(self):
         return True
@@ -29,13 +31,16 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.get_rates(False, "Testing getRates() with a false flag.")
         return self.assertEqual(expected, result)
 
+
     def testSendErrorMessage(self):
         # TODO: Create tests for SendErrorMessage.
         return True
 
+
     def testSplitJSON(self):
         # TODO: Create tests for SplitJSON.
         return True
+
 
     def testCheckAvailableBases_valid(self):
         base = "USD"
@@ -79,9 +84,15 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_available_bases(base)
         return self.assertEqual(expected, result)
 
+
     def testCheckAvailableCurrencies(self):
         # TODO: Create tests for CheckAvailableCurrencies.
-        return True
+        testDict = {'BMN': '1280.011', 'UMN': '9001.0112'}
+        starting_length = len(self.app_dict.currencies)
+        result = self.app_dict.check_available_currencies(testDict)
+        ending_size = len(self.app_dict.currencies)
+        return starting_length < ending_size
+
 
     def testAddCurrency_desired_format(self):    
         initial_size = len(self.app_dict.get_dictionary())
@@ -120,6 +131,11 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_valid_currency_value('10.221')
         return self.assertEqual(expected, result)
 
+    def testCheckValidCurrencyValue_BaseInput(self):        
+        expected = [False, "Invalid input: 'USD' is not permitted as a currency value."]
+        result = self.app_dict.check_valid_currency_value('USD')
+        return self.assertEqual(expected, result)
+
     def testCheckValidCurrencyValue_None(self):
         expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
         result = self.app_dict.check_valid_currency_value(None)
@@ -130,15 +146,16 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_valid_currency_value("")
         return self.assertEqual(expected, result)
 
+
     def testCheckValidCurrencyKey(self):
-        expected = [True, "Provided key: '1.003' is valid."]
+        expected = [True, "Provided key: 'USD' is valid."]
+        result = self.app_dict.check_valid_currency_key('USD')          
+        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) > 0)
+
+    def testCheckValidCurrencyKey_DecimalString(self):        
+        expected = [False, "Invalid input: '1.003' is not permitted as a base key."]
         result = self.app_dict.check_valid_currency_key(1.003)     
         return self.assertEqual(expected, result)
-
-    def testCheckValidCurrencyKey_DecimalString(self):
-        expected = [True, "Provided key: '8.21' is valid."]
-        result = self.app_dict.check_valid_currency_key('8.21')     
-        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) > 0)
 
     def testCheckValidCurrencyKey_None(self):
         expected = [False, "None values are not permitted as input."]
@@ -149,6 +166,7 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [False, 'Empty keys are not permitted as input.']
         result = self.app_dict.check_valid_currency_key("")
         return self.assertEqual(expected, result)
+
 
     def testFormatBase(self):
         expected = [True, 'JPY']
@@ -171,9 +189,12 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertTrue(result[0]) and self.assertEqual(expected, result[1])
 
     def testFormatBase_Spaces(self):
-        expected = "EUR"
+        # TODO: Confirm that this is desired functionality.
+        # i.e: Should I allow spacing to cause errors? - Requires modification of regular expression.
+
+        expected = "Invalid input: '   EUR    ' is not permitted as a base key."
         result = self.app_dict.format_base("   EUR    ")
-        return self.assertTrue(result[0]) and self.assertEqual(expected, result[1])
+        return self.assertFalse(result[0]) and self.assertEqual(expected, result[1])
 
     def testFormatBase_numeric(self):
         expected = False
@@ -184,6 +205,7 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = False
         result = self.app_dict.format_base(1.002)
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
+
 
     def testFormatCurrency(self):
         expected = [True, 6.2125]
@@ -201,9 +223,9 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def testFormatCurrency_Negative(self):
-        expected = [True, -2.0012]
+        expected = [False, "Invalid input: '-2.0012' is not permitted as a currency value."]
         result = self.app_dict.format_currency(-2.0012)
-        return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
+        return self.assertEqual(expected, result) and self.assertFalse(isinstance(result[1], float))
 
     def testFormatCurrency_EmptyString(self):
         expected = [False, "ERROR: Empty strings are not permitted as input."]
@@ -216,9 +238,10 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
     def testFormatCurrency_specialCharacters(self):
-        # TODO: Create a test against special character input.
-        # i.e: ! @ # $ % ^ & * ( )
-        return True
+        expected = False
+        result = self.app_dict.format_currency("! @ # $ % ^ & * ( )")
+        return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result == 2)) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
+
 
 if __name__ == '__main__':
     unittest.main()
