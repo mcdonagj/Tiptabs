@@ -44,6 +44,12 @@ class testTiptabs(unittest.TestCase):
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
 
+    def testSetAmount_EmptyString(self):
+        expected = 0.00
+        self.app.set_amount("")
+        result = self.app.get_amount()
+        return self.assertEqual(expected, result)
+
     def testSetAmount_Stringvalue(self):
         expected = 10.00
         self.app.set_amount("10.00")
