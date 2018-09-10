@@ -4,10 +4,11 @@ FROM ubuntu:16.04
 
 # Install python, pip, and virtualenv.
 RUN \
-  apt-get update && apt-get upgrade -y && \
-  apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
-
-RUN apt-get update -y && apt-get install nodejs -y && apt-get install npm -y
+  apt-get update && \
+  apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk &&\
+  apt-get install -y nodejs && \
+  apt-get install -y npm && \
+  apt-get clean
 
 RUN npm i angular-material
 

@@ -93,6 +93,13 @@ class testDictionaryBuilder(unittest.TestCase):
         ending_size = len(self.app_dict.currencies)
         return starting_length < ending_size
 
+    def testCheckAvailableCurrencies_EmptyDict(self):
+        testDictEmpty = {}
+        start_len = len(self.app_dict.currencies)
+        result = self.app_dict.check_available_currencies(testDictEmpty)
+        end_len = len(self.app_dict.currencies)
+        return start_len == end_len
+
 
     def testAddCurrency_desired_format(self):    
         initial_size = len(self.app_dict.get_dictionary())
