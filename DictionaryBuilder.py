@@ -198,10 +198,12 @@ class DictionaryBuilder:
         :return: List containing a Boolean condition indicating success or failure of addition of currency.
         """
         revised_addition = currency_to_add
+        invalid_entry = [False, "ERROR: None entries are not accepted."]
         invalid_curr_resp = [False, "ERROR: Currency addition is empty."]
+        invalid_base_resp = [False, "ERROR: Base addition is empty."]
 
         if revised_addition is None:
-            return invalid_curr_resp
+            return invalid_entry
 
         if "," or "}" or '"' in revised_addition:
             revised_addition = currency_to_add.replace(",", "").replace("}", "").replace('"', "").strip()
@@ -210,9 +212,12 @@ class DictionaryBuilder:
         valid_curr_length = (len(revised_addition) > 0) and (":" in str(revised_addition))
         if valid_curr_length:
 
-            key_pairs = revised_addition.split(":")            
+            key_pairs = revised_addition.split(":")
 
-            if not key_pairs[0] or not key_pairs[1]:
+            if not key_pairs[0]:
+                return invalid_base_resp
+
+            if not key_pairs[1]:
                 return invalid_curr_resp
 
             revised_base = str(key_pairs[0]).strip()
