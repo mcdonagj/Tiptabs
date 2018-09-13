@@ -26,6 +26,27 @@ class testTiptabs(unittest.TestCase):
         result = self.app.set_base("asdfasdf")
         return self.assertEqual(expected, result[0])
 
+    def testSetBase_numericalBase(self):
+        expected = False
+        result = self.app.set_base(1.002)
+        expected_base = "EUR"
+        return self.assertEqual(expected, result[0]) and self.assertEqual(expected_base, self.app.get_base())
+
+    def testSetBase_numericalString(self):
+        expected = False
+        result = self.app.set_base("10.244")
+        return self.assertEqual(expected, result[0])
+
+    def testSetBase_None(self):
+        expected = False
+        result = self.app.set_base(None)
+        return self.assertEqual(expected, result[0]) and self.assertTrue(self.app.get_base() == "EUR")
+
+    def testSetBase_EmptyString(self):
+        expected = False
+        result = self.app.set_base("")
+        return self.assertEqual(expected, result[0]) and self.assertEqual(self.app.get_base(), "EUR")
+
     def testSetAmount(self):
         expected = 10.00
         self.app.set_amount(10.00)
@@ -50,7 +71,7 @@ class testTiptabs(unittest.TestCase):
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
 
-    def testSetAmount_Stringvalue(self):
+    def testSetAmount_NumericalString(self):
         expected = 10.00
         self.app.set_amount("10.00")
         result = self.app.get_amount()
