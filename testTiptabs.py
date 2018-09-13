@@ -11,22 +11,22 @@ class testTiptabs(unittest.TestCase):
 
     # TODO: Test class constructor with empty string, null values, etc
 
-    def test_get_base(self):
+    def testGetBase(self):
         expected = "EUR"
         result = self.app.get_base()
         return self.assertEqual(expected, result)
 
-    def test_set_base_valid_base(self):
+    def testSetBase_validBase(self):
         expected = True
         result = self.app.set_base("USD")
         return self.assertEqual(expected, result[0])
 
-    def test_set_base_invalid_base(self):
+    def testSetBase_invalidBase(self):
         expected = False
         result = self.app.set_base("asdfasdf")
         return self.assertEqual(expected, result[0])
 
-    def test_set_amount(self):
+    def testSetAmount(self):
         expected = 10.00
         self.app.set_amount(10.00)
         result = self.app.get_amount()
@@ -53,6 +53,12 @@ class testTiptabs(unittest.TestCase):
     def testSetAmount_Stringvalue(self):
         expected = 10.00
         self.app.set_amount("10.00")
+        result = self.app.get_amount()
+        return self.assertEqual(expected, result)
+
+    def testSetAmount_InvalidString(self):
+        expected = 0.00
+        self.app.set_amount("asdf")
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
 
