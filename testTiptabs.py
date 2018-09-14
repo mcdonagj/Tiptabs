@@ -83,7 +83,7 @@ class testTiptabs(unittest.TestCase):
         result = self.app.get_amount()
         return self.assertEqual(expected, result)
 
-    def test_calculate_total_test_same_base(self):
+    def testCalculateTotal(self):
         expected = [True, "Your total amount was: 2968.444883 JPY."]
         result = self.app.calculate_total(20.00, 15.00, "JPY")
         return self.assertEqual(expected[0], result[0])
@@ -101,6 +101,41 @@ class testTiptabs(unittest.TestCase):
     def testCalculateTotal_None_CurrencyBase(self):
         expected = [False, 'ERROR: NoneTypes are not accepted for currency bases.']
         result = self.app.calculate_total(20.00, 15.00, None)
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_EmptyString_BillAmount(self):
+        expected = [False, 'ERROR: NoneTypes are not accepted for bill amounts.']
+        result = self.app.calculate_total("", 15.00, 'USD')
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_EmptyString_CurrencyBase(self):
+        expected = [False, 'ERROR: NoneTypes are not accepted for currency bases.']
+        result = self.app.calculate_total(20.00, 15.00, "")
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_EmptyString_TipPercentage(self):
+        expected = [False, 'ERROR: NoneTypes are not accepted for tip percentages.']
+        result = self.app.calculate_total(20.00, "", 'USD')
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_AlphanumericString_BillAmount(self):
+        expected = [False, "ERROR: 'Test' is not valid input for a bill amount."]
+        result = self.app.calculate_total("Test", 15.00, 'USD')
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_AlphanumericString_TipPercentage(self):
+        expected = [False, "ERROR: 'asdf' is not valid input for a tip percentage."]
+        result = self.app.calculate_total(20.00, "asdf", 'USD')
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_NumericValue_CurrencyBase(self):
+        expected = [False, "ERROR: '10.0' is not valid input for a currency base."]
+        result = self.app.calculate_total(20.00, 15.00, 10.0)
+        return self.assertEqual(expected, result)
+
+    def testCalculateTotal_NumericString_CurrencyBase(self):
+        expected = [False, "ERROR: '10.0' is not valid input for a currency base."]
+        result = self.app.calculate_total(20.00, 15.00, '10.0')
         return self.assertEqual(expected, result)
 
 

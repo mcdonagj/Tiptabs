@@ -93,14 +93,18 @@ class Tiptabs:
         :return: Total sum of the bill.
         """
 
-        if not tip_percentage:
-            return [False, "ERROR: NoneTypes are not accepted for tip percentages."]
+        contents = [bill_amount, tip_percentage, converted_currency]
+        cond = ["bill amount", "tip percentage", "currency base"]
 
-        if not bill_amount:
-            return [False, "ERROR: NoneTypes are not accepted for bill amounts."]
+        for index, item in enumerate(contents):
+            if not item:
+                empty_item_resp = "ERROR: NoneTypes are not accepted for {!s}s.".format(cond[index])
+                return [False, empty_item_resp]
 
-        if not converted_currency:
-            return [False, "ERROR: NoneTypes are not accepted for currency bases."]
+            valid_item = self.dictionary_builder.check_valid_currency_key(item) if index == 2 else self.dictionary_builder.check_valid_currency_value(item)
+            if not valid_item[0]:
+                invalid_item_result = "ERROR: '{!s}' is not valid input for a {!s}.".format(str(item), cond[index])
+                return [False, invalid_item_result]
 
         corrected_tip_percentage = float(tip_percentage) / 100.00
         bill_amt = float(bill_amount)
