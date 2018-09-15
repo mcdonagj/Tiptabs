@@ -157,7 +157,7 @@ class DictionaryBuilder:
 
     def add_to_dictionary(self, given_currencies):
         """
-        check_available_currencies(dict) - Helper method that checks and adds additional values to the
+        add_to_dictionary(dict) - Helper method that checks and adds additional values to the
         currency dictionary from a given dictionary.
         :param given_currencies: dictionary of currencies to be added to the calculator.
         :return: List containing success of operation and corresponding response string.
