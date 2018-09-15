@@ -16,6 +16,36 @@ class DictionaryBuilder:
         """
         return self.currencies
 
+    def set_dictionary(self, desired_dictionary):
+        """
+        set_dictionary(Dict) - Setter function for setting a custom dictionary of currencies.
+        :param desired_currencies: Dictionary of currencies to set within the calculator.
+        :return: Boolean condition that indicates the success of setting the dictionary.
+        """
+        
+        if not desired_dictionary:                     
+            return [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]    
+
+        if not isinstance(desired_dictionary, dict()):
+            return [False, "ERROR: You must provide a dictionary collection."]
+
+        if len(desired_dictionary.keys()) == 0 or len(desired_dictionary.values()) == 0:
+            return [False, "ERROR: The internal currency collection cannot be empty. \n\t - Please provide a collection with at least one currency."]
+
+        for item in desired_dictionary.keys():
+            valid_key_check = self.check_valid_currency_key(item)
+            if not valid_key_check[0]:
+                return valid_key_check
+
+        for item in desired_dictionary.values():
+            valid_value_check = self.check_valid_currency_value(item)
+            if not valid_value_check[0]:
+                return valid_value_check
+
+        self.currencies = desired_dictionary       
+
+        return [True, "Local dictionary set to the provided dictionary."]
+
     @staticmethod
     def request_rates():
         """
@@ -34,8 +64,8 @@ class DictionaryBuilder:
 
         ok_response = rates_request.status_code == 200
 
-        if not ok_response:
-            invalid_resp_code = "ERROR:  RESP " + str(rates_request.status_code) + ": invalid response from fixer.io:"
+        if not ok_response:            
+            invalid_resp_code = "ERROR:  RESP {!s}: invalid response from fixer.io:".format(str(rates_request.status_code))
             return [ok_response, invalid_resp_code]
 
         return [ok_response, rates_request.text]
@@ -47,7 +77,6 @@ class DictionaryBuilder:
         :param resp_text: Text returned from a given query to the rates service.
         :return: List containing success of operation and JSON text of a given rates query.
         """
-
         # TODO: Check the relationship between retrieving rates and splitting JSON.
 
         # Check to see if the service is available.
@@ -126,18 +155,17 @@ class DictionaryBuilder:
         formatted_base = self.format_base(str(given_base))        
         return formatted_base[1] in self.currencies.keys()
 
-    def check_available_currencies(self, given_currencies):
+    def add_to_dictionary(self, given_currencies):
         """
         check_available_currencies(dict) - Helper method that checks and adds additional values to the
         currency dictionary from a given dictionary.
         :param given_currencies: dictionary of currencies to be added to the calculator.
         :return: List containing success of operation and corresponding response string.
-        """
-        func_name = "check_available_currencies(self, dict)"
+        """        
         dictionary = self.get_dictionary()
         check_type = type(given_currencies) is dict
         if not check_type:
-            inc_type_resp = "ERROR: Invalid parameter type {!s} provided to func {!s}:".format(str(type(given_currencies)), str(func_name))
+            inc_type_resp = "ERROR: Invalid parameter type {!s}.".format(str(type(given_currencies)))
             return [False, inc_type_resp]
 
         check_length = len(given_currencies) == 0
@@ -161,32 +189,25 @@ class DictionaryBuilder:
                 return [False, inc_key_resp]
 
         # Check all values of provided keys.
-        for key in provided_keys:
+        for value in given_currencies.values():
             # TODO: Check this functionality with unit tests.
-            valid_value = self.check_valid_currency_value(given_currencies.get(key))            
+            valid_value = self.check_valid_currency_value(value)            
             if not valid_value[0]:
-                inc_val_resp = "This entry is invalid: {!s} {!s}".format(str(key), str(given_currencies.get(key)))
+                inc_val_resp = "This entry is invalid: {!s}".format(str(value))
                 return [False, inc_val_resp]
 
         val_added = 0
         val_updated = 0
-        for key in my_keys:
-            # Check to see if a key is within the dictionary already.
-            if key in provided_keys:
-                print("This is my key: " + key)
-                # Store the value of the current key from the provided dictionary.
-                key_value = given_currencies.get(key)
-                # Store the value of the current key from the global dictionary.
-                dict_value = dictionary.get(key)
-                # If the value is not equal to the dictionary value, update the key's value.
-                if key_value != dict_value:
-                    dictionary[key] = key_value
-                    val_updated += 1
-            else:
-                # If the key is not already in the dictionary, add it.
+
+        for key in given_currencies.keys():
+            if not key in dictionary.keys():
                 dictionary[key] = given_currencies.get(key)
                 val_added += 1
-
+            else:
+                val_updated += 1                            
+                if given_currencies.get(key) != dictionary.get(key):
+                    dictionary[key] = given_currencies.get(key)          
+   
         revise_resp = "SUCCESS: {!s} key-value pairs added and {!s} values updated.".format(str(val_added), str(val_updated))
 
         return [True, revise_resp]
@@ -197,14 +218,14 @@ class DictionaryBuilder:
         :param currency_to_add:
         :return: List containing a Boolean condition indicating success or failure of addition of currency.
         """
-        revised_addition = currency_to_add
         invalid_entry = [False, "ERROR: None entries are not accepted."]
+        if currency_to_add is None:            
+            return invalid_entry
+             
         invalid_curr_resp = [False, "ERROR: Currency addition is empty."]
         invalid_base_resp = [False, "ERROR: Base addition is empty."]
 
-        if revised_addition is None:
-            return invalid_entry
-
+        revised_addition = currency_to_add
         if "," or "}" or '"' in revised_addition:
             revised_addition = currency_to_add.replace(",", "").replace("}", "").replace('"', "").strip()
 

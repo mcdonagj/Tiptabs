@@ -79,27 +79,33 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_available_bases(base)
         return self.assertEqual(expected, result)
 
-    def testCheckAvailableCurrencies(self):
-        # TODO: Create tests for CheckAvailableCurrencies.
-        testDict = {'BMN': '1280.011', 'UMN': '9001.0112'}
+    def testAddToDictionary(self):        
+        testDict = {'ZYQ': '1280.011', 'YUM': '9001.0112'}        
         starting_length = len(self.app_dict.currencies)
-        result = self.app_dict.check_available_currencies(testDict)
-        ending_size = len(self.app_dict.currencies)
-        return starting_length < ending_size
+        result = self.app_dict.add_to_dictionary(testDict)        
+        ending_size = len(self.app_dict.currencies)        
+        return self.assertTrue(starting_length < ending_size)
 
-    def testCheckAvailableCurrencies_EmptyDict(self):
+    def testAddToDictionary_DuplicateKeys(self):        
+        testDict = {'UUU': '1280.011', 'USD': '9001.0112'}        
+        starting_length = len(self.app_dict.currencies)
+        result = self.app_dict.add_to_dictionary(testDict)        
+        ending_size = len(self.app_dict.currencies)
+        return self.assertTrue(starting_length < ending_size)
+
+    def testAddToDictionary_EmptyDict(self):
         testDictEmpty = {}
         start_len = len(self.app_dict.currencies)
-        result = self.app_dict.check_available_currencies(testDictEmpty)
+        result = self.app_dict.add_to_dictionary(testDictEmpty)
         end_len = len(self.app_dict.currencies)
-        return start_len == end_len
+        return self.assertTrue(start_len == end_len)
 
     def testAddCurrency(self):
         initial_size = len(self.app_dict.get_dictionary())
         expected = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
         result = self.app_dict.add_currency("MMM:2.001")
         result_size = len(self.app_dict.get_dictionary())
-        return self.assertEqual(expected, result) and self.assertTrue(result_size > initial_size)
+        return self.assertEqual(expected, result)
 
     def testAddCurrency_InvalidFormat(self):
         expected = [False, "ERROR: Currency addition is empty."]
@@ -154,7 +160,7 @@ class testDictionaryBuilder(unittest.TestCase):
     def testCheckValidCurrencyKey(self):
         expected = [True, "Provided key: 'USD' is valid."]
         result = self.app_dict.check_valid_currency_key('USD')          
-        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) > 0)
+        return self.assertEqual(expected, result)
 
     def testCheckValidCurrencyKey_ValueInput(self):
         expected = [False, "Invalid input: '1.003' is not permitted as a base key."]
@@ -174,30 +180,29 @@ class testDictionaryBuilder(unittest.TestCase):
     def testFormatBase(self):
         expected = [True, 'JPY']
         result = self.app_dict.format_base("JPY")
-        return self.assertEqual(expected, result) and self.assertTrue(result[0]) and self.assertTrue(len(result[1]) == 3)
+        return self.assertEqual(expected, result)
 
     def testFormatBase_None(self):
         expected = [False, "None values are not permitted as input."]
         result = self.app_dict.format_base(None)
-        return self.assertEqual(expected, result) and self.assertFalse(result[0]) and self.assertTrue(len(result[1]) > 0)
+        return self.assertEqual(expected, result)
 
     def testFormatBase_EmptyString(self):
         expected = [False, "Empty keys are not permitted as input."]
         result = self.app_dict.format_base("")
-        return self.assertTrue(isinstance(result, list)) and self.assertEqual(expected, result) and self.assertFalse(result[0]) and self.assertTrue(len(result[1]) > 0)
+        return self.assertEqual(expected, result)
 
     def testFormatBase_Lowercase(self):
-        expected = "USD"
+        expected = [True, "USD"]
         result = self.app_dict.format_base("usd")
-        return self.assertTrue(result[0]) and self.assertEqual(expected, result[1])
+        return self.assertEqual(expected, result)
 
     def testFormatBase_Spaces(self):
         # TODO: Confirm that this is desired functionality.
         # i.e: Should I allow spacing to cause errors? - Requires modification of regular expression.
-
-        expected = "Invalid input: '   EUR    ' is not permitted as a base key."
+        expected = [False, "Invalid input: '   EUR    ' is not permitted as a base key."]
         result = self.app_dict.format_base("   EUR    ")
-        return self.assertFalse(result[0]) and self.assertEqual(expected, result[1])
+        return self.assertEqual(expected, result)
 
     def testFormatBase_Numeric(self):
         expected = False
@@ -205,9 +210,9 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result[0])
 
     def testFormatBase_Decimal(self):
-        expected = False
+        expected = [False, "Invalid input: '1.002' is not permitted as a base key."]
         result = self.app_dict.format_base(1.002)
-        return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result) == 2) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
+        return self.assertEqual(expected, result)
 
     def testFormatCurrency(self):
         expected = [True, 6.2125]
