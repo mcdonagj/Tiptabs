@@ -15,6 +15,12 @@ class testDictionaryBuilder(unittest.TestCase):
         get_dictionary_type = type(self.app_dict.get_dictionary())
         return self.assertEqual(get_dictionary_type, dict_type)
 
+    def testSetDictionary(self):
+        my_dictionary = {'ABC': '20.01', 'DEF': '1.012'} 
+        expected = [True, "Local dictionary set to the provided dictionary."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
     def testRequestRates(self):
         test_request_rates_resp = self.app_dict.request_rates()
         expected = True

@@ -26,7 +26,7 @@ class DictionaryBuilder:
         if not desired_dictionary:                     
             return [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]    
 
-        if not isinstance(desired_dictionary, dict()):
+        if not isinstance(desired_dictionary, dict):
             return [False, "ERROR: You must provide a dictionary collection."]
 
         if len(desired_dictionary.keys()) == 0 or len(desired_dictionary.values()) == 0:
