@@ -21,6 +21,12 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
+    def testSetDictionary_List(self):
+        my_list_dictionary = ["Apples", "Bananas", "Oranges"] 
+        expected = [False, 'ERROR: You must provide a dictionary collection.']
+        result = self.app_dict.set_dictionary(my_list_dictionary)
+        return self.assertEqual(expected, result)
+
     def testRequestRates(self):
         test_request_rates_resp = self.app_dict.request_rates()
         expected = True
