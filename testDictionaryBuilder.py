@@ -21,6 +21,12 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
+    def testSetDictionary_EmptyDict(self):
+        my_empty_dictionary = {}
+        expected = [False, 'ERROR: Your provided dictionary cannot contain Nonetypes.']
+        result = self.app_dict.set_dictionary(my_empty_dictionary)
+        return self.assertEqual(expected, result)
+
     def testSetDictionary_List(self):
         my_list_dictionary = ["Apples", "Bananas", "Oranges"] 
         expected = [False, 'ERROR: You must provide a dictionary collection.']

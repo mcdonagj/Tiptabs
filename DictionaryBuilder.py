@@ -19,7 +19,7 @@ class DictionaryBuilder:
     def set_dictionary(self, desired_dictionary):
         """
         set_dictionary(Dict) - Setter function for setting a custom dictionary of currencies.
-        :param desired_currencies: Dictionary of currencies to set within the calculator.
+        :param desired_dictionary: Dictionary of currencies to set within the calculator.
         :return: Boolean condition that indicates the success of setting the dictionary.
         """
         
