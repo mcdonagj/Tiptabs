@@ -1,7 +1,7 @@
 import unittest
 
-from DictionaryBuilder import *
 from Tiptabs import *
+from DictionaryBuilder import *
 
 class testDictionaryBuilder(unittest.TestCase):
 
@@ -18,6 +18,18 @@ class testDictionaryBuilder(unittest.TestCase):
     def testSetDictionary(self):
         my_dictionary = {'ABC': '20.01', 'DEF': '1.012'} 
         expected = [True, "Local dictionary set to the provided dictionary."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
+    def testSetDictionary_InvalidValue(self):
+        my_dictionary = {'INV': '-120.101', 'ESC': '131.02'}
+        expected = [False, "Invalid input: '-120.101' is not permitted as a currency value."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
+    def testSetDictionary_InvalidKey(self):
+        my_dictionary = {'INVP': '140', 'ESCAPE': '90.02'}
+        expected = [False, "Invalid input: 'INVP' is not permitted as a base key."]
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
