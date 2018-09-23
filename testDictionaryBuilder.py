@@ -33,6 +33,12 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
+    def testSetDictionary_None(self):
+        my_dictionary = None
+        expected = [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
     def testSetDictionary_EmptyDict(self):
         my_empty_dictionary = {}
         expected = [False, 'ERROR: Your provided dictionary cannot contain Nonetypes.']
@@ -40,9 +46,9 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def testSetDictionary_List(self):
-        my_list_dictionary = ["Apples", "Bananas", "Oranges"] 
+        my_list = ["Apples", "Bananas", "Oranges"] 
         expected = [False, 'ERROR: You must provide a dictionary collection.']
-        result = self.app_dict.set_dictionary(my_list_dictionary)
+        result = self.app_dict.set_dictionary(my_list)
         return self.assertEqual(expected, result)
 
     def testRequestRates(self):
