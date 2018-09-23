@@ -122,6 +122,13 @@ class testDictionaryBuilder(unittest.TestCase):
         ending_size = len(self.app_dict.currencies)        
         return self.assertTrue(starting_length < ending_size)
 
+    def testAddToDictionary_None(self):        
+        testDict = None        
+        starting_length = len(self.app_dict.currencies)
+        result = self.app_dict.add_to_dictionary(testDict)        
+        ending_size = len(self.app_dict.currencies)        
+        return self.assertTrue(starting_length == ending_size)
+
     def testAddToDictionary_DuplicateKeys(self):        
         testDict = {'UUU': '1280.011', 'USD': '9001.0112'}        
         starting_length = len(self.app_dict.currencies)
