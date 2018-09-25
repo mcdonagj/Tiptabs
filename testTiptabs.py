@@ -2,6 +2,7 @@ import unittest
 from DictionaryBuilder import *
 from Tiptabs import *
 
+
 class testTiptabs(unittest.TestCase):
 
     app_dict = DictionaryBuilder()
@@ -30,7 +31,9 @@ class testTiptabs(unittest.TestCase):
         expected = False
         result = self.app.set_base(1.002)
         expected_base = "EUR"
-        return self.assertEqual(expected, result[0]) and self.assertEqual(expected_base, self.app.get_base())
+        return self.assertEqual(expected, result[0]) and self.assertEqual(
+            expected_base, self.app.get_base()
+        )
 
     def testSetBase_numericalString(self):
         expected = False
@@ -40,12 +43,16 @@ class testTiptabs(unittest.TestCase):
     def testSetBase_None(self):
         expected = False
         result = self.app.set_base(None)
-        return self.assertEqual(expected, result[0]) and self.assertTrue(self.app.get_base() == "EUR")
+        return self.assertEqual(expected, result[0]) and self.assertTrue(
+            self.app.get_base() == "EUR"
+        )
 
     def testSetBase_EmptyString(self):
         expected = False
         result = self.app.set_base("")
-        return self.assertEqual(expected, result[0]) and self.assertEqual(self.app.get_base(), "EUR")
+        return self.assertEqual(expected, result[0]) and self.assertEqual(
+            self.app.get_base(), "EUR"
+        )
 
     def testSetAmount(self):
         expected = 10.00
@@ -89,43 +96,48 @@ class testTiptabs(unittest.TestCase):
         return self.assertEqual(expected[0], result[0])
 
     def testCalculateTotal_None_BillAmount(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for bill amounts.']
+        expected = [False, "ERROR: NoneTypes are not accepted for bill amounts."]
         result = self.app.calculate_total(None, 15.00, "EUR")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_None_TipPercentage(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for tip percentages.']
+        expected = [False, "ERROR: NoneTypes are not accepted for tip percentages."]
         result = self.app.calculate_total(20.00, None, "EUR")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_None_CurrencyBase(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for currency bases.']
+        expected = [False, "ERROR: NoneTypes are not accepted for currency bases."]
         result = self.app.calculate_total(20.00, 15.00, None)
+        return self.assertEqual(expected, result)
+    
+    def testCalculateTotal_None_AllFields(self):
+        expected = [False, "ERROR: NoneTypes are not accepted for bill amounts."]
+        result = self.app.calculate_total(None, None, None)
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_EmptyString_BillAmount(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for bill amounts.']
-        result = self.app.calculate_total("", 15.00, 'USD')
+        expected = [False, "ERROR: NoneTypes are not accepted for bill amounts."]
+        result = self.app.calculate_total("", 15.00, "USD")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_EmptyString_CurrencyBase(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for currency bases.']
+        expected = [False, "ERROR: NoneTypes are not accepted for currency bases."]
         result = self.app.calculate_total(20.00, 15.00, "")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_EmptyString_TipPercentage(self):
-        expected = [False, 'ERROR: NoneTypes are not accepted for tip percentages.']
-        result = self.app.calculate_total(20.00, "", 'USD')
+        expected = [False, "ERROR: NoneTypes are not accepted for tip percentages."]
+        result = self.app.calculate_total(20.00, "", "USD")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_AlphanumericString_BillAmount(self):
         expected = [False, "ERROR: 'Test' is not valid input for a bill amount."]
-        result = self.app.calculate_total("Test", 15.00, 'USD')
+        result = self.app.calculate_total("Test", 15.00, "USD")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_AlphanumericString_TipPercentage(self):
         expected = [False, "ERROR: 'asdf' is not valid input for a tip percentage."]
-        result = self.app.calculate_total(20.00, "asdf", 'USD')
+        result = self.app.calculate_total(20.00, "asdf", "USD")
         return self.assertEqual(expected, result)
 
     def testCalculateTotal_NumericValue_CurrencyBase(self):
@@ -135,9 +147,8 @@ class testTiptabs(unittest.TestCase):
 
     def testCalculateTotal_NumericString_CurrencyBase(self):
         expected = [False, "ERROR: '10.0' is not valid input for a currency base."]
-        result = self.app.calculate_total(20.00, 15.00, '10.0')
+        result = self.app.calculate_total(20.00, 15.00, "10.0")
         return self.assertEqual(expected, result)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
