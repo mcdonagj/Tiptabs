@@ -110,7 +110,7 @@ def main():
                 total_desr_currency = str(request.form['converted_currency'])
 
                 # Set the internal base to desired rate.
-                set_base_result = tiptabs_core.set_base(total_base_currency)
+                # set_base_result = tiptabs_core.set_base(total_base_currency)
 
                 # Calculate the given total with the provided form information.
                 total = tiptabs_core.calculate_total(
