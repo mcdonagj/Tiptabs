@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # # Create a function that installs a package given a string describing the desired package and desired version of the package.
 # def install_dependencies(package, version):
@@ -9,7 +9,8 @@
 # install_dependencies('flask', '1.0.2')
 # install_dependencies('requests', '2.18.4')
 # install_dependencies('MySQL-connector-python', '8.0.12')
-from requests import *
+
+import requests
 from flask import Flask, render_template, request
 from Tiptabs import *
 from TiptabsDB import *
@@ -20,8 +21,8 @@ import sys
 
 def main():
     """
-    main() - Main class for the International Tip Calculator. The Flask web application is created
-    in this file. Additionally, this file handles the creation of the dictionary of currencies.
+    main() - Main class for Tiptabs. The Flask web application is created in this file. 
+    Additionally, this file handles the creation of the dictionary of currencies.
     :return:
     """
     # Create a DictionaryBuilder object, which:
@@ -47,10 +48,10 @@ def main():
     rates.sort()
 
     # Initialize the MySQL database.
-    #db = TiptabsDB()
+    db = TiptabsDB()
 
-    #db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
-    # db.add_entry(db_entry)
+    db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
+    db.add_entry(db_entry)
 
     # TODO: Define a route for all users tab.
     #db_users = db.get_all_users()
@@ -107,6 +108,9 @@ def main():
 
                 # Store the conversion currency.
                 total_desr_currency = str(request.form['converted_currency'])
+
+                # Set the internal base to desired rate.
+                set_base_result = tiptabs_core.set_base(total_base_currency)
 
                 # Calculate the given total with the provided form information.
                 total = tiptabs_core.calculate_total(

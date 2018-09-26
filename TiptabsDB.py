@@ -38,7 +38,7 @@ class TiptabsDB:
             return invalid_entry_array
 
         for item in entry:
-            if not len(item) > 0:
+            if not item or not len(item) > 0:
                 valid_input = False
 
         if not valid_input:
