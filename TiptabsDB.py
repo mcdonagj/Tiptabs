@@ -29,6 +29,7 @@ class TiptabsDB:
     def _get_connector(self):
         return self.TiptabsDBConnector
 
+    @staticmethod
     def check_inputs(self, entry):
         valid_input = True
 
