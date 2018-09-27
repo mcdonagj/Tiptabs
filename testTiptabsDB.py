@@ -8,7 +8,12 @@ class testTiptabsDB(unittest.TestCase):
     def testCheckInputs(self):
         input = ['users', 'Gary', 'Gary', 'JPYtoUSD']
         expected = [True, "Valid input entered."]
-        db = TiptabsDB()
-        result = db.check_inputs(input)
+        result = TiptabsDB.check_inputs(self, input)
+        return self.assertEqual(expected, result)
+
+    def testCheckInputs_InvalidInputSize(self):
+        invalid_size_input = ['users', 'Alex', 'Alex']
+        expected = [False, "Invalid number of entry items entered."]
+        result = TiptabsDB.check_inputs(self, invalid_size_input)
         return self.assertEqual(expected, result)
         
