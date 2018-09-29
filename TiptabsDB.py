@@ -33,6 +33,9 @@ class TiptabsDB:
     def check_inputs(self, entry):
         valid_input = True
 
+        if not entry:
+            return [False, "ERROR: None entries are not allowed to be stored into the Tiptabs database."]
+
         if len(entry) != 4:
             valid_input = False
             invalid_entry_array = [valid_input, "Invalid number of entry items entered."]
@@ -41,10 +44,8 @@ class TiptabsDB:
         for item in entry:
             if not item or not len(item) > 0:
                 valid_input = False
-
-        if not valid_input:
-            add_invalid_item_res = "Invalid item was attempted to be added."
-            return [valid_input, add_invalid_item_res]
+                add_invalid_item_res = "Invalid item was attempted to be added."
+                return [valid_input, add_invalid_item_res]        
 
         check_inputs_result = [valid_input, "Valid input entered."]
         return check_inputs_result

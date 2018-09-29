@@ -16,4 +16,10 @@ class testTiptabsDB(unittest.TestCase):
         expected = [False, "Invalid number of entry items entered."]
         result = TiptabsDB.check_inputs(self, invalid_size_input)
         return self.assertEqual(expected, result)
+
+    def testCheckInputs_NoneInput(self):
+        none_input = None
+        expected = [False, "ERROR: None entries are not allowed to be stored into the Tiptabs database."]
+        result = TiptabsDB.check_inputs(self, none_input)
+        return self.assertEqual(expected, result)
         
