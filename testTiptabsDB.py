@@ -28,4 +28,9 @@ class testTiptabsDB(unittest.TestCase):
         expected = [False, "Invalid item was attempted to be added."]
         result = TiptabsDB.check_inputs(self, none_entry)
         return self.assertEqual(expected, result)
-        
+
+    def testCheckInputs_EmptyStrings(self):
+        empty_string_input = ["", "", "", ""]
+        expected = [False, "Invalid item was attempted to be added."]
+        result = TiptabsDB.check_inputs(self, empty_string_input)
+        return self.assertEqual(expected, result)
