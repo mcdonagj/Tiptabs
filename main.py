@@ -17,6 +17,7 @@ from TiptabsDB import *
 from DictionaryBuilder import *
 # from UserInterface import *
 import sys
+import platform
 
 
 def main():
@@ -48,10 +49,10 @@ def main():
     rates.sort()
 
     # Initialize the MySQL database.
-    db = TiptabsDB()
+    #db = TiptabsDB()
 
-    db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
-    db.add_entry(db_entry)
+    #db_entry = ['users', 'garym', 'garym', 'EURtoUSD']
+    #db.add_entry(db_entry)
 
     # TODO: Define a route for all users tab.
     #db_users = db.get_all_users()
@@ -140,7 +141,12 @@ def main():
     def no_page_found(e):
         return render_template('error_404.html')
 
-    app.run(host='0.0.0.0', port=5000)
+        
+    my_host_name = platform.system()
+
+    hostip = '127.0.0.1' if my_host_name == "Windows" else '0.0.0.0'
+
+    app.run(host=hostip, port=5000)
 
 
 if __name__ == '__main__':
