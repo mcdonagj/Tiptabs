@@ -1,6 +1,9 @@
 
 # Install OS environment.
 FROM ubuntu:16.04
+LABEL name="tiptabs"
+LABEL mainainer="Gary McDonald"
+LABEL description="Python web application that simplifies conversions between established currencies."
 
 # Install python, pip, and virtualenv.
 RUN \
@@ -19,11 +22,8 @@ RUN virtualenv venv
 WORKDIR env/bin
 
 # Retrieve project from repo.
-RUN git clone https://github.com/mcdonagj/Tiptabs.git
-WORKDIR Tiptabs
-
-# Install requirements.
-RUN pip3 install -r requirements.txt
+RUN git clone https://github.com/mcdonagj/Tiptabs.git && \
+    pip3 install -e ./Tiptabs
 
 # Expose port for Flask.
 EXPOSE 5000
@@ -32,4 +32,4 @@ EXPOSE 5000
 EXPOSE 3006
 
 # Run main.py.
-CMD ["python3", "main.py"]
+CMD ["tiptabs"]

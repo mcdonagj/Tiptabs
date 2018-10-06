@@ -33,3 +33,7 @@ Temporary Items
 .idea/**/uiDesigner.xml
 
 *.iws
+
+*/__pycache__/
+*.egg-info*
+env/
