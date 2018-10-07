@@ -1,4 +1,4 @@
-from DictionaryBuilder import *
+from Tiptabs.DictionaryBuilder import *
 
 class Tiptabs:
 
