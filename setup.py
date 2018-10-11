@@ -5,7 +5,7 @@ setup(
     version="1.0.0",
     packages=["Tiptabs"],
     install_requires=[
-        "Flask==0.12.2",
+        "Flask==0.12.3",
         "Flask-API==0.7.1",
         "Jinja2==2.9.6",
         "requests==2.19.1",
