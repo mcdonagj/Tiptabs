@@ -10,7 +10,11 @@ When rates are not available, the application sends an email notification to `mc
 Tiptabs utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
 To install these dependencies from the command line, complete any of the following steps:
-1. Installation via Dockerfile.
+1. Installation via Makefile.
+    Thanks to @kylelaker, you can install most of the Tiptabs dependencies using the provided Makefile.
+    Simply navigate to the Tiptabs directory and type `make install`. Note: this method utilizes Python's built in package manager, pip. Similar instructions, (Step #3), provide more detailed instruction on the required dependencies.
+
+2. Installation via Dockerfile.
     As of 6/28/2018 (V3.6), a Dockerfile is included that assembles an Ubuntu 16.04 Docker image with all required dependencies.
     To create this image, verify that you have the Docker daemon installed and running.
 
@@ -27,11 +31,11 @@ To install these dependencies from the command line, complete any of the followi
     The `$(imageID)` is the provided digit sequence targeting the image made by the Dockerfile.
     The provided requirements.txt file lists dependencies that are installed into the container's virtual environment (venv).
 
-2. Installation via `install_dependencies()`.
+3. Installation via `install_dependencies()`.
     ###### *Note: Located in main.py, there is a function that automates the installation of dependencies. (install_dependencies(package, version))
     As of 6/1/2018, ` install_dependencies ` installs up-to-date versions of requests and flask via pip.
 
-3. Installation via command line interface (CLI).
+4. Installation via command line interface (CLI).
     Manually installing these packages using the commands below will not alter the execution of this repository.
     ```sh
     pip install requests
