@@ -21,7 +21,8 @@
 
                                 <md-input-container flex="50">
                                     <label>Base Currency</label>
-                                    <select ng-model="response.base_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="base_currency for base_currency in available_rates"></select>
+                                    <select ng-model="response.base_currency" class="input-sm form-control" style="width:auto;display:none"
+                                        ng-options="base_currency for base_currency in available_rates"></select>
                                     <md-select name="base_currency" ng-model="response.base_currency" class="input-sm form-control">
                                         <md-option ng-bind="base_currency" ng-value="base_currency" ng-repeat="base_currency in available_rates"></md-option>
                                     </md-select>
@@ -30,7 +31,8 @@
 
                                 <md-input-container flex="50">
                                     <label>Converted Currency</label>
-                                    <select ng-model="response.converted_currency" class="input-sm form-control" style="width:auto;display:none" ng-options="converted_currency for converted_currency in available_rates"></select>
+                                    <select ng-model="response.converted_currency" class="input-sm form-control" style="width:auto;display:none"
+                                        ng-options="converted_currency for converted_currency in available_rates"></select>
                                     <md-select name="converted_currency" ng-model="response.converted_currency" class="input-sm form-control">
                                         <md-option ng-bind="converted_currency" ng-value="converted_currency" ng-repeat="converted_currency in available_rates"></md-option>
 
@@ -45,14 +47,14 @@
 
                                 <md-input-container flex="50">
                                     <label>Bill Amount</label>
-                                    <input name="bill_amount" type="number" ng-model="response.bill_amount" min="0" step="0.01" value="0" placeholder="Enter a Bill Amount.."
-                                        required>
+                                    <input name="bill_amount" type="number" ng-model="response.bill_amount" min="0"
+                                        step="0.01" value="0" placeholder="Enter a Bill Amount.." required>
                                 </md-input-container>
 
                                 <md-input-container flex="50">
                                     <label>Tip Percentage</label>
-                                    <input name="tip_percentage" type="number" ng-model="response.tip_percentage" min="0" max="100" step="1" value="15" placeholder="Enter a Tip Amount.."
-                                        required>
+                                    <input name="tip_percentage" type="number" ng-model="response.tip_percentage" min="0"
+                                        max="100" step="1" value="15" placeholder="Enter a Tip Amount.." required>
                                 </md-input-container>
 
                             </div>
@@ -61,14 +63,22 @@
                                 <span>Submit</span>
                             </md-button>
                         </form>
+                        <md-button class="md-warn md-raised md-hue-2">
+                                Reset Fields
+                        </md-button>
                     </md-content>
                 </md-tab>
 
                 <md-tab label="Multiple Conversions">
                     <md-content class="md-padding">
                         <h1 class="md-display-2">Input Option: Card Selection</h1>
-                        <p>This page will contain a form with multiple cards for selecting conversions from one currency to
+                        <p>This page will contain a form with multiple cards for selecting conversions from one
+                            currency to
                             another.</p>
+
+                        <md-button class="md-warn md-raised md-hue-2">
+                            Reset Fields
+                        </md-button>
 
                         <md-slider-container flex="50">
                             <span>Tip Amount</span>
@@ -81,7 +91,8 @@
 
                         <md-slider-container flex="50">
                             <span>Bill Amount</span>
-                            <md-slider ng-model="bill.amount" min="0" max="250" aria-label="bill" id="bill-slider" class="md-accent">
+                            <md-slider ng-model="bill.amount" min="0" max="250" aria-label="bill" id="bill-slider"
+                                class="md-accent">
                             </md-slider>
                             <md-input-container flex="50">
                                 <input type="number" ng-model="bill.amount" aria-label="bill" aria-controls="bill-slider">
