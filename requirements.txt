@@ -3,5 +3,5 @@
 Flask==0.12.3
 Flask-API==0.7.1
 Jinja2==2.9.6
-requests==2.19.1
+requests==2.20.0
 MySQL-connector-python==8.0.12
