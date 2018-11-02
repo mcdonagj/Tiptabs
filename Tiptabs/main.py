@@ -20,7 +20,7 @@ import sys
 import platform
 
 
-def main():
+def main(environ, start_resp):
     """
     main() - Main class for Tiptabs. The Flask web application is created in this file. 
     Additionally, this file handles the creation of the dictionary of currencies.
@@ -146,8 +146,8 @@ def main():
 
     hostip = '127.0.0.1' if my_host_name == "Windows" else '0.0.0.0'
 
-    app.run(host=hostip, port=5000)
+    app.run()
 
 
 if __name__ == '__main__':
-    main()
+    main(environ, start_resp)

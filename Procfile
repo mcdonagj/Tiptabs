@@ -1,1 +1,1 @@
-web: gunicorn Tiptabs.main:main --log-file=-
+web: gunicorn -w 4 Tiptabs.main:main
