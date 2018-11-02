@@ -67,7 +67,8 @@ def main(environ, start_resp):
 
     @app.route('/', methods=['GET'])
     def get_home():
-        return render_template("error_404.html")
+        return b"Hello, world!\n"
+        #render_template("error_404.html")
 
     # TODO: Add a route for inputting a list of currencies to be added/updated via form input / read from a file.
 
