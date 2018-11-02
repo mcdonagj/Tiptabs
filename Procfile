@@ -1,1 +1,1 @@
-web: gunicorn --timeout=15 -w 4 Tiptabs.main:main
+web: gunicorn --bind 0.0.0.0:9000 -w 4 Tiptabs.main:main
