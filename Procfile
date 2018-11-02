@@ -1,1 +1,1 @@
-web: gunicorn -w 4 Tiptabs.main:main
+web: gunicorn --timeout=15 -w 4 Tiptabs.main:main
