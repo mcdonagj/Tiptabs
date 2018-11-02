@@ -105,7 +105,7 @@ def main(environ, start_resp):
     def no_page_found(e):
         return render_template('error_404.html')
 
-    app.run(environ)
+    app.run()
 
 if __name__ == '__main__':
     main(environ, start_resp)
