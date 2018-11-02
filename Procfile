@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:8000 -w 4 Tiptabs.main:main
+web: gunicorn -p $PORT -w 4 Tiptabs.main:main
