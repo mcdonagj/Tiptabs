@@ -9,7 +9,7 @@ class testConversions(unittest.TestCase):
 
     def test_search_in_python_org(self):
         driver = self.driver
-        driver.get("/")        
+        driver.get("localhost")        
         self.assertIn("Tiptabs", driver.title)
 
     def tearDown(self):
