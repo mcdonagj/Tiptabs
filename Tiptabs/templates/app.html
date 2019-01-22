@@ -7,6 +7,64 @@
     <title>Tiptabs - V3.7</title>
 </head>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-messages.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.js"></script>
+
+<script>
+'use strict'
+
+var app = angular.module('tiptabs_app', ['ngMaterial', 'ngMessages']);
+
+    app.config(['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[');
+        $interpolateProvider.endSymbol(']}');
+    }]);
+
+    app.controller("app_controller", function ($scope, $http, $mdDialog) {
+        $scope.available_rates = JSON.parse('{{rates | tojson}}');
+        $scope.response = {};
+        $scope.status = '  ';
+        $scope.resetForm = function (ev) {
+            var confirm = $mdDialog.confirm()
+                .title('Are you sure?')
+                .textContent('All entered information will be lost!')
+                .targetEvent(ev)
+                .ok('Reset Form.')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function () {
+                $scope.status = 'Form Reset.';
+            }, function () {
+                $scope.status = 'Decided to cancel.';
+            });
+        };
+        
+        $scope.showConfirm = function (ev) {
+            var confirm = $mdDialog.confirm()
+                .title('Calculate a Tip Amount?')
+                .textContent('You\'ve chosen to convert {{BILL_AMOUNT}} in {{BASE_CURRENCY}} to {{CONVERTED_CURRENCY}}.' +
+                    '\n{{TIP_PERCENTAGE}} of {{BASE_CURRENCY}} will be added to your total in {{CONVERTED_CURRENCY}}.')
+                .targetEvent(ev)
+                .ok('Calculate Tip')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function () {
+                document.getElementById("Input-Form").submit();
+                $scope.status = 'Your converted total is..';
+            }, function () {
+                $scope.status = 'Decided to cancel.';
+            });
+        };
+        $scope.sendResponse = function () {
+            $http.post('/', $scope.response, { 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+    })
+</script>
+
 <body ng-app="tiptabs_app">
     <div ng-controller="app_controller" ng-cloak>
 
@@ -76,9 +134,31 @@
                             currency to
                             another.</p>
 
-                        <md-button class="md-warn md-raised md-hue-2">
-                            Reset Fields
-                        </md-button>
+                        <div layout="row" layout-align="start" flex="">
+
+                            <md-input-container flex="50">
+                                <label>Base Currency</label>
+                                <select ng-model="response.base_currency" class="input-sm form-control" style="width:auto;display:none"
+                                    ng-options="base_currency for base_currency in available_rates"></select>
+                                <md-select name="base_currency" ng-model="response.base_currency" class="input-sm form-control">
+                                    <md-option ng-bind="base_currency" ng-value="base_currency" ng-repeat="base_currency in available_rates"></md-option>
+                                </md-select>
+
+                            </md-input-container>
+
+                            <md-input-container flex="50">
+                                <label>Converted Currency</label>
+                                <select ng-model="response.converted_currency" class="input-sm form-control" style="width:auto;display:none"
+                                    ng-options="converted_currency for converted_currency in available_rates"></select>
+                                <md-select name="converted_currency" ng-model="response.converted_currency" class="input-sm form-control">
+                                    <md-option ng-bind="converted_currency" ng-value="converted_currency" ng-repeat="converted_currency in available_rates"></md-option>
+
+                                    <div class="errors" ng-messages="Input-Form.convertedCurrency.$error">
+                                        <div ng-message="required">Selection Required</div>
+                                    </div>
+                                </md-select>
+                            </md-input-container>
+                        </div>
 
                         <md-slider-container flex="50">
                             <span>Tip Amount</span>
@@ -101,6 +181,10 @@
 
                         <md-button class="md-primary md-raised" ng-click="showConfirm($event)">
                             Submit
+                        </md-button>
+
+                        <md-button class="md-warn md-raised md-hue-2" ng-click="resetForm($event)">
+                            Reset Fields
                         </md-button>
 
                     </md-content>
@@ -126,17 +210,6 @@
             </md-tabs>
         </md-content>
     </div>
-</body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-messages.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.js"></script>
-
-<script src="js/app.js"></script>
-
 </body>
 
 </html>
