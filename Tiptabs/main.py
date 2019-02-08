@@ -12,12 +12,13 @@
 
 import requests
 from flask import Flask, render_template, request
-from Tiptabs.Tiptabs import *
-from Tiptabs.TiptabsDB import *
-from Tiptabs.DictionaryBuilder import *
+from Tiptabs import *
+from TiptabsDB import *
+from DictionaryBuilder import *
 # from UserInterface import *
 import sys
 import platform
+import logging
 
 
 def main():
@@ -27,20 +28,35 @@ def main():
     :return:
     """
 
+    rates_service = "https//data.fixer.io"
+
+    logging.basicConfig(level=logging.DEBUG)
+    logger = logging.getLogger(__name__)
+
     dictionary_builder = DictionaryBuilder()
+    logger.info("DictionaryBuilder created.")
     exec_rates = dictionary_builder.request_rates()
+    logger.info("Check availability of Rates API. ({})".format(rates_service))
 
     if not exec_rates[0]:
+        logger.info(str(exec_rates[1]))
         dictionary_builder.send_error_message()
         sys.exit()
+
 
     populate_dictionary_result = dictionary_builder.get_rates(
         exec_rates[0], exec_rates[1])
 
-    tiptabs_core = Tiptabs("EUR", dictionary_builder)
+    base_rate = "EUR"
+    tiptabs_core = Tiptabs(base_rate, dictionary_builder)
+    logger.info("Initialize Tiptabs core with base rate: {} ...".format(base_rate))
     rates = list(dictionary_builder.currencies.keys())
-    rates.sort()
+    logger.info("{} conversion rates succesfully recieved!".format(len(rates)))
 
+    rates.sort()
+    logger.info("-- Sorting {} rates in alphanumeric order ...".format(len(rates)))
+
+    logger.info(" Initializing Flask application ...")
     app = Flask(__name__)
 
     @app.route('/', methods=['GET'])
@@ -105,7 +121,11 @@ def main():
     def no_page_found(e):
         return render_template('error_404.html')
 
-    app.run(host='0.0.0.0', port=5000)
+    app_host = '0.0.0.0'
+    app_port = 5000
+    app.run(host=app_host, port=app_port)
+    logger.info(" Application running at {} on port {}.".format(str(app_host), str(app_port)))
+
 
 if __name__ == '__main__':
     main()
