@@ -12,9 +12,9 @@
 
 import requests
 from flask import Flask, render_template, request
-from Tiptabs import *
-from TiptabsDB import *
-from DictionaryBuilder import *
+from Tiptabs.Tiptabs import *
+from Tiptabs.TiptabsDB import *
+from Tiptabs.DictionaryBuilder import *
 # from UserInterface import *
 import sys
 import platform

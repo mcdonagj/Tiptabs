@@ -22,8 +22,9 @@ RUN virtualenv venv
 WORKDIR env/bin
 
 # Retrieve project from repo.
-RUN git clone https://github.com/mcdonagj/Tiptabs.git && \
-    pip3 install -e ./Tiptabs
+#RUN git clone https://github.com/mcdonagj/Tiptabs.git && \
+COPY . ./Tiptabs
+RUN pip3 install -e ./Tiptabs
 
 # Expose port for Flask.
 EXPOSE 5000
