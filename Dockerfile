@@ -21,8 +21,7 @@ RUN virtualenv venv
 # Activate virtualenv.
 WORKDIR env/bin
 
-# Retrieve project from repo.
-#RUN git clone https://github.com/mcdonagj/Tiptabs.git && \
+# Copy local files into virtualenv.
 COPY . ./Tiptabs
 RUN pip3 install -e ./Tiptabs
 
