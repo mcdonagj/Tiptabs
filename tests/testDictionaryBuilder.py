@@ -292,6 +292,5 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.format_currency("! @ # $ % ^ & * ( )")
         return self.assertTrue(isinstance(result, list)) and self.assertTrue(len(result == 2)) and self.assertEqual(expected, result[0]) and self.assertTrue(len(result[1]) > 0)
 
-
 if __name__ == '__main__':
     unittest.main()

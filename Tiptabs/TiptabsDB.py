@@ -1,6 +1,5 @@
 import mysql.connector
 
-
 class TiptabsDB:
 
     def __init__(self):

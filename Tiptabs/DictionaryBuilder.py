@@ -1,8 +1,7 @@
+import re
 import smtplib
-from time import strftime, gmtime
-
 import requests
-
+from time import strftime, gmtime
 
 class DictionaryBuilder:
 
@@ -46,8 +45,7 @@ class DictionaryBuilder:
 
         return [True, "Local dictionary set to the provided dictionary."]
 
-    @staticmethod
-    def request_rates():
+    def request_rates(self):
         """
         request_rates - Builds the current rates variable with current rate values.
                         Prints an error message to the terminal if the status code is not HTTP[200] (OK).
@@ -91,8 +89,7 @@ class DictionaryBuilder:
         return fixed_json_resp if not fixed_json_resp[0] else [True, requests_text]
         
 
-    @staticmethod
-    def send_error_message():
+    def send_error_message(self):
         """
         send_error_message - Helper function that assists with handling error messages within Tiptabs.
         Creates an MIME message and sends it to a given email address. Execution of Tiptabs halts if
@@ -313,7 +310,6 @@ class DictionaryBuilder:
 
         #TODO: Add check for string against ISO codes.
 
-        import re
         valid_key_pattern = re.compile('([A-Z]{3})?$', re.IGNORECASE)
 
         valid_key_input = valid_key_pattern.match(str(given_currency_key))        

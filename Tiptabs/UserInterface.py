@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class UserInterface:
     user_input = ""
     entry_field = None

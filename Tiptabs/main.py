@@ -10,39 +10,38 @@
 # install_dependencies('requests', '2.18.4')
 # install_dependencies('MySQL-connector-python', '8.0.12')
 
+import sys
+import logging
+import platform
 import requests
-from flask import Flask, render_template, request
 from Tiptabs.Tiptabs import *
 from Tiptabs.TiptabsDB import *
+# from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
-# from UserInterface import *
-import sys
-import platform
-import logging
-
+from flask import Flask, render_template, request
 
 def main():
     """
     main() - Main class for Tiptabs. The Flask web application is created in this file. 
     Additionally, this file handles the creation of the dictionary of currencies.
-    :return:
     """
-
-    rates_service = "https//data.fixer.io"
 
     logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
 
+    rates_service = "https//data.fixer.io"
+    logger.debug("Rates Service being requested from: {}".format(str(rates_service)))
+
     dictionary_builder = DictionaryBuilder()
-    logger.info("DictionaryBuilder created.")
-    exec_rates = dictionary_builder.request_rates()
+    logger.debug("DictionaryBuilder created.")
+
     logger.info("Check availability of Rates API. ({})".format(rates_service))
+    exec_rates = dictionary_builder.request_rates()
 
     if not exec_rates[0]:
         logger.info(str(exec_rates[1]))
         dictionary_builder.send_error_message()
         sys.exit()
-
 
     populate_dictionary_result = dictionary_builder.get_rates(
         exec_rates[0], exec_rates[1])
@@ -51,7 +50,7 @@ def main():
     tiptabs_core = Tiptabs(base_rate, dictionary_builder)
     logger.info("Initialize Tiptabs core with base rate: {} ...".format(base_rate))
     rates = list(dictionary_builder.currencies.keys())
-    logger.info("{} conversion rates succesfully recieved!".format(len(rates)))
+    logger.info("-- {} conversion rates succesfully recieved!".format(len(rates)))
 
     rates.sort()
     logger.info("-- Sorting {} rates in alphanumeric order ...".format(len(rates)))

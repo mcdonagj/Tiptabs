@@ -40,3 +40,6 @@ class testTiptabsDB(unittest.TestCase):
         expected = [False, "Invalid item was attempted to be added."]
         result = TiptabsDB.check_inputs(self, empty_string_input)
         return self.assertEqual(expected, result)
+
+if __name__ == '__main__':
+    unittest.main()

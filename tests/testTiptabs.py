@@ -1,7 +1,6 @@
 import unittest
-from Tiptabs.DictionaryBuilder import *
 from Tiptabs.Tiptabs import *
-
+from Tiptabs.DictionaryBuilder import *
 
 class testTiptabs(unittest.TestCase):
 
