@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
 
-# # Create a function that installs a package given a string describing the desired package and desired version of the package.
-# def install_dependencies(package, version):
-#     import subprocess
-#     import sys
-#     subprocess.call([sys.executable, '-m', 'pip', 'install', '{}=={}'.format(package, version)])
-#
-# install_dependencies('flask', '1.0.2')
-# install_dependencies('requests', '2.18.4')
-# install_dependencies('MySQL-connector-python', '8.0.12')
-
 import sys
 import logging
 import platform
