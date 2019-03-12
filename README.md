@@ -1,11 +1,10 @@
 ## Tiptabs
-A Python web application written to simplify conversions between established currencies.
+A Python web application written to simplify conversions between established currencies. \
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
 
 When rates are available from fixer.io, currency rates are retrieved and stored into a `DictionaryBuilder` object, which consists of a dictionary and functions for modifying and validating this information.
 
-When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status.
-
+When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status. \
 Tiptabs utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
 To build the project, complete any of the following steps:
@@ -45,11 +44,10 @@ To build the project, complete any of the following steps:
     pip install flask
     pip install MySQL-connector-python
     ```
-The basic CSS format is adapted from a template found below:
-    a. https://www.w3schools.com/css/tryit.asp?filename=trycss_template3
+The basic CSS format is adapted from a template found here: https://www.w3schools.com/css/tryit.asp?filename=trycss_template3 \
 Further adaptation of this template was done with information found through various outlets.
 
-As of 7/3/2018 (V3.7), AngularJS is used to generate forms with various currency information in `app.html`.
+As of 7/3/2018 (V3.7), AngularJS is used to generate forms with various currency information in `app.html`.\
 This functionality does not require the installation of AngularJS, as it is reference via the `<head>` of `app.html`.
 
 Ideas for this project that I'm researching or implementing:
@@ -63,7 +61,8 @@ Ideas for this project that I'm researching or implementing:
 3. Create tests for various functions in the Tiptabs and supporting classes.
     * [WIP] Use pytest to cover all possible cases for class functions.
     * [WIP] pytest source: https://docs.pytest.org/en/latest/
-    ###### *Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. In the future of Tiptabs, this message will be posted as a message on the AngularJS frontend.
+    ###### Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. 
+    ###### In the future of Tiptabs, this message will be posted as a message on the AngularJS frontend.
 
 4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
@@ -97,5 +96,5 @@ Ideas for this project that I'm researching or implementing:
 
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
-Version: V3.8.1.
+Version: V3.8.1. \
 Last Update: February-23-2019.
