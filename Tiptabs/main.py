@@ -50,6 +50,7 @@ def main():
 
     @app.route('/', methods=['GET'])
     def get_home():
+        logger.debug(" -- Contents of Rates: {}".format(str(rates)))
         return render_template("app.html", rates=rates)
 
     @app.route('/', methods=['POST'])
