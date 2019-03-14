@@ -64,6 +64,8 @@ def main():
 
                 total_base_currency = str(request.form['base_currency'])
 
+                logger.debug(" -- Chosen Base Currency: {}".format(str(total_base_currency)))
+
                 check_avail_base = dictionary_builder.check_available_bases(
                     total_base_currency)
 
