@@ -69,6 +69,8 @@ def main():
                 check_avail_base = dictionary_builder.check_available_bases(
                     total_base_currency)
 
+                logger.debug(" -- Is the chosen base '{}' available? : {}.".format(str(total_base_currency), str(check_avail_base)))
+
                 if not check_avail_base:
                     base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(
                         total_base_currency)
@@ -86,6 +88,11 @@ def main():
 
                 # Set the internal base to desired rate.
                 # set_base_result = tiptabs_core.set_base(total_base_currency)
+
+                check_desr_currency = dictionary_builder.check_available_bases(
+                    total_desr_currency)
+
+                logger.debug(" -- Is the chosen conversion currency '{}' available? : {}.".format(str(total_desr_currency), str(check_desr_currency)))
 
                 total = tiptabs_core.calculate_total(
                     total_bill_amount, total_tip_percentage, total_desr_currency)
