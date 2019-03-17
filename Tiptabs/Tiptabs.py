@@ -16,10 +16,7 @@ class Tiptabs:
             self.base = "EUR"
         else:
             base_available = desired_dictionary.check_available_bases(desired_base)
-            if base_available:
-                self.base = desired_base
-            else:
-                self.base = "EUR"
+            self.base = ("EUR", desired_base)[base_available]
 
         self.amount = 0.00
 

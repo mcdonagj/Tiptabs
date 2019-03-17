@@ -6,6 +6,7 @@ import platform
 import requests
 from Tiptabs.Tiptabs import *
 from Tiptabs.TiptabsDB import *
+from Tiptabs.PhoneVerifier import *
 # from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
 from flask import Flask, render_template, request
@@ -19,7 +20,11 @@ def main():
     logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
 
-    rates_service = "https//data.fixer.io"
+    phone_verifier = PhoneVerifier()
+    desired_number = "14158586273"
+    phone_verifier.verifyPhone(desired_number)
+
+    rates_service = "https://data.fixer.io"
     logger.debug("Rates Service being requested from: {}".format(str(rates_service)))
 
     dictionary_builder = DictionaryBuilder()
@@ -37,8 +42,10 @@ def main():
         exec_rates[0], exec_rates[1])
 
     base_rate = "EUR"
+    
     tiptabs_core = Tiptabs(base_rate, dictionary_builder)
     logger.info("Initialize Tiptabs core with base rate: {} ...".format(base_rate))
+    
     rates = list(dictionary_builder.currencies.keys())
     logger.info("-- {} conversion rates succesfully recieved!".format(len(rates)))
 
