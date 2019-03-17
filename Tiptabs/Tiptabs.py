@@ -16,7 +16,7 @@ class Tiptabs:
             self.base = "EUR"
         else:
             base_available = desired_dictionary.check_available_bases(desired_base)
-            self.base = ("EUR", desired_base)[base_available]
+            self.base = desired_base if base_available else "EUR"
 
         self.amount = 0.00
 
@@ -34,9 +34,6 @@ class Tiptabs:
         :return: Boolean condition that indicates the success of setting the desired base.
         """
         available_base = self.dictionary_builder.check_available_bases(desired_base)
-
-        # TODO: Check logic in this function.
-        # Error checking for non-available bases is not working as intended.
 
         set_base_res = [False, "Desired base of {!s} is not available.\n Default base of EUR assigned.".format(str(desired_base))]
 
@@ -56,11 +53,10 @@ class Tiptabs:
         :param desired_amount: Bill amount to be converted.
         """
 
-        if desired_amount and self.dictionary_builder.check_valid_currency_value(desired_amount)[0] and not float(
-                desired_amount) <= 0.000000:
-            self.amount = float(desired_amount)
-        else:
-            self.amount = 0.00
+        valid_amount = (desired_amount and self.dictionary_builder.check_valid_currency_value(desired_amount)[0] and not float(
+                desired_amount) <= 0.000000)
+
+        self.amount = float(desired_amount) if valid_amount else 0.00        
 
     def get_amount(self):
         """

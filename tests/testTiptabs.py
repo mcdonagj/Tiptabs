@@ -16,10 +16,15 @@ class testTiptabs(unittest.TestCase):
         result = self.app.get_base()
         return self.assertEqual(expected, result)
 
-    def testSetBase_validBase(self):
+    def testSetBase_validBase_BoolReturn(self):
         expected = True
         result = self.app.set_base("USD")
         return self.assertEqual(expected, result[0])
+
+    def testSetBase_validBase_GetBase(self):
+        expected = "JPY"
+        result = self.app.set_base("JPY")
+        return self.assertEqual(expected, str(self.app.get_base()))
 
     def testSetBase_invalidBase(self):
         expected = False

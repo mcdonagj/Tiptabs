@@ -89,12 +89,16 @@ Ideas for this project that I'm researching or implementing:
 9. Integrate Slack support to Tiptabs.
     * [WIP] Be able to send requests to Tiptabs and have converted values sent back as a message to the user.
     * [WIP] Webhooks Source: https://api.slack.com/incoming-webhooks
-    
+
 10. Use FontAwesome currency icons within AngularJS input/output fields.
     * [WIP] FA icon Source: https://www.w3schools.com/icons/fontawesome_icons_currency.asp
     * [WIP] XE's icon collection for currencies: https://www.xe.com/symbols.php
 
+11. Allow for converted rates to be sent via SMS.
+    * [DONE] Create a class for verifying phone numbers within the United States.
+    * [WIP] Use an SMS service to send rate information and conversion amounts to a designated number.
+
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
-Version: V3.8.1. \
-Last Update: February-23-2019.
+Version: V3.8.2. \
+Last Update: March-17-2019.
