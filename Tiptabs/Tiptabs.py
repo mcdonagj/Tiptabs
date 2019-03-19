@@ -22,7 +22,7 @@ class Tiptabs:
 
     def get_base(self):
         """
-        get_base() - Helper function that returns the base currency instance variable.
+        get_base(self) - Helper function that returns the base currency instance variable.
         :return: Base currency instance variable.
         """
         return self.base
@@ -49,7 +49,7 @@ class Tiptabs:
 
     def set_amount(self, desired_amount):
         """
-        set_amount(float) - Setter function for setting a bill amount within Tiptabs.
+        set_amount(self, float) - Setter function for setting a bill amount within Tiptabs.
         :param desired_amount: Bill amount to be converted.
         """
 
@@ -60,14 +60,14 @@ class Tiptabs:
 
     def get_amount(self):
         """
-        get_amount() - Getter function for retrieving the current bill amount within Tiptabs.
+        get_amount(self) - Getter function for retrieving the current bill amount within Tiptabs.
         :return: Float instance variable for the current amount.
         """
         return self.amount
 
     def calculate_total(self, bill_amount, tip_percentage, converted_currency):
         """
-        calculate_total(str, str) - Function that calculates the total for a given bill amount and tip percentage.
+        calculate_total(self, str, str, str) - Function that calculates the total for a given bill amount and tip percentage.
         :param converted_currency: Desired currency base chosen on the ITC page.
         :param bill_amount: Desired bill amount.
         :param tip_percentage: Desired tip amount. (Later converted to a decimal value)
@@ -94,8 +94,6 @@ class Tiptabs:
         fixed_converted_currency = str(converted_currency).replace('string:', '')
 
         valid_input_currency = self.dictionary_builder.check_available_bases(fixed_converted_currency)
-
-        # TODO: Test this invalid input functionality in testTiptabs.py.
         
         if not valid_input_currency:
             invalid_input_resp = "Your desired currency base of {!s} is not available in the calculator.".format(str(fixed_converted_currency))

@@ -3,7 +3,7 @@ import requests
 class PhoneVerifier:
 
     def __init__(self):
-        """Constructor for PhoneVerifier objects.
+        """__init__(): Constructor for PhoneVerifier objects.
 
         Usage::
         >>> import PhoneVerifier

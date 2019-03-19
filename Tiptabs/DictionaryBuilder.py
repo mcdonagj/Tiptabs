@@ -6,18 +6,24 @@ from time import strftime, gmtime
 class DictionaryBuilder:
 
     def __init__(self):
+        """__init__(self): Constructor for DictionaryBuilder objects.
+
+        Usage::
+        >>> import DictionaryBuilder
+        >>> db = DictionaryBuilder()
+        """
         self.currencies = dict()
 
     def get_dictionary(self):
         """
-        get_dictionary - Returns the currencies instance variable.
+        get_dictionary(self) - Returns the currencies instance variable.
         :return: Dictionary object containing all retrieved currencies.
         """
         return self.currencies
 
     def set_dictionary(self, desired_dictionary):
         """
-        set_dictionary(Dict) - Setter function for setting a custom dictionary of currencies.
+        set_dictionary(self, Dict) - Setter function for setting a custom dictionary of currencies.
         :param desired_dictionary: Dictionary of currencies to set within the calculator.
         :return: Boolean condition that indicates the success of setting the dictionary.
         """
@@ -47,8 +53,8 @@ class DictionaryBuilder:
 
     def request_rates(self):
         """
-        request_rates - Builds the current rates variable with current rate values.
-                        Prints an error message to the terminal if the status code is not HTTP[200] (OK).
+        request_rates(self) - Builds the current rates variable with current rate values.
+                              Prints an error message to the terminal if the status code is not HTTP[200] (OK).
         :return: Boolean value if the rates can be retrieved from the given service.
         """
 
@@ -70,7 +76,7 @@ class DictionaryBuilder:
 
     def get_rates(self, service_up, resp_text):
         """
-        get_rates(bool) - Retrieves and calls JSON organization subroutine for available rates.
+        get_rates(self, bool, str) - Retrieves and calls JSON organization subroutine for available rates.
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
         :param resp_text: Text returned from a given query to the rates service.
         :return: List containing success of operation and JSON text of a given rates query.
@@ -91,7 +97,7 @@ class DictionaryBuilder:
 
     def send_error_message(self):
         """
-        send_error_message - Helper function that assists with handling error messages within Tiptabs.
+        send_error_message(self) - Helper function that assists with handling error messages within Tiptabs.
         Creates an MIME message and sends it to a given email address. Execution of Tiptabs halts if
         this state is encountered.
         """
@@ -125,7 +131,7 @@ class DictionaryBuilder:
 
     def split_json(self, requests_text):
         """
-        split_json(str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
+        split_json(self, str) - Helper method that divides JSON text into usable text for the Dictionary of currencies.
         :param requests_text: JSON text retrieved from Fixer.io.
         :return: List containing success of operation and corresponding response string.
         """
@@ -145,7 +151,7 @@ class DictionaryBuilder:
 
     def check_available_bases(self, given_base):
         """
-        check_available_bases(str) - Helper method that checks to see if a given base (key) is within the dictionary.
+        check_available_bases(self, str) - Helper method that checks to see if a given base (key) is within the dictionary.
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
@@ -154,7 +160,7 @@ class DictionaryBuilder:
 
     def add_to_dictionary(self, given_currencies):
         """
-        add_to_dictionary(dict) - Helper method that checks and adds additional values to the
+        add_to_dictionary(self, dict) - Helper method that checks and adds additional values to the
         currency dictionary from a given dictionary.
         :param given_currencies: dictionary of currencies to be added to the calculator.
         :return: List containing success of operation and corresponding response string.
@@ -211,7 +217,7 @@ class DictionaryBuilder:
 
     def add_currency(self, currency_to_add):
         """
-        add_currency(str) - Helper function that adds a given currency to the currencies dictionary.
+        add_currency(self, str) - Helper function that adds a given currency to the currencies dictionary.
         :param currency_to_add:
         :return: List containing a Boolean condition indicating success or failure of addition of currency.
         """
@@ -269,7 +275,7 @@ class DictionaryBuilder:
 
     def check_valid_currency_value(self, given_currency_key_value):
         """
-        check_valid_currency_value(str) - Helper function that validates a provided currency key value using a regular expression.
+        check_valid_currency_value(self, str) - Helper function that validates a provided currency key value using a regular expression.
         :param given_currency_key_value: Desired key value to be checked.
         :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
         """
@@ -297,7 +303,7 @@ class DictionaryBuilder:
 
     def check_valid_currency_key(self, given_currency_key):
         """
-        check_valid_currency_key(str) - Helper function that validates a provided currency key against a predetermined list of ISO codes.
+        check_valid_currency_key(self, str) - Helper function that validates a provided currency key against a predetermined list of ISO codes.
         :param given_currency_key_value: Desired key to be checked.
         :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
         """
@@ -324,7 +330,7 @@ class DictionaryBuilder:
 
     def format_base(self, provided_base):
         """
-        format_base(str) - Helper function that formats a provided base to a predefined standard for bases. (Simplifies expected output.)
+        format_base(self, str) - Helper function that formats a provided base to a predefined standard for bases. (Simplifies expected output.)
         :param provided_base: Desired base to be formatted.
         :return: List containing a Boolean condition indicating success of base formatting and a detailed response.
         """
@@ -342,7 +348,7 @@ class DictionaryBuilder:
 
     def format_currency(self, provided_currency):
         """
-        format_currency(str) - Helper function that formats a provided currency to a predefined standard for currencies. (Simplifies expected output.)
+        format_currency(self, str) - Helper function that formats a provided currency to a predefined standard for currencies. (Simplifies expected output.)
         :param provided_currency: Desired currency to be formatted.
         :return: List containing a Boolean condition indicating success of currency formatting and a detailed response.
         """
