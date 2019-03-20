@@ -34,3 +34,7 @@ class PhoneVerifier:
         r = requests.get(request)
         if (r.ok):
             print(r.json())
+
+    def send_sms_to_number(self, sms_number):
+        # Use Amazon SNS to send rates information to a SMS number.
+        return True

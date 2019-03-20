@@ -21,8 +21,6 @@ def main():
     logger = logging.getLogger(__name__)
 
     phone_verifier = PhoneVerifier()
-    desired_number = "14158586273"
-    phone_verifier.verifyPhone(desired_number)
 
     rates_service = "https://data.fixer.io"
     logger.debug("Rates Service being requested from: {}".format(str(rates_service)))
@@ -107,6 +105,12 @@ def main():
                 post_form_resp = total
 
             return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
+
+    @app.route('/result', methods=['POST'])
+    def send_sms(desired_number):        
+        valid_number = phone_verifier.verifyPhone(desired_number)        
+        if valid_number:
+            send_sms_to_number(desired_number)
 
     @app.route('/fixer_status', methods=['GET'])
     def get_fixer_status():
