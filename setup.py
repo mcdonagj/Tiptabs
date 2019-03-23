@@ -10,6 +10,8 @@ setup(
         "Jinja2==2.9.6",
         "requests==2.20.0",
         "MySQL-connector-python==8.0.12",
+        "python-dotenv==0.10.1",
+        "boto3==1.9.119",
     ],
     url="https://github.com/mcdonagj/Tiptabs",
     license="MIT",
