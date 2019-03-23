@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import logging
 import platform
 import requests
+from pathlib import Path
 from Tiptabs.Tiptabs import *
+from dotenv import load_dotenv
 from Tiptabs.TiptabsDB import *
 from Tiptabs.PhoneVerifier import *
+from os.path import dirname, abspath
 # from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
 from flask import Flask, render_template, request
@@ -18,7 +22,17 @@ def main():
     """
 
     logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)    
+    
+    env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
+    logger.debug("Loading .env file from: {}".format(env_path))    
+    load_dotenv(dotenv_path=env_path)
+
+    APP_PORT = int(os.getenv("APP_PORT"))
+    logger.debug("Chosen port for application: {}".format(str(APP_PORT)))
+
+    APP_ADDRESS = str(os.getenv("APP_HOST"))
+    logger.debug("Chosen address for application: {}".format(str(APP_ADDRESS)))
 
     phone_verifier = PhoneVerifier()
 
@@ -131,10 +145,8 @@ def main():
     def no_page_found(e):
         return render_template('error_404.html')
 
-    app_host = '0.0.0.0'
-    app_port = 5000
-    app.run(host=app_host, port=app_port)
-    logger.info(" Application running at {} on port {}.".format(str(app_host), str(app_port)))
+
+    app.run(host=APP_ADDRESS, port=APP_PORT)
 
 
 if __name__ == '__main__':
