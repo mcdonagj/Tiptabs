@@ -51,19 +51,17 @@ class DictionaryBuilder:
 
         return [True, "Local dictionary set to the provided dictionary."]
 
-    def request_rates(self):
+    def request_rates(self, url, key, format):
         """
-        request_rates(self) - Builds the current rates variable with current rate values.
-                              Prints an error message to the terminal if the status code is not HTTP[200] (OK).
+        request_rates(self, str, str, str) - Retrieves rates from the rates api; Prints an error message if the status code is not HTTP[200] (OK).
         :return: Boolean value if the rates can be retrieved from the given service.
         """
 
-        url = 'http://data.fixer.io/api/latest?access_key=3f604e437d5c5029d1cf7fa38acdcde9&format=1'
-
-        rates_request = requests.get(url)
+        #rates = 'http://data.fixer.io/api/latest?access_key=3f604e437d5c5029d1cf7fa38acdcde9&format=1'
+        rates = "{!s}access_key={!s}&format={!s}".format(url, key, format)
+        rates_request = requests.get(rates)
 
         # TODO: Parse response JSON in a more refined way.
-
         # rates_request.json()
 
         ok_response = rates_request.status_code == 200
@@ -113,7 +111,7 @@ class DictionaryBuilder:
             strftime(
                 "%Y-%m-%d %H:%M:%S", gmtime()))
 
-        message_body = 'Subject: {}\n\n{}'.format(message['Subject'], message_text)
+        message_body = 'Subject: {!s}\n\n{!s}'.format(message['Subject'], message_text)
 
         gmail_user = 'sendpyerr@gmail.com'
         gmail_pwd = 'pythonerr'

@@ -3,17 +3,21 @@ import requests
 
 class PhoneVerifier:
 
-    def __init__(self):
+    def __init__(self, format, country_code, api_url, key):
         """__init__(): Constructor for PhoneVerifier objects.
 
         Usage::
         >>> import PhoneVerifier
         >>> pv = PhoneVerifier()
         """
-        self.format = "1"
-        self.country_code = ""
-        self.url = "http://apilayer.net/api/validate"
-        self.access_key = "3951622ea8890f098b9cb245ced7e742"
+        # self.format = "1"
+        # self.country_code = ""
+        # self.url = "http://apilayer.net/api/validate"
+        # self.access_key = "3951622ea8890f098b9cb245ced7e742"
+        self.format = format
+        self.country_code = country_code
+        self.url = api_url
+        self.access_key = key
 
     def verifyPhone(self, number):
         """Validates phone numbers from a given integer value.
@@ -31,7 +35,7 @@ class PhoneVerifier:
         `Dict` object.
         """
 
-        request = "{}?access_key={}&number={}&country_code={}&format={}".format(self.url, self.access_key, number, self.country_code, self.format)
+        request = "{!s}?access_key={!s}&number={!s}&country_code={!s}&format={!s}".format(self.url, self.access_key, number, self.country_code, self.format)
         r = requests.get(request)
         if (r.ok):
             print(r.json())

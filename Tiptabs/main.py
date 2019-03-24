@@ -25,25 +25,24 @@ def main():
     logger = logging.getLogger(__name__)    
     
     env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
-    logger.debug("Loading .env file from: {}".format(env_path))    
+    logger.debug("Loading .env file from: {!s}".format(env_path))    
     load_dotenv(dotenv_path=env_path)
 
     APP_PORT = int(os.getenv("APP_PORT"))
-    logger.debug("Chosen port for application: {}".format(str(APP_PORT)))
+    logger.debug("Chosen port for application: {!s}".format(str(APP_PORT)))
 
     APP_ADDRESS = str(os.getenv("APP_HOST"))
-    logger.debug("Chosen address for application: {}".format(str(APP_ADDRESS)))
+    logger.debug("Chosen address for application: {!s}".format(APP_ADDRESS))
 
-    phone_verifier = PhoneVerifier()
+    phone_verifier = PhoneVerifier(str(os.getenv("SMS_FORMAT")), str(os.getenv("SMS_COUNTRY_CODE")), str(os.getenv("SMS_URL")), str(os.getenv("SMS_KEY")))
 
-    rates_service = "https://data.fixer.io"
-    logger.debug("Rates Service being requested from: {}".format(str(rates_service)))
+    logger.debug("Rates Service being requested from: {!s}".format(str(os.getenv("RATES_URL"))))
 
     dictionary_builder = DictionaryBuilder()
     logger.debug("DictionaryBuilder created.")
 
-    logger.info("Check availability of Rates API. ({})".format(rates_service))
-    exec_rates = dictionary_builder.request_rates()
+    logger.info("Check availability of Rates API. ({!s})".format(str(os.getenv("RATES_URL"))))
+    exec_rates = dictionary_builder.request_rates(str(os.getenv("RATES_URL")), str(os.getenv("RATES_KEY")), str(os.getenv("RATES_FORMAT")))
 
     if not exec_rates[0]:
         logger.info(str(exec_rates[1]))
@@ -56,20 +55,20 @@ def main():
     base_rate = "EUR"
     
     tiptabs_core = Tiptabs(base_rate, dictionary_builder)
-    logger.info("Initialize Tiptabs core with base rate: {} ...".format(base_rate))
+    logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(base_rate))
     
     rates = list(dictionary_builder.currencies.keys())
-    logger.info("-- {} conversion rates succesfully recieved!".format(len(rates)))
+    logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))
 
     rates.sort()
-    logger.info("-- Sorting {} rates in alphanumeric order ...".format(len(rates)))
+    logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
 
     logger.info(" Initializing Flask application ...")
     app = Flask(__name__)
 
     @app.route('/', methods=['GET'])
     def get_home():
-        logger.debug(" -- Contents of Rates: {}".format(str(rates)))
+        logger.debug(" -- Contents of Rates: {!s}".format(str(rates)))
         return render_template("app.html", rates=rates)
 
     @app.route('/', methods=['POST'])
@@ -83,12 +82,12 @@ def main():
 
                 total_base_currency = str(request.form['base_currency'])
 
-                logger.debug(" -- Chosen Base Currency: {}".format(str(total_base_currency)))
+                logger.debug(" -- Chosen Base Currency: {!s}".format(str(total_base_currency)))
 
                 check_avail_base = dictionary_builder.check_available_bases(
                     total_base_currency)
 
-                logger.debug(" -- Is the chosen base '{}' available? : {}.".format(str(total_base_currency), str(check_avail_base)))
+                logger.debug(" -- Is the chosen base '{}' available? : {!s}.".format(str(total_base_currency), str(check_avail_base)))
 
                 if not check_avail_base:
                     base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(
@@ -111,7 +110,7 @@ def main():
                 check_desr_currency = dictionary_builder.check_available_bases(
                     total_desr_currency)
 
-                logger.debug(" -- Is the chosen conversion currency '{}' available? : {}.".format(str(total_desr_currency), str(check_desr_currency)))
+                logger.debug(" -- Is the chosen conversion currency '{!s}' available? : {!s}.".format(str(total_desr_currency), str(check_desr_currency)))
 
                 total = tiptabs_core.calculate_total(
                     total_bill_amount, total_tip_percentage, total_desr_currency)
