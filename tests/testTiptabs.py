@@ -2,14 +2,18 @@ import unittest
 from Tiptabs.Tiptabs import *
 from Tiptabs.DictionaryBuilder import *
 
+from os.path import dirname, abspath
+
 class testTiptabs(unittest.TestCase):
 
+    RATES_FORMAT='1'
+    RATES_KEY='3f604e437d5c5029d1cf7fa38acdcde9'
+    RATES_URL='http://data.fixer.io/api/latest?'
+
     app_dict = DictionaryBuilder()
-    res = app_dict.request_rates()
+    res = app_dict.request_rates(RATES_URL, RATES_KEY, RATES_FORMAT)
     populate_dictionary_result = app_dict.get_rates(res[0], res[1])
     app = Tiptabs("EUR", app_dict)
-
-    # TODO: Test class constructor with empty string, null values, etc
 
     def testGetBase(self):
         expected = "EUR"
@@ -24,6 +28,7 @@ class testTiptabs(unittest.TestCase):
     def testSetBase_validBase_GetBase(self):
         expected = "JPY"
         result = self.app.set_base("JPY")
+        print(result[1])
         return self.assertEqual(expected, str(self.app.get_base()))
 
     def testSetBase_invalidBase(self):
@@ -97,6 +102,7 @@ class testTiptabs(unittest.TestCase):
     def testCalculateTotal(self):
         expected = [True, "Your total amount was: 2968.444883 JPY."]
         result = self.app.calculate_total(20.00, 15.00, "JPY")
+        print(result[1])
         return self.assertEqual(expected[0], result[0])
 
     def testCalculateTotal_None_BillAmount(self):

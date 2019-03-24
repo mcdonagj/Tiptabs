@@ -5,8 +5,12 @@ from Tiptabs.DictionaryBuilder import *
 
 class testDictionaryBuilder(unittest.TestCase):
 
+    RATES_FORMAT='1'
+    RATES_KEY='3f604e437d5c5029d1cf7fa38acdcde9'
+    RATES_URL='http://data.fixer.io/api/latest?'
+
     app_dict = DictionaryBuilder()
-    res = app_dict.request_rates()
+    res = app_dict.request_rates(RATES_URL, RATES_KEY, RATES_FORMAT)
     populate_dictionary_result = app_dict.get_rates(res[0], res[1])
     app = Tiptabs("EUR", app_dict)
 
@@ -52,7 +56,7 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def testRequestRates(self):
-        test_request_rates_resp = self.app_dict.request_rates()
+        test_request_rates_resp = self.app_dict.request_rates(self.RATES_URL, self.RATES_KEY, self.RATES_FORMAT)
         expected = True
         result = (test_request_rates_resp[0] and len(str(test_request_rates_resp[1])) > 0)
         return self.assertEqual(expected, result)
