@@ -98,6 +98,10 @@ Ideas for this project that I'm researching or implementing:
     * [DONE] Create a class for verifying phone numbers within the United States.
     * [WIP] Use an SMS service to send rate information and conversion amounts to a designated number.
 
+12. Store credentials outside of the codebase.
+    * [DONE] Create a .env file that stores all secrets within environment variables.
+    * [WIP] Design error handling in the application around incorrect/lack-of .env configurations.
+
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
 Version: V3.8.2. \
