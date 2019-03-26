@@ -1,7 +1,8 @@
 import boto3
+import logging
 import requests
 
-class PhoneVerifier:
+class PhoneVerifier:  
 
     def __init__(self, format, country_code, api_url, key):
         """__init__(): Constructor for PhoneVerifier objects.
@@ -18,6 +19,8 @@ class PhoneVerifier:
         self.country_code = country_code
         self.url = api_url
         self.access_key = key
+        logging.basicConfig(level=logging.DEBUG)
+        self.logger = logging.getLogger(__name__) 
 
     def verifyPhone(self, number):
         """Validates phone numbers from a given integer value.
@@ -37,6 +40,7 @@ class PhoneVerifier:
 
         request = "{!s}?access_key={!s}&number={!s}&country_code={!s}&format={!s}".format(self.url, self.access_key, number, self.country_code, self.format)
         r = requests.get(request)
+        self.logger.debug("Did the request return HTTP200[OK]? -- {!s}".format(r.ok))
         if (r.ok):
             print(r.json())
 
