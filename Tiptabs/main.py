@@ -46,7 +46,10 @@ def main():
 
     if not exec_rates[0]:
         logger.info(str(exec_rates[1]))
-        dictionary_builder.send_error_message()
+        FROM_ADDRESS = str(os.getenv("FROM_ADDRESS"))
+        TO_ADDRESS = str(os.getenv("TO_ADDRESS"))
+        GMAIL_PW = str(os.getenv("GMAIL_PW"))
+        dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
         sys.exit()
 
     populate_dictionary_result = dictionary_builder.get_rates(
@@ -123,7 +126,7 @@ def main():
     def send_sms(desired_number):        
         valid_number = phone_verifier.verifyPhone(desired_number)        
         if valid_number:
-            send_sms_to_number(desired_number)
+            phone_verifier.send_sms_to_number(desired_number)
 
     @app.route('/fixer_status', methods=['GET'])
     def get_fixer_status():

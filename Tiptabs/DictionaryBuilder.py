@@ -57,7 +57,6 @@ class DictionaryBuilder:
         :return: Boolean value if the rates can be retrieved from the given service.
         """
 
-        #rates = 'http://data.fixer.io/api/latest?access_key=3f604e437d5c5029d1cf7fa38acdcde9&format=1'
         rates = "{!s}access_key={!s}&format={!s}".format(url, key, format)
         rates_request = requests.get(rates)
 
@@ -93,7 +92,7 @@ class DictionaryBuilder:
         return fixed_json_resp if not fixed_json_resp[0] else [True, requests_text]
         
 
-    def send_error_message(self):
+    def send_error_message(self, FROM_ADDRESS, TO_ADDRESS, GMAIL_PW):
         """
         send_error_message(self) - Helper function that assists with handling error messages within Tiptabs.
         Creates an MIME message and sends it to a given email address. Execution of Tiptabs halts if
@@ -103,8 +102,8 @@ class DictionaryBuilder:
         from email.mime.multipart import MIMEMultipart
         message = MIMEMultipart()
 
-        message['From'] = 'sendpyerr@gmail.com'
-        message['To'] = 'mcdonagj@dukes.jmu.edu'
+        message['From'] = FROM_ADDRESS
+        message['To'] = TO_ADDRESS
         message['Subject'] = '[ERROR] Tiptabs - ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
         message_text = "There was a problem with retrieving rates in Tiptabs:\n\tDate: {0}\n".format(
@@ -113,13 +112,10 @@ class DictionaryBuilder:
 
         message_body = 'Subject: {!s}\n\n{!s}'.format(message['Subject'], message_text)
 
-        gmail_user = 'sendpyerr@gmail.com'
-        gmail_pwd = 'pythonerr'
-
         smtpserver = smtplib.SMTP("smtp.gmail.com", 587)
         smtpserver.ehlo()
         smtpserver.starttls()
-        smtpserver.login(gmail_user, gmail_pwd)
+        smtpserver.login(FROM_ADDRESS, GMAIL_PW)
 
         smtpserver.sendmail(message['From'], message['To'], message_body)
 
