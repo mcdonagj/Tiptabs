@@ -1,4 +1,4 @@
-## Tiptabs
+# Tiptabs
 A Python web application written to simplify conversions between established currencies. \
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
 
@@ -7,7 +7,8 @@ When rates are available from fixer.io, currency rates are retrieved and stored 
 When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status. \
 Tiptabs utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
-To build the project, complete any of the following steps:
+## Building the Project
+You can build Tiptabs using any of the following methods:
 1. Build via Makefile.
     Thanks to @kylelaker, you can build Tiptabs using the provided Makefile.
     Simply navigate to the Tiptabs directory, install the module with `make install`, and build using Docker with `make docker`.
@@ -50,7 +51,8 @@ Further adaptation of this template was done with information found through vari
 As of 7/3/2018 (V3.7), AngularJS is used to generate forms with various currency information in `app.html`.\
 This functionality does not require the installation of AngularJS, as it is reference via the `<head>` of `app.html`.
 
-Ideas for this project that I'm researching or implementing:
+## Project Ideas
+I'm currently working on developing the following features:
 1. A local graphical user interface utilizing Tkinter.
     * [WIP] Created a UserInterface class to start this functionality.
 
@@ -61,8 +63,9 @@ Ideas for this project that I'm researching or implementing:
 3. Create tests for various functions in the Tiptabs and supporting classes.
     * [WIP] Use pytest to cover all possible cases for class functions.
     * [WIP] pytest source: https://docs.pytest.org/en/latest/
-    ###### Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. 
-    ###### In the future of Tiptabs, this message will be posted as a message on the AngularJS frontend.
+
+    Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. \
+    In the future of Tiptabs, this message will be posted as a message on the AngularJS frontend.
 
 4. A Flask web application hosted on a web server within Amazon Web Services' Elastic Beanstalk.
     * [WIP] Created a Flask web application within main.py.
@@ -102,7 +105,8 @@ Ideas for this project that I'm researching or implementing:
     * [DONE] Create a .env file that stores all secrets within environment variables.
     * [WIP] Design error handling in the application around incorrect/lack-of .env configurations.
 
+## Running Tiptabs
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
-Version: V3.8.2. \
-Last Update: March-17-2019.
+Version: V3.8.3. \
+Last Update: March-30-2019.

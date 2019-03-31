@@ -11,10 +11,6 @@ class PhoneVerifier:
         >>> import PhoneVerifier
         >>> pv = PhoneVerifier()
         """
-        # self.format = "1"
-        # self.country_code = ""
-        # self.url = "http://apilayer.net/api/validate"
-        # self.access_key = "3951622ea8890f098b9cb245ced7e742"
         self.format = format
         self.country_code = country_code
         self.url = api_url
