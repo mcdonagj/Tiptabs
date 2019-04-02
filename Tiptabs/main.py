@@ -55,10 +55,8 @@ def main():
     populate_dictionary_result = dictionary_builder.get_rates(
         exec_rates[0], exec_rates[1])
 
-    base_rate = "EUR"
-    
-    tiptabs_core = Tiptabs(base_rate, dictionary_builder)
-    logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(base_rate))
+    tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
+    logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
     
     rates = list(dictionary_builder.currencies.keys())
     logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))
