@@ -8,3 +8,4 @@ requests==2.20.0
 selenium==3.141.0
 python-dotenv==0.10.1
 MySQL-connector-python==8.0.12
+gunicorn==19.9.0

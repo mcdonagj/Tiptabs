@@ -12,6 +12,7 @@ setup(
         "MySQL-connector-python==8.0.12",
         "python-dotenv==0.10.1",
         "boto3==1.9.119",
+        "gunicorn==19.9.0"
     ],
     url="https://github.com/mcdonagj/Tiptabs",
     license="MIT",
