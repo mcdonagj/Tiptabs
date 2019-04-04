@@ -21,14 +21,14 @@ from flask import Flask, render_template, request
 #     Additionally, this file handles the creation of the dictionary of currencies.
 #     """
 
-#     logging.basicConfig(level=logging.DEBUG)
-#     logger = logging.getLogger(__name__)    
-    
-#     env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
-#     logger.debug("Loading .env file from: {!s}".format(env_path))    
-#     load_dotenv(dotenv_path=env_path)
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)    
 
-#     APP_PORT = int(os.getenv("APP_PORT"))
+env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
+logger.debug("Loading .env file from: {!s}".format(env_path))    
+load_dotenv(dotenv_path=env_path)
+
+    # APP_PORT = int(os.getenv("APP_PORT"))
 #     logger.debug("Chosen port for application: {!s}".format(str(APP_PORT)))
 
 #     APP_ADDRESS = str(os.getenv("APP_HOST"))
@@ -38,11 +38,11 @@ from flask import Flask, render_template, request
 
 #     logger.debug("Rates Service being requested from: {!s}".format(str(os.getenv("RATES_URL"))))
 
-#     dictionary_builder = DictionaryBuilder()
+dictionary_builder = DictionaryBuilder()
 #     logger.debug("DictionaryBuilder created.")
 
 #     logger.info("Check availability of Rates API. ({!s})".format(str(os.getenv("RATES_URL"))))
-#     exec_rates = dictionary_builder.request_rates(str(os.getenv("RATES_URL")), str(os.getenv("RATES_KEY")), str(os.getenv("RATES_FORMAT")))
+exec_rates = dictionary_builder.request_rates(str(os.getenv("RATES_URL")), str(os.getenv("RATES_KEY")), str(os.getenv("RATES_FORMAT")))
 
 #     if not exec_rates[0]:
 #         logger.info(str(exec_rates[1]))
@@ -52,16 +52,16 @@ from flask import Flask, render_template, request
 #         dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
 #         sys.exit()
 
-#     populate_dictionary_result = dictionary_builder.get_rates(
-#         exec_rates[0], exec_rates[1])
+populate_dictionary_result = dictionary_builder.get_rates(
+    exec_rates[0], exec_rates[1])
 
-#     tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
+tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
 #     logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
     
-#     rates = list(dictionary_builder.currencies.keys())
+rates = list(dictionary_builder.currencies.keys())
 #     logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))
 
-#     rates.sort()
+rates.sort()
 #     logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
 
 #     logger.info(" Initializing Flask application ...")
@@ -149,7 +149,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def get_home():
-    return render_template("error_404.html")
+    return render_template("app.html", rates=rates)
 
 if __name__ == '__main__':
     app.run()
