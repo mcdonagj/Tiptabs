@@ -13,7 +13,7 @@ from Tiptabs.PhoneVerifier import *
 from os.path import dirname, abspath
 # from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, make_response
 
 # def main():
 #     """
@@ -145,11 +145,33 @@ rates.sort()
 #     def no_page_found(e):
 #         return render_template('error_404.html')
 
-
 app = Flask(__name__)
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def get_home():
-    return render_template("app.html", rates=rates)
+    if request.method == 'GET':
+        return render_template("app.html", rates=rates)
+    elif request.method == 'POST':
+        post_form_resp = [False, "ERROR: Request form was invalid/empty."]
+        if request.form:
+            base = str(request.form['base_currency'])
+            check_avail_base = dictionary_builder.check_available_bases(base)
+            if not check_avail_base:
+                base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(base)
+                post_form_resp = [False, base_not_avail_resp]
+                return jsonify({str(False): str(base_not_avail_resp)})
+            
+            total_bill_amount = str(request.form['bill_amount'])
+            total_tip_percentage = str(request.form['tip_percentage'])
+            total_desr_currency = str(request.form['converted_currency'])
+
+            # Set the internal base to desired rate.
+            # set_base_result = tiptabs_core.set_base(total_base_currency)
+
+            check_desr_currency = dictionary_builder.check_available_bases(total_desr_currency)
+            post_form_resp = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
+            return jsonify({str(post_form_resp[0]): str(post_form_resp[1])})
+
+
 
 if __name__ == '__main__':
     app.run()
