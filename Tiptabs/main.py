@@ -172,7 +172,7 @@ def home():
 
 @app.route('/rates', methods=['GET'])
 def rates():
-    return jsonify(dictionary_builder.get_dictionary())
+    return jsonify(dictionary_builder.currencies)
 
 
 if __name__ == '__main__':
