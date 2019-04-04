@@ -1,21 +1,21 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-import os
-import sys
-import logging
-import platform
-import requests
-from pathlib import Path
-from Tiptabs.Tiptabs import *
-from dotenv import load_dotenv
-from Tiptabs.TiptabsDB import *
-from Tiptabs.PhoneVerifier import *
-from os.path import dirname, abspath
-# from Tiptabs.UserInterface import *
-from Tiptabs.DictionaryBuilder import *
-from flask import Flask, render_template, request
+# import os
+# import sys
+# import logging
+# import platform
+# import requests
+# from pathlib import Path
+# from Tiptabs.Tiptabs import *
+# from dotenv import load_dotenv
+# from Tiptabs.TiptabsDB import *
+# from Tiptabs.PhoneVerifier import *
+# from os.path import dirname, abspath
+# # from Tiptabs.UserInterface import *
+# from Tiptabs.DictionaryBuilder import *
+# from flask import Flask, render_template, request
 
-def main():
+# def main():
 #     """
 #     main() - Main class for Tiptabs. The Flask web application is created in this file. 
 #     Additionally, this file handles the creation of the dictionary of currencies.
@@ -65,7 +65,7 @@ def main():
 #     logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
 
 #     logger.info(" Initializing Flask application ...")
-    app = Flask(__name__)
+    # app = Flask(__name__)
 
 #     @app.route('/', methods=['GET'])
 #     def get_home():
@@ -146,9 +146,7 @@ def main():
 #         return render_template('error_404.html')
 
 
+if __name__ == '__main__':
+    app = Flask(__name__)
     port = int(os.environ.get('PORT', 5000))
     app.run(host=APP_ADDRESS, port=port)
-
-
-if __name__ == '__main__':
-    main()
