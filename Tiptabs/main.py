@@ -147,7 +147,6 @@ def main():
 
 
     app = Flask(__name__)
-    port = int(os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
-    app.run(host=APP_ADDRESS, port=port)
+    app.run(host=APP_ADDRESS, port=int(os.environ.get('PORT', 5000)))
