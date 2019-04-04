@@ -1,1 +1,1 @@
-web: gunicorn -p $PORT -w 4 Tiptabs.main:main
+web: gunicorn Tiptabs.main:main
