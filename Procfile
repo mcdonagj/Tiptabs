@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:${PORT} Tiptabs.main:app
+web: gunicorn Tiptabs.main:app
