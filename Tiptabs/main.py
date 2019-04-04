@@ -146,7 +146,8 @@ def main():
         return render_template('error_404.html')
 
 
-    app.run(host=APP_ADDRESS, port=APP_PORT)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host=APP_ADDRESS, port=port)
 
 
 if __name__ == '__main__':
