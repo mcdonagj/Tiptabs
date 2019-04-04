@@ -170,10 +170,6 @@ def home():
             post_form_resp = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
             return jsonify({str(post_form_resp[0]): str(post_form_resp[1])})
 
-@app.route('/rates', methods=['GET'])
-def rates():
-    return jsonify(dictionary_builder.currencies)
-
 
 if __name__ == '__main__':
     app.run()
