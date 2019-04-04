@@ -15,7 +15,7 @@
 # from Tiptabs.DictionaryBuilder import *
 # from flask import Flask, render_template, request
 
-# def main():
+def main():
 #     """
 #     main() - Main class for Tiptabs. The Flask web application is created in this file. 
 #     Additionally, this file handles the creation of the dictionary of currencies.
@@ -146,7 +146,8 @@
 #         return render_template('error_404.html')
 
 
-if __name__ == '__main__':
     app = Flask(__name__)
     port = int(os.environ.get('PORT', 5000))
+
+if __name__ == '__main__':
     app.run(host=APP_ADDRESS, port=port)
