@@ -146,7 +146,7 @@ from flask import Flask, render_template, request
 #         return render_template('error_404.html')
 
 
-    app = Flask(__name__)
+app = Flask(__name__)
 
 # if __name__ == '__main__':
-    app.run(host=APP_ADDRESS, port=int(os.environ.get('PORT', 5000)))
+app.run(host=APP_ADDRESS, port=int(os.environ.get('PORT', 5000)))
