@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:${PORT} Tiptabs.main:main
+web: gunicorn --bind 0.0.0.0:${PORT} wsgi
