@@ -60,18 +60,15 @@ class DictionaryBuilder:
         rates = "{!s}access_key={!s}&format={!s}".format(url, key, format)
         rates_request = requests.get(rates)
 
-        # TODO: Parse response JSON in a more refined way.
-        # rates_request.json()
-
         ok_response = rates_request.status_code == 200
 
         if not ok_response:            
             invalid_resp_code = "ERROR:  RESP {!s}: invalid response from fixer.io:".format(str(rates_request.status_code))
             return [ok_response, invalid_resp_code]
 
-        return [ok_response, rates_request.text]
+        return [ok_response, rates_request.json()]
 
-    def get_rates(self, service_up, resp_text):
+    def get_rates(self, service_up, resp_json):
         """
         get_rates(self, bool, str) - Retrieves and calls JSON organization subroutine for available rates.
         :param service_up: Boolean variable dictating availability of rates service, Fixer.io.
@@ -275,8 +272,6 @@ class DictionaryBuilder:
         """
         import re
         valid_currency_pattern = re.compile('(^\d*(\.\d+)?$)', re.IGNORECASE)
-
-        funct_name = "check_valid_currency_value()"
 
         if given_currency_key_value is None:
             none_currency_input_resp = "ERROR: None values are not permitted as input into function: {!s}.".format(funct_name)

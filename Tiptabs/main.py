@@ -13,7 +13,7 @@ from Tiptabs.PhoneVerifier import *
 from os.path import dirname, abspath
 # from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, make_response
 
 def main():
     """
@@ -25,23 +25,23 @@ def main():
     logger = logging.getLogger(__name__)    
     
     env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
-    logger.debug("Loading .env file from: {!s}".format(env_path))    
+    logger.debug(" Loading .env file from: {!s}".format(env_path))    
     load_dotenv(dotenv_path=env_path)
 
     APP_PORT = int(os.getenv("APP_PORT"))
-    logger.debug("Chosen port for application: {!s}".format(str(APP_PORT)))
+    logger.debug(" Chosen port for application: {!s}".format(str(APP_PORT)))
 
     APP_ADDRESS = str(os.getenv("APP_HOST"))
-    logger.debug("Chosen address for application: {!s}".format(APP_ADDRESS))
+    logger.debug(" Chosen address for application: {!s}".format(APP_ADDRESS))
 
     phone_verifier = PhoneVerifier(str(os.getenv("SMS_FORMAT")), str(os.getenv("SMS_COUNTRY_CODE")), str(os.getenv("SMS_URL")), str(os.getenv("SMS_KEY")))
 
-    logger.debug("Rates Service being requested from: {!s}".format(str(os.getenv("RATES_URL"))))
+    logger.debug(" Rates Service being requested from: {!s}".format(str(os.getenv("RATES_URL"))))
 
     dictionary_builder = DictionaryBuilder()
-    logger.debug("DictionaryBuilder created.")
+    logger.debug(" DictionaryBuilder created.")
 
-    logger.info("Check availability of Rates API. ({!s})".format(str(os.getenv("RATES_URL"))))
+    logger.info(" Check availability of Rates API. ({!s})".format(str(os.getenv("RATES_URL"))))
     exec_rates = dictionary_builder.request_rates(str(os.getenv("RATES_URL")), str(os.getenv("RATES_KEY")), str(os.getenv("RATES_FORMAT")))
 
     if not exec_rates[0]:
@@ -52,25 +52,28 @@ def main():
         dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
         sys.exit()
 
-    populate_dictionary_result = dictionary_builder.get_rates(
-        exec_rates[0], exec_rates[1])
+    
+
+    # populate_dictionary_result = dictionary_builder.get_rates(
+    #     exec_rates[0], exec_rates[1])
 
     tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
-    logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
+    logger.info(" Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
     
-    rates = list(dictionary_builder.currencies.keys())
-    logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))
+    # rates = list(dictionary_builder.currencies.keys())
+    # logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))
 
-    rates.sort()
-    logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
+    # rates.sort()
+    # logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
 
     logger.info(" Initializing Flask application ...")
     app = Flask(__name__)
 
-    @app.route('/', methods=['GET'])
+    @app.route('/rates', methods=['GET'])
     def get_home():
-        logger.debug(" -- Contents of Rates: {!s}".format(str(rates)))
-        return render_template("app.html", rates=rates)
+        #logger.debug(" -- Contents of Rates: {!s}".format(str(rates)))
+        return jsonify(exec_rates[1])
+        #return render_template("app.html", rates=rates)
 
     @app.route('/', methods=['POST'])
     def post_home():
@@ -143,7 +146,9 @@ def main():
 
     @app.errorhandler(404)
     def no_page_found(e):
-        return render_template('error_404.html')
+        #return render_template('error_404.html')
+        no_page_found_response = jsonify({'ERROR': '[404] Not Found.'})
+        return make_response(no_page_found_response, 404)
 
 
     app.run(host=APP_ADDRESS, port=APP_PORT)
