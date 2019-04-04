@@ -147,7 +147,7 @@ rates.sort()
 
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
-def get_home():
+def home():
     if request.method == 'GET':
         return render_template("app.html", rates=rates)
     elif request.method == 'POST':
@@ -157,7 +157,6 @@ def get_home():
             check_avail_base = dictionary_builder.check_available_bases(base)
             if not check_avail_base:
                 base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(base)
-                post_form_resp = [False, base_not_avail_resp]
                 return jsonify({str(False): str(base_not_avail_resp)})
             
             total_bill_amount = str(request.form['bill_amount'])
@@ -171,6 +170,9 @@ def get_home():
             post_form_resp = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
             return jsonify({str(post_form_resp[0]): str(post_form_resp[1])})
 
+@app.route('/rates', methods=['GET'])
+def rates():
+    return jsonify(dictionary_builder.get_dictionary())
 
 
 if __name__ == '__main__':
