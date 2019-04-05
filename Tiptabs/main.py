@@ -87,7 +87,7 @@ rates.sort()
 #         return render_template('error_404.html')
 
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST', 'PUT'])
 def home():
     if request.method == 'GET':
         return render_template("app.html", rates=rates)
@@ -109,7 +109,7 @@ def home():
 
             check_desr_currency = dictionary_builder.check_available_bases(total_desr_currency)
             post_form_resp = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
-            return make_response(jsonify({str(post_form_resp[0]): str(post_form_resp[1])}), 200)
+            return jsonify({str(post_form_resp[0]): str(post_form_resp[1])})
 
 
 @app.errorhandler(404)
