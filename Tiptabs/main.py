@@ -87,11 +87,11 @@ rates.sort()
 #         return render_template('error_404.html')
 
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST', 'PUT'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'GET':
         return render_template("app.html", rates=rates)
-    elif request.method == 'PUT':
+    elif request.method == 'POST':
         post_form_resp = [False, "ERROR: Request form was invalid/empty."]
         if request.form:
             base = str(request.form['base_currency'])
