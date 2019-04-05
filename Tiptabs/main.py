@@ -49,7 +49,7 @@ if not exec_rates[0]:
     TO_ADDRESS = str(os.getenv("TO_ADDRESS"))
     GMAIL_PW = str(os.getenv("GMAIL_PW"))
     dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
-    return make_response(jsonify({'False': 'Rates service not available.'}))
+    #return make_response(jsonify({'False': 'Rates service not available.'}))
 
 populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
