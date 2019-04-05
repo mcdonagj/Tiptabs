@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 from Tiptabs.TiptabsDB import *
 from Tiptabs.PhoneVerifier import *
 from os.path import dirname, abspath
-# from Tiptabs.UserInterface import *
 from Tiptabs.DictionaryBuilder import *
 from flask import Flask, render_template, request, jsonify, make_response
 
@@ -28,7 +27,7 @@ env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
 logger.debug("Loading .env file from: {!s}".format(env_path))    
 load_dotenv(dotenv_path=env_path)
 
-    # APP_PORT = int(os.getenv("APP_PORT"))
+# APP_PORT = int(os.getenv("APP_PORT"))
 #     logger.debug("Chosen port for application: {!s}".format(str(APP_PORT)))
 
 #     APP_ADDRESS = str(os.getenv("APP_HOST"))
@@ -44,16 +43,15 @@ dictionary_builder = DictionaryBuilder()
 #     logger.info("Check availability of Rates API. ({!s})".format(str(os.getenv("RATES_URL"))))
 exec_rates = dictionary_builder.request_rates(str(os.getenv("RATES_URL")), str(os.getenv("RATES_KEY")), str(os.getenv("RATES_FORMAT")))
 
-#     if not exec_rates[0]:
-#         logger.info(str(exec_rates[1]))
-#         FROM_ADDRESS = str(os.getenv("FROM_ADDRESS"))
-#         TO_ADDRESS = str(os.getenv("TO_ADDRESS"))
-#         GMAIL_PW = str(os.getenv("GMAIL_PW"))
-#         dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
-#         sys.exit()
+if not exec_rates[0]:
+    logger.info(str(exec_rates[1]))
+    FROM_ADDRESS = str(os.getenv("FROM_ADDRESS"))
+    TO_ADDRESS = str(os.getenv("TO_ADDRESS"))
+    GMAIL_PW = str(os.getenv("GMAIL_PW"))
+    dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
+    return make_response(jsonify({'False': 'Rates service not available.'}))
 
-populate_dictionary_result = dictionary_builder.get_rates(
-    exec_rates[0], exec_rates[1])
+populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
 tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
 #     logger.info("Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
@@ -65,60 +63,6 @@ rates.sort()
 #     logger.info("-- Sorting {!s} rates in alphanumeric order ...".format(len(rates)))
 
 #     logger.info(" Initializing Flask application ...")
-    # app = Flask(__name__)
-
-#     @app.route('/', methods=['GET'])
-#     def get_home():
-#         logger.debug(" -- Contents of Rates: {!s}".format(str(rates)))
-#         return render_template("app.html", rates=rates)
-
-#     @app.route('/', methods=['POST'])
-#     def post_home():
-
-#         if request.method == 'POST':
-
-#             post_form_resp = [False, "ERROR: Request form was invalid/empty."]
-
-#             if request.form:
-
-#                 total_base_currency = str(request.form['base_currency'])
-
-#                 logger.debug(" -- Chosen Base Currency: {!s}".format(str(total_base_currency)))
-
-#                 check_avail_base = dictionary_builder.check_available_bases(
-#                     total_base_currency)
-
-#                 logger.debug(" -- Is the chosen base '{}' available? : {!s}.".format(str(total_base_currency), str(check_avail_base)))
-
-#                 if not check_avail_base:
-#                     base_not_avail_resp = 'ERROR: Chosen base "{!s}" is not available.'.format(
-#                         total_base_currency)
-
-#                     post_form_resp = [False, base_not_avail_resp]
-
-#                     # Return the response to display on app.html
-#                     # return post_form_resp
-
-#                 total_bill_amount = str(request.form['bill_amount'])
-
-#                 total_tip_percentage = str(request.form['tip_percentage'])
-
-#                 total_desr_currency = str(request.form['converted_currency'])
-
-#                 # Set the internal base to desired rate.
-#                 # set_base_result = tiptabs_core.set_base(total_base_currency)
-
-#                 check_desr_currency = dictionary_builder.check_available_bases(
-#                     total_desr_currency)
-
-#                 logger.debug(" -- Is the chosen conversion currency '{!s}' available? : {!s}.".format(str(total_desr_currency), str(check_desr_currency)))
-
-#                 total = tiptabs_core.calculate_total(
-#                     total_bill_amount, total_tip_percentage, total_desr_currency)
-
-#                 post_form_resp = total
-
-#             return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
 
 #     @app.route('/result', methods=['POST'])
 #     def send_sms(desired_number):        
@@ -128,13 +72,10 @@ rates.sort()
 
 #     @app.route('/fixer_status', methods=['GET'])
 #     def get_fixer_status():
-
 #         fxr_resp = [False, "Fixer.io is not available."]
-
 #         if request.method == 'GET':
 #             if exec_rates:
 #                 fxr_resp = [exec_rates, "Fixer.io is available for use."]
-
 #         return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
 
 #     @app.route('/feedback', methods=['GET', 'POST'])
@@ -146,11 +87,11 @@ rates.sort()
 #         return render_template('error_404.html')
 
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST', 'PUT'])
 def home():
     if request.method == 'GET':
         return render_template("app.html", rates=rates)
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         post_form_resp = [False, "ERROR: Request form was invalid/empty."]
         if request.form:
             base = str(request.form['base_currency'])
@@ -168,7 +109,12 @@ def home():
 
             check_desr_currency = dictionary_builder.check_available_bases(total_desr_currency)
             post_form_resp = tiptabs_core.calculate_total(total_bill_amount, total_tip_percentage, total_desr_currency)
-            return jsonify({str(post_form_resp[0]): str(post_form_resp[1])})
+            return make_response(jsonify({str(post_form_resp[0]): str(post_form_resp[1])}), 200)
+
+
+@app.errorhandler(404)
+def no_page_found(e):
+    return make_response(jsonify({'ERROR': 'Not Found.'}), 404)
 
 
 if __name__ == '__main__':

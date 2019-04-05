@@ -61,7 +61,7 @@ var app = angular.module('tiptabs_app', ['ngMaterial', 'ngMessages']);
             });
         };
         $scope.sendResponse = function () {
-            $http.post('/', $scope.response, { 'Content-Type': 'application/x-www-form-urlencoded' })
+            $http.put('/', $scope.response, { 'Content-Type': 'application/x-www-form-urlencoded' })
         };
     })
 </script>
