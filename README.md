@@ -7,6 +7,8 @@ When rates are available from fixer.io, currency rates are retrieved and stored 
 When rates are not available, the application sends an email notification to `mcdonagj@dukes.jmu.edu` of the service status. \
 Tiptabs utilizes various libraries and microframeworks, like Requests and Flask, that assist in the retrieval and routing of information.
 
+Try it out live: https://tiptabs.herokuapp.com
+
 ## Building the Project
 You can build Tiptabs using any of the following methods:
 1. Build via Makefile.
@@ -108,5 +110,5 @@ I'm currently working on developing the following features:
 ## Running Tiptabs
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
 
-Version: V3.8.3. \
-Last Update: March-30-2019.
+Version: V3.9.0. \
+Last Update: April-06-2019.
