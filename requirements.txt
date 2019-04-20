@@ -1,7 +1,7 @@
 # Requirements
 
 Flask==0.12.3
-Jinja2==2.9.6
+Jinja2==2.10.1
 boto3==1.9.119
 Flask-API==0.7.1
 requests==2.20.0
