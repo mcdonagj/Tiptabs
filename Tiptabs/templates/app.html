@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <title>Tiptabs - Simplifying Currency Conversion.</title>
 </head>
 
@@ -14,6 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-messages.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.js"></script>
+
 
 <script>
 'use strict'
@@ -125,6 +128,16 @@ var app = angular.module('tiptabs_app', ['ngMaterial', 'ngMessages']);
                                 Reset Fields
                         </md-button>
                     </md-content>
+
+                    <div id='map' style='width: 400px; height: 300px;'></div>
+                    <script>
+                        mapboxgl.accessToken = 'pk.eyJ1IjoibWNkb25hZ2oiLCJhIjoiY2p1ZXQ3d2prMDNwejRkcGlpeXoxdm1ybiJ9.AwTH4llh40z0mtqyKACw5w';
+                        var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/streets-v11'
+                        });
+                    </script>
+
                 </md-tab>
 
                 <md-tab label="Multiple Conversions">
