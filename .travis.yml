@@ -1,0 +1,18 @@
+sudo: required
+language: python
+python: 
+  - "2.7"
+  - "3.4" 
+virtualenv:
+  system_site_packages: true
+before_install:
+  - apt-get update
+  - apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
+  - apt-get install -y nodejs
+  - apt-get install -y npm
+  - apt-get clean
+install:
+  - npm i angular-material
+  - pip install -r requirements.txt
+script:
+  - make test
