@@ -28,7 +28,6 @@ class testTiptabs(unittest.TestCase):
     def testSetBase_validBase_GetBase(self):
         expected = "JPY"
         result = self.app.set_base("JPY")
-        print(result[1])
         return self.assertEqual(expected, str(self.app.get_base()))
 
     def testSetBase_invalidBase(self):
@@ -102,7 +101,6 @@ class testTiptabs(unittest.TestCase):
     def testCalculateTotal(self):
         expected = [True, "Your total amount was: 2968.444883 JPY."]
         result = self.app.calculate_total(20.00, 15.00, "JPY")
-        print(result[1])
         return self.assertEqual(expected[0], result[0])
 
     def testCalculateTotal_None_BillAmount(self):
