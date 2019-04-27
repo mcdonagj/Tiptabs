@@ -20,4 +20,7 @@ devel:
 test:
 	make -C tests test
 
+clean:
+	find ./tests/__pycache__ -name '*.pyc' -exec rm --force
+
 .PHONY: env docker install devel test
