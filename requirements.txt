@@ -5,6 +5,5 @@ Jinja2==2.9.6
 boto3==1.9.119
 Flask-API==0.7.1
 requests==2.20.0
-selenium==3.141.0
 python-dotenv==0.10.1
 MySQL-connector-python==8.0.12

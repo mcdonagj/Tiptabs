@@ -134,15 +134,16 @@ def main():
 
         fxr_resp = [False, "Fixer.io is not available."]
 
-        if request.method == 'GET':
-            if exec_rates:
-                fxr_resp = [exec_rates, "Fixer.io is available for use."]
+        if exec_rates:
+            fxr_resp = [exec_rates, "Fixer.io is available for use."]
 
         return render_template("fixer_status.html", resp=fxr_resp[0], result=fxr_resp[1])
 
-    @app.route('/feedback', methods=['GET', 'POST'])
+    @app.route('/feedback', methods=['POST'])
     def send_feedback():
-        return render_template("feedback.html")
+        # TODO: Process acceptable JSON; send back a thank-you message.
+        feedback_response = jsonify({'SUCCESS': '[200] Thanks for the feedback!'})
+        return make_response(feedback_response, 200)
 
     @app.errorhandler(404)
     def no_page_found(e):

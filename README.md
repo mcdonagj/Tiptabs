@@ -18,12 +18,13 @@ You can build Tiptabs using any of the following methods:
     As of 6/28/2018 (V3.6), a Dockerfile is included that assembles the project using an Ubuntu 16.04 Docker image.
     To build with Docker, verify that you have the Docker daemon installed and running.
 
-    While in the module directory containing the Dockerfile:
+    Building the backend service:
     ```sh
-    docker build .
+    docker build -t tiptabs .
     ...
-    docker run -it -p 5000:5000 $imageID
+    docker run --name tiptabs_backend -dt -p 5000:5000 tiptabs:latest
     ```
+
     Docker assembles an image and provides a reference identification number (imageID) for the created image.
     `docker run` runs your newly-created image within an isolated container.
     The `-i` and `-t` flags (combined as `-it`) create an interactive process (Shell) for the application.
