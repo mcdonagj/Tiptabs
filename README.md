@@ -39,6 +39,7 @@ You can build Tiptabs using any of the following methods:
     docker-compose up
     ```
     To remove the service stack, run `docker-compose down`. Future services added to this project will be built using this method.
+    In later versions of this project, services will be initialized within a Docker Swarm.
 
 4. Installation via command line interface (CLI).
     Manually installing these packages using the commands below will not alter the execution of this repository.
@@ -90,6 +91,7 @@ I'm currently working on developing the following features:
 8. Extend the functionality of the Dockerfile to create a MongoDB/Redis service alongside the app container.
     * [DONE] Create a docker-compose.yml file to create multiple containers.
     * [WIP] Create Mongo/Redis service functionality.
+    * [WIP] Implement Docker Swarm features.
 
 9. Integrate Slack support to Tiptabs.
     * [WIP] Be able to send requests to Tiptabs and have converted values sent back as a message to the user.
