@@ -64,7 +64,8 @@ I'm currently working on developing the following features:
     * [WIP] Create a toggleable pane for this functionality on the app.html page.
 
 3. Create tests for various functions in the Tiptabs and supporting classes.
-    * [WIP] Use pytest to cover all possible cases for class functions.
+    * [DONE] Create a basic testing suite for backend behavior using unittest.
+    * [WIP] Refactor unittest suite using pytest to cover all possible cases for class functions.
     * [WIP] pytest source: https://docs.pytest.org/en/latest/
 
     Note: Some methods are being refactored to return a list containing a Boolean condition indicating the success of a given operation and an error message for the given condition that occurred. \
