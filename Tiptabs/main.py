@@ -52,13 +52,11 @@ def main():
         dictionary_builder.send_error_message(FROM_ADDRESS, TO_ADDRESS, GMAIL_PW)
         sys.exit()
 
-    
-
-    # populate_dictionary_result = dictionary_builder.get_rates(
-    #     exec_rates[0], exec_rates[1])
+    # TODO: Take JSON object; add to local dictionary; allow for calls for smallest conversion, largest conversion, etc.
+    # populate_dictionary_result = dictionary_builder.get_rates(exec_rates[0], exec_rates[1])
 
     tiptabs_core = Tiptabs(str(os.getenv("STARTING_RATE")), dictionary_builder)
-    logger.info(" Initialize Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
+    logger.info(" Set Tiptabs core with base rate: {!s} ...".format(str(os.getenv("STARTING_RATE"))))
     
     # rates = list(dictionary_builder.currencies.keys())
     # logger.info("-- {!s} conversion rates succesfully recieved!".format(len(rates)))

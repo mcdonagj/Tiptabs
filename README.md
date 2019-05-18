@@ -14,8 +14,8 @@ You can build Tiptabs using any of the following methods:
     Simply navigate to the Tiptabs directory, install the module with `make install`, and build using Docker with `make docker`.
     Note: this method utilizes Python's built in package manager, pip, and Docker.
 
-2. Build locally via Dockerfile.
-    As of 6/28/2018 (V3.6), a Dockerfile is included that assembles the project using an Ubuntu 16.04 Docker image.
+2. Build backend via Dockerfile.
+    As of 6/28/2018 (V3.6), a Dockerfile is included that assembles the project using Google's distroless Python 3 Docker image.
     To build with Docker, verify that you have the Docker daemon installed and running.
 
     Building the backend service:
@@ -37,9 +37,17 @@ You can build Tiptabs using any of the following methods:
     ```sh
     docker-compose up
     ```
-    To remove the service stack, run `docker-compose down`. Future services added to this project will be built using this method.
+    To remove the service stack, run `docker-compose down`.
+    This method is helpful for debugging swarm mode.
 
-4. Installation via command line interface (CLI).
+4. Launch Tiptabs on `docker-swarm`.
+    As of 5/18/2019, Tiptabs' service stack can be launched in a Docker Swarm environment. Core services, like the frontend, backend, & database services are created with two replicas spread across the available worker nodes. Other helpful services, like `adminer` and `visualizer` are places on the master node. To launch Tiptabs with onto Docker Swarm, navigate to the module directory:
+    ```sh
+    docker stack deploy --compose-file docker-compose.yml tiptabs
+    ```
+    To remove the services from the swarm, run `docker service rm tiptabs`.
+
+5. Installation via command line interface (CLI).
     Manually installing these packages using the commands below will not alter the execution of this repository.
     ```sh
     pip install requests
@@ -105,6 +113,11 @@ I'm currently working on developing the following features:
 12. Store credentials outside of the codebase.
     * [DONE] Create a .env file that stores all secrets within environment variables.
     * [WIP] Design error handling in the application around incorrect/lack-of .env configurations.
+
+13. Allow for API requests for largest, smallest, and commonly used currencies.
+    * [DONE] Refactor backend for better retrieval of rates.
+    * [WIP] Refactor backend for better storage of rates.
+    * [WIP] Add routes for easier requests for rate conversions.
 
 ## Running Tiptabs
 After building, simply visit `0.0.0.0:5000` in your web-browser and the application appears!
