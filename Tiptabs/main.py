@@ -121,6 +121,14 @@ def main():
 
             return render_template("result.html", resp=post_form_resp[0], result=post_form_resp[1])
 
+    @app.route('/rates/<string:rate>/min', methods=['GET'])
+    def min_conversion(rate):
+        return jsonify({'Desired Minimum Rate' : rate})
+
+    @app.route('/rates/<string:rate>/max', methods=['GET'])
+    def max_conversion(rate):
+        return jsonify({'Desired Maximum Rate' : rate})
+
     @app.route('/result', methods=['POST'])
     def send_sms(desired_number):        
         valid_number = phone_verifier.verifyPhone(desired_number)        
