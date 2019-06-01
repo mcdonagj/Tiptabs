@@ -76,6 +76,8 @@ I'm currently working on developing the following features:
         * [DONE] Created app.html and style.css for the web application's layout.
         * [DONE] Use AngularJS to control form creation and population.
         * [WIP] Convert Flask code to FlaskS3 references for easier implementations with AWS S3.
+    * [NOTE] Development branches are deployed to a EC2 instance.
+        * Example: 3.85.70.113:5000/rates
 
 5. Use Swagger, an API / API framework, to create an API for interacting with Tiptabs.
     * [WIP] Framework Source: https://swagger.io/tools/swagger-ui/
