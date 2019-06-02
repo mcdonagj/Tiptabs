@@ -6,6 +6,8 @@ virtualenv:
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
+  - sudo pip install -U pip
+  - sudo export PYTHONPATH=$PYTHONPATH:$(pwd)
 install:
   - sudo pip install -r requirements.txt
 script:
