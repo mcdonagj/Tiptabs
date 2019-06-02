@@ -12,7 +12,7 @@ before_install:
   - sudo pip install -U pip
 
 env:
-  - "PYTHONPATH=$PYTHONPATH:$(pwd)"
+  - PYTHONPATH=$PYTHONPATH:$(pwd)
 
 install:
   - sudo pip install -r requirements.txt
