@@ -1,4 +1,4 @@
-import boto3
+# import boto3
 import logging
 import requests
 
@@ -42,7 +42,7 @@ class PhoneVerifier:
 
     def send_sms_to_number(self, sms_number):
         # Use Amazon SNS to send rates information to a SMS number.
-        client = boto3.client('sns')
+        # client = boto3.client('sns')
         # Verify that the SMS number has not opted out of SMS messages.
         response = client.check_if_phone_number_is_opted_out(sms_number)
         return True
