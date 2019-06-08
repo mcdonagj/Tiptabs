@@ -32,7 +32,7 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(expected, result)
 
     def testSetDictionary_InvalidKey(self):
-        my_dictionary = {'INVP': '140', 'ESCAPE': '90.02'}
+        my_dictionary = {'INVP': '140', 'ESC': '90.02'}
         expected = [False, "Invalid input: 'INVP' is not permitted as a base key."]
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
