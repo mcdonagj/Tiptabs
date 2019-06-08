@@ -37,6 +37,18 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
+    def testSetDictionary_InvalidMultipleKeys_FirstEntry(self):
+        my_dictionary = {'WRONG': '122', 'INVALID': '33.02'}
+        expected = [False, "Invalid input: 'WRONG' is not permitted as a base key."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
+    def testSetDictionary_InvalidKey_SecondEntry(self):
+        my_dictionary = {'INV': '122', 'INVALID': '33.02'}
+        expected = [False, "Invalid input: 'INVALID' is not permitted as a base key."]
+        result = self.app_dict.set_dictionary(my_dictionary)
+        return self.assertEqual(expected, result)
+
     def testSetDictionary_None(self):
         my_dictionary = None
         expected = [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]
