@@ -310,7 +310,7 @@ class DictionaryBuilder:
 
         #TODO: Add check for string against ISO codes.
 
-        valid_key_pattern = re.compile('([A-Z]{3})?$', re.IGNORECASE)
+        valid_key_pattern = re.compile('^([A-Z]{3}){1}$', re.IGNORECASE)
 
         valid_key_input = valid_key_pattern.match(str(given_currency_key))        
 
