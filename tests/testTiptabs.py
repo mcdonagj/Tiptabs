@@ -1,5 +1,5 @@
 import unittest
-from Tiptabs.Tiptabs import DictionaryBuilder, Tiptabs
+from Tiptabs import *
 from os.path import dirname, abspath
 
 class testTiptabs(unittest.TestCase):

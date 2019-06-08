@@ -1,5 +1,5 @@
 import unittest
-from Tiptabs.TiptabsDB import *
+from Tiptabs import *
 
 class testTiptabsDB(unittest.TestCase):
 
