@@ -14,4 +14,5 @@ install:
   - sudo pip install -r requirements.txt
 
 script:
+  - $(shell export PYTHONPATH=$PYTHONPATH:$(pwd))
   - sudo make test
