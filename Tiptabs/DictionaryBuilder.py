@@ -25,7 +25,8 @@ class DictionaryBuilder:
         """
         set_dictionary(self, Dict) - Setter function for setting a custom dictionary of currencies.
         :param desired_dictionary: Dictionary of currencies to set within the calculator.
-        :return: Boolean condition that indicates the success of setting the dictionary.
+        :return: List containing a Boolean condition that indicates the success of setting the dictionary 
+        and a detailed message for the encountered behavior.
         """
         
         if not desired_dictionary:                     
@@ -312,7 +313,7 @@ class DictionaryBuilder:
 
         valid_key_pattern = re.compile('^([A-Z]{3}){1}$', re.IGNORECASE)
 
-        valid_key_input = valid_key_pattern.match(str(given_currency_key))        
+        valid_key_input = valid_key_pattern.match(str(given_currency_key))
 
         if valid_key_input is None:
             invalid_key_input = "Invalid input: '{!s}' is not permitted as a base key.".format(str(given_currency_key))
