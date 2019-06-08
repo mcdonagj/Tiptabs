@@ -11,8 +11,7 @@ before_install:
   - sudo apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
 
 install:
-  - sudo pip install -r requirements.txt
+  - sudo pip3 install --user -r requirements.txt
 
 script:
-  - $(shell export PYTHONPATH=$PYTHONPATH:$(pwd))
   - python3 -m unittest

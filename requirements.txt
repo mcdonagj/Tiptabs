@@ -1,6 +1,5 @@
 # Requirements
 
-mysql==0.0.2
 Flask==0.12.3
 Jinja2==2.10.1
 boto3==1.9.119
