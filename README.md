@@ -1,4 +1,7 @@
 # Tiptabs
+
+[![Build Status](https://travis-ci.org/mcdonagj/Tiptabs.svg?branch=master)](https://travis-ci.org/mcdonagj/Tiptabs)
+
 A Python web application written to simplify conversions between established currencies. \
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
 
