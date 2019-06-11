@@ -1,6 +1,7 @@
 # Tiptabs
 
 [![Build Status](https://travis-ci.org/mcdonagj/Tiptabs.svg?branch=master)](https://travis-ci.org/mcdonagj/Tiptabs)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fe5dd7147cf044feaaa306146f941f76)](https://www.codacy.com/app/mcdonagj/Tiptabs?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mcdonagj/Tiptabs&amp;utm_campaign=Badge_Grade)
 
 A Python web application written to simplify conversions between established currencies. \
 By using information from fixer.io, the application calculates a total for the user using the values taken from this database of information.
