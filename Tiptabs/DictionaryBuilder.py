@@ -274,7 +274,6 @@ class DictionaryBuilder:
         :param given_currency_key_value: Desired key value to be checked.
         :return: List containing a Boolean condition indicating validity of the provided currency value and a detailed response.
         """
-        import re
         valid_currency_pattern = re.compile('(^\d*(\.\d+)?$)', re.IGNORECASE)
 
         funct_name = "check_valid_currency_value()"
