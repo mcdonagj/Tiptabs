@@ -3,7 +3,6 @@
 import os
 import sys
 import logging
-import platform
 import requests
 from pathlib import Path
 from Tiptabs.Tiptabs import *
