@@ -29,7 +29,7 @@ class DictionaryBuilder:
         and a detailed message for the encountered behavior.
         """
         
-        if not desired_dictionary:                     
+        if not desired_dictionary:            
             return [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]    
 
         if not isinstance(desired_dictionary, dict):
@@ -150,7 +150,7 @@ class DictionaryBuilder:
         :param given_base: desired based to be checked for.
         :return: the given key if it is within the currencies dictionary.
         """
-        formatted_base = self.format_base(str(given_base))        
+        formatted_base = self.format_base(str(given_base))
         return formatted_base[1] in self.currencies.keys()
 
     def add_to_dictionary(self, given_currencies):
@@ -189,7 +189,7 @@ class DictionaryBuilder:
         # Check all values of provided keys.
         for value in given_currencies.values():
             # TODO: Check this functionality with unit tests.
-            valid_value = self.check_valid_currency_value(value)            
+            valid_value = self.check_valid_currency_value(value) 
             if not valid_value[0]:
                 inc_val_resp = "This entry is invalid: {!s}".format(str(value))
                 return [False, inc_val_resp]
@@ -204,7 +204,7 @@ class DictionaryBuilder:
             else:
                 val_updated += 1                            
                 if given_currencies.get(key) != dictionary.get(key):
-                    dictionary[key] = given_currencies.get(key)          
+                    dictionary[key] = given_currencies.get(key)
    
         revise_resp = "SUCCESS: {!s} key-value pairs added and {!s} values updated.".format(str(val_added), str(val_updated))
 
