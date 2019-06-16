@@ -7,7 +7,7 @@ virtualenv:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk
+  - sudo apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk python-setuptools
 
 install:
   - sudo pip3 install --user -r requirements.txt
