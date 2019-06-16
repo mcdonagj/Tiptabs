@@ -11,7 +11,7 @@ install:
   - sudo pip3 install --user -r requirements.txt
 
 script:
-  - python3 -m unittest
+  - sudo python3 -m unittest
 
 notifications:
   email: false
