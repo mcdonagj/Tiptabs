@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk python-setuptools
 
 install:
-  - sudo pip3 install --user -r requirements.txt
+  - sudo pip3 install -r requirements.txt
 
 script:
   - sudo python3 -m unittest
