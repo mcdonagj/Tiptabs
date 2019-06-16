@@ -45,7 +45,7 @@ class Tiptabs:
         else:
             self.base = "EUR"
 
-        return set_base_res 
+        return set_base_res
 
     def set_amount(self, desired_amount):
         """
@@ -94,7 +94,7 @@ class Tiptabs:
         fixed_converted_currency = str(converted_currency).replace('string:', '')
 
         valid_input_currency = self.dictionary_builder.check_available_bases(fixed_converted_currency)
-        
+
         if not valid_input_currency:
             invalid_input_resp = "Your desired currency base of {!s} is not available in the calculator.".format(str(fixed_converted_currency))
             return [False, invalid_input_resp]
