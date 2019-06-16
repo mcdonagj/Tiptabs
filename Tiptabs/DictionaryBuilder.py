@@ -29,8 +29,8 @@ class DictionaryBuilder:
         and a detailed message for the encountered behavior.
         """
         
-        if not desired_dictionary:                     
-            return [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]    
+        if not desired_dictionary:
+            return [False, "ERROR: Your provided dictionary cannot contain Nonetypes."]
 
         if not isinstance(desired_dictionary, dict):
             return [False, "ERROR: You must provide a dictionary collection."]
@@ -48,7 +48,7 @@ class DictionaryBuilder:
             if not valid_value_check[0]:
                 return valid_value_check
 
-        self.currencies = desired_dictionary       
+        self.currencies = desired_dictionary
 
         return [True, "Local dictionary set to the provided dictionary."]
 
@@ -202,7 +202,7 @@ class DictionaryBuilder:
                 dictionary[key] = given_currencies.get(key)
                 val_added += 1
             else:
-                val_updated += 1                            
+                val_updated += 1             
                 if given_currencies.get(key) != dictionary.get(key):
                     dictionary[key] = given_currencies.get(key)          
    
@@ -333,7 +333,7 @@ class DictionaryBuilder:
 
         if not valid_base_resp[0]:
             return valid_base_resp
-        
+
         if isinstance(provided_base, int) or isinstance(provided_base, float) or str(provided_base).isnumeric():
             format_base_resp = "ERROR: Invalid base value! '{!s}' cannot contain numeric characters.".format(str(provided_base))
             return [False, format_base_resp]

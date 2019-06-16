@@ -15,12 +15,12 @@ from flask import Flask, render_template, request, jsonify, make_response
 
 # def main():
 #     """
-#     main() - Main class for Tiptabs. The Flask web application is created in this file. 
+#     main() - Main class for Tiptabs. The Flask web application is created in this file.
 #     Additionally, this file handles the creation of the dictionary of currencies.
 #     """
 
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)    
+logger = logging.getLogger(__name__)
 
 env_path = str(Path(dirname(dirname(abspath(__file__)))) / '.env')
 logger.debug("Loading .env file from: {!s}".format(env_path))    

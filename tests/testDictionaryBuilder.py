@@ -20,7 +20,7 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertEqual(get_dictionary_type, dict_type)
 
     def testSetDictionary(self):
-        my_dictionary = {'ABC': '20.01', 'DEF': '1.012'} 
+        my_dictionary = {'ABC': '20.01', 'DEF': '1.012'}
         expected = [True, "Local dictionary set to the provided dictionary."]
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
@@ -133,10 +133,10 @@ class testDictionaryBuilder(unittest.TestCase):
         return self.assertTrue(starting_length < ending_size)
 
     def testAddToDictionary_None(self):        
-        testDict = None        
+        testDict = None
         starting_length = len(self.app_dict.currencies)
         result = self.app_dict.add_to_dictionary(testDict)        
-        ending_size = len(self.app_dict.currencies)        
+        ending_size = len(self.app_dict.currencies)
         return self.assertTrue(starting_length == ending_size)
 
     def testAddToDictionary_DuplicateKeys(self):        
@@ -151,14 +151,14 @@ class testDictionaryBuilder(unittest.TestCase):
         start_len = len(self.app_dict.currencies)
         result = self.app_dict.add_to_dictionary(testDictEmpty)
         end_len = len(self.app_dict.currencies)
-        return self.assertTrue(start_len == end_len)
+        return self.assertTrue((start_len == end_len) and result[0])
 
     def testAddCurrency(self):
         initial_size = len(self.app_dict.get_dictionary())
         expected = [True, "SUCCESS: K/V pair created and entered into currencies dictionary."]
         result = self.app_dict.add_currency("MMM:2.001")
         result_size = len(self.app_dict.get_dictionary())
-        return self.assertEqual(expected, result)
+        return self.assertEqual(expected, result) and self.assertEqual(initial_size, result_size)
 
     def testAddCurrency_InvalidFormat(self):
         expected = [False, "ERROR: Currency addition is empty."]
@@ -195,7 +195,7 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.check_valid_currency_value('10.221')
         return self.assertEqual(expected, result)
 
-    def testCheckValidCurrencyValue_BaseInput(self):        
+    def testCheckValidCurrencyValue_BaseInput(self):     
         expected = [False, "Invalid input: 'USD' is not permitted as a currency value."]
         result = self.app_dict.check_valid_currency_value('USD')
         return self.assertEqual(expected, result)
@@ -276,7 +276,7 @@ class testDictionaryBuilder(unittest.TestCase):
         expected = [True, 1.0]
         result = self.app_dict.format_currency('1.0')
         return self.assertEqual(expected, result) and self.assertTrue(isinstance(result[1], float))
-    
+
     def testFormatCurrency_None(self):
         expected = [False, "ERROR: None values are not permitted as input into function: check_valid_currency_value()."]
         result = self.app_dict.format_currency(None)
