@@ -171,9 +171,6 @@ class DictionaryBuilder:
             # Provided dictionary is empty; return True.
             return [True, "SUCCESS: Provided list of currencies is empty; Nothing to add."]
 
-        # Store the keys of all available currencies. (Names)
-        my_keys = dictionary.keys()
-
         # Store the keys of all provided currencies.
         provided_keys = given_currencies.keys()
 
@@ -198,7 +195,7 @@ class DictionaryBuilder:
         val_updated = 0
 
         for key in given_currencies.keys():
-            if not key in dictionary.keys():
+            if key not in dictionary.keys():
                 dictionary[key] = given_currencies.get(key)
                 val_added += 1
             else:
@@ -248,7 +245,7 @@ class DictionaryBuilder:
                 return [False, base_non_alpha]
 
             # Check currency to be only numeric characters.
-            if not "." in str(revised_value):
+            if "." not in str(revised_value):
                 value_non_numeric = "ERROR: Provided value '{!s}' is invalid. Must be a numeric value.".format((str(key_pairs[1])))
                 return [False, value_non_numeric]
             
