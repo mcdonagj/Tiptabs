@@ -37,12 +37,6 @@ class testDictionaryBuilder(unittest.TestCase):
         result = self.app_dict.set_dictionary(my_dictionary)
         return self.assertEqual(expected, result)
 
-    def testSetDictionary_InvalidMultipleKeys(self):
-        my_dictionary = {'WRONG': '122', 'INVALID': '33.02'}
-        expected = [False, "Invalid input: 'WRONG' is not permitted as a base key."]
-        result = self.app_dict.set_dictionary(my_dictionary)
-        return self.assertEqual(expected, result)
-
     def testSetDictionary_InvalidKey_End(self):
         my_dictionary = {'INV': '122', 'INVALID': '33.02'}
         expected = [False, "Invalid input: 'INVALID' is not permitted as a base key."]
