@@ -11,7 +11,8 @@ RUN \
   apt-get install -y python3 python python-dev python3-pip python-virtualenv git python3-tk &&\
   apt-get install -y nodejs && \
   apt-get install -y npm && \
-  apt-get clean
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN npm i angular-material
 
@@ -19,7 +20,7 @@ RUN npm i angular-material
 RUN virtualenv venv
 
 # Activate virtualenv.
-WORKDIR env/bin
+WORKDIR /env/bin
 
 # Copy local files into virtualenv.
 COPY . ./Tiptabs
