@@ -1,3 +1,10 @@
+version: 0.1.0
+name: tiptabs
+description: currency conversion calculator.
+maintainers:
+ - name: Gary McDonald
+   email: mcdonagj@dukes.jmu.edu
+---
 version: '3.7'
 services:
 
