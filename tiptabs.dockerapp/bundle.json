@@ -1,0 +1,122 @@
+{
+	"name": "tiptabs",
+	"version": "0.1.0",
+	"description": "",
+	"maintainers": [
+		{
+			"name": "mcdonagj",
+			"email": "mcdonagj@dukes.jmu.edu"
+		}
+	],
+	"invocationImages": [
+		{
+			"imageType": "docker",
+			"image": "tiptabs:0.1.0-invoc"
+		}
+	],
+	"images": {
+		"adminer": {
+			"imageType": "docker",
+			"image": "adminer",
+			"description": "adminer"
+		},
+		"agent": {
+			"imageType": "docker",
+			"image": "portainer/agent",
+			"description": "portainer/agent"
+		},
+		"backend": {
+			"imageType": "docker",
+			"image": "tiptabs_backend:latest",
+			"description": "tiptabs_backend:latest"
+		},
+		"portainer": {
+			"imageType": "docker",
+			"image": "portainer/portainer",
+			"description": "portainer/portainer"
+		}
+	},
+	"actions": {
+		"com.docker.app.inspect": {
+			"stateless": true
+		},
+		"com.docker.app.render": {
+			"stateless": true
+		},
+		"com.docker.app.status": {}
+	},
+	"parameters": {
+		"com.docker.app.kubernetes-namespace": {
+			"type": "string",
+			"default": "",
+			"metadata": {
+				"description": "Namespace in which to deploy"
+			},
+			"destination": {
+				"env": "DOCKER_KUBERNETES_NAMESPACE"
+			},
+			"apply-to": [
+				"install",
+				"upgrade",
+				"uninstall",
+				"com.docker.app.status"
+			]
+		},
+		"com.docker.app.orchestrator": {
+			"type": "string",
+			"default": "",
+			"allowedValues": [
+				"",
+				"swarm",
+				"kubernetes"
+			],
+			"metadata": {
+				"description": "Orchestrator on which to deploy"
+			},
+			"destination": {
+				"env": "DOCKER_STACK_ORCHESTRATOR"
+			},
+			"apply-to": [
+				"install",
+				"upgrade",
+				"uninstall",
+				"com.docker.app.status"
+			]
+		},
+		"com.docker.app.render-format": {
+			"type": "string",
+			"default": "yaml",
+			"allowedValues": [
+				"yaml",
+				"json"
+			],
+			"metadata": {
+				"description": "Output format for the render command"
+			},
+			"destination": {
+				"env": "DOCKER_RENDER_FORMAT"
+			},
+			"apply-to": [
+				"com.docker.app.render"
+			]
+		},
+		"com.docker.app.share-registry-creds": {
+			"type": "bool",
+			"default": false,
+			"metadata": {
+				"description": "Share registry credentials with the invocation image"
+			},
+			"destination": {
+				"env": "DOCKER_SHARE_REGISTRY_CREDS"
+			}
+		}
+	},
+	"credentials": {
+		"com.docker.app.registry-creds": {
+			"path": "/cnab/app/registry-creds.json"
+		},
+		"docker.context": {
+			"path": "/cnab/app/context.dockercontext"
+		}
+	}
+}
