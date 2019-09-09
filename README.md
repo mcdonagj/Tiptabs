@@ -26,9 +26,8 @@ You can build Tiptabs using any of the following methods:
 
     While in the module directory containing the Dockerfile:
     ```sh
-    docker build .
-    ...
-    docker run -it -p 5000:5000 $imageID
+    docker build --tag tiptabs-app:3.9.0 .
+    docker run -p 5000:5000 --detach --name Tiptabs tiptabs-app:3.9.0
     ```
     Docker assembles an image and provides a reference identification number (imageID) for the created image.
     `docker run` runs your newly-created image within an isolated container.
@@ -36,6 +35,7 @@ You can build Tiptabs using any of the following methods:
     The `-p` flag exposes the container's local port of 5000 to the local machine's port of 5000.
     The `$(imageID)` is the provided digit sequence targeting the image made by the Dockerfile.
     The provided requirements.txt file lists dependencies that are installed into the container's virtual environment (venv).
+
 
 3. Build service stack with `docker-compose`.
     As of 2/23/2019 (V3.8.1), a `docker-compose.yml` file is included to build a service stack for the project. To build with `docker-compose`, navigate to the module directory:

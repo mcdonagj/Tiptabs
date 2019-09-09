@@ -7,7 +7,7 @@ env:
 
 # Build the docker image
 docker:
-	docker build .
+    docker build --tag tiptabs-app:3.9.0 .
 
 # Install the project
 install:
